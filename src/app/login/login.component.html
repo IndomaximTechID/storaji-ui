@@ -11,34 +11,34 @@
                   <div class="uk-card-body">
                     <h2 style="text-align:center;">{{globals.webtitle}}</h2>
                     <br />
-                     <form method="POST">
+                     <form (submit)="login($event, email.value, password.value)">
                         <fieldset class="uk-fieldset">
                            <div class="uk-margin">
                               <div class="uk-position-relative">
                                  <span class="uk-form-icon ion-android-person"></span>
-                                 <input name="email" class="uk-input" type="email" placeholder="Email">
+                                 <input name="email" class="uk-input" type="email" placeholder="Email" #email>
                               </div>
                            </div>
                            <div class="uk-margin">
                               <div class="uk-position-relative">
                                  <span class="uk-form-icon ion-locked"></span>
-                                 <input name="password" class="uk-input" type="password" placeholder="Password">
+                                 <input name="password" class="uk-input" type="password" placeholder="Password" #password>
                               </div>
                            </div>
                            <div class="uk-margin">
-                              <a href="#">Forgot your password?</a>
+                              <a routerLink="/">Forgot your password?</a>
                            </div>
                            <div class="uk-margin">
-                              <a href="/" class="uk-button uk-button-primary">
+                              <button type="submit" class="uk-button uk-button-primary">
                                 <span class="ion-forward"></span>&nbsp; Login
-                              </a>
+                              </button>
                            </div>
                            <hr />
                            <div style="text-align:center;">
                               <p>
                                  You don't have an account yet?
                               </p>
-                              <a href="register.html" class="uk-button uk-button-default">
+                              <a routerLink="/register.html" class="uk-button uk-button-default">
                               <span class="ion-android-person-add"></span>&nbsp; Register
                               </a>
                            </div>

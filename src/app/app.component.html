@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<app-header *ngIf="wrapper && !loading"></app-header>
+<app-sidebar *ngIf="wrapper && !loading"></app-sidebar>
+<div class="loading-overlay" *ngIf="loading">
+  Loading <span class="d">.</span><span class="d d-2">.</span><span class="d d-3">.</span>
+</div>
+<router-outlet *ngIf="!loading"></router-outlet>

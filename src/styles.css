@@ -3,6 +3,34 @@ html, body{
   height:100%;
   background-color: #F0F0F0;
 }
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #39f;
+  text-transform: uppercase;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+@keyframes dots {
+  50% {
+    transform: translateY(-.4rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.d {
+  animation: dots 1.5s ease-out infinite;
+}
+.d-2 {
+  animation-delay: .5s;
+}
+.d-3 {
+  animation-delay: 1s;
+}
 .uk-logo, .uk-logo:hover, .uk-logo:active, .uk-logo:visited {
     color: #ffffff;
 }
@@ -13,6 +41,7 @@ html, body{
 }
 .uk-navbar-container {
     background-color: #1e87f0 !important;
+    width: 100% !important;
 }
 .user > #name {
     font-size: 22px;
@@ -34,10 +63,6 @@ html, body{
 .statistics-number {
     font-size: 50px;
 }
-
-
-
-
 
 .tm-sidebar-left {
     position: fixed;

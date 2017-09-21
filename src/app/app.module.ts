@@ -14,6 +14,12 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ElementsTablesComponent } from './elements/tables/tables.component';
 import { ElementsArticlesComponent } from './elements/articles/articles.component';
 
+// http
+import { HttpModule, Http } from '@angular/http';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+
+import { UserService } from './shared/services/user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +36,10 @@ import { ElementsArticlesComponent } from './elements/articles/articles.componen
   imports: [
     BrowserModule,
     AppRouter,
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [Globals],
+  providers: [Globals, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,18 +6,10 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../public/ng4-inventory/",
+      "outDir": "dist",
       "assets": [
-        { "glob": "**/*", "input": "../node_modules/jquery/dist/", "output": "./js" },
-        { "glob": "**/*", "input": "../node_modules/ionicons/fonts/", "output": "./fonts" },
-        { "glob": "**/*", "input": "../node_modules/ionicons/css/", "output": "./css" },
-        { "glob": "**/*", "input": "../node_modules/ionicons/src/", "output": "./svg" },
-        { "glob": "**/*", "input": "../node_modules/uikit/dist/css/", "output": "./css" },
-        { "glob": "**/*", "input": "../node_modules/uikit/dist/js/", "output": "./js" },
-        { "glob": "jquery.transit.js", "input": "../node_modules/jquery.transit/", "output": "./js" },
-        { "glob": "scripts.js", "input": "./", "output": "./js" },
-        "assets",
-        "favicon.ico"
+        { "glob": "**/*", "input": "./assets/", "output": "./assets/" },
+        { "glob": "favicon.ico", "input": "./", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -27,9 +19,18 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/ionicons/css/ionicons.min.css",
+        "../node_modules/uikit/dist/css/uikit.min.css",
+        "../node_modules/notyf/dist/notyf.min.css",
         "styles.css"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/uikit/dist/js/uikit.min.js",
+        "../node_modules/uikit/dist/js/uikit-icons.min.js",
+        "../node_modules/jquery.transit/jquery.transit.js",
+        "../node_modules/notyf/dist/notyf.min.js",
+        "scripts.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

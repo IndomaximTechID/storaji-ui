@@ -1,4 +1,5 @@
 $(function() {
+  const notyf = new Notyf();
   // Sidebar Toggler
   function sidebarToggle(toogle) {
     var sidebar = $('#sidebar');
@@ -22,7 +23,7 @@ $(function() {
     }
   }
 
-  $('#sidebar_toggle').click(function() {
+  $('body').on('click', '#sidebar_toggle', function() {
     var sidebar = $('#sidebar');
     var padder = $('.content-padder');
 
@@ -53,7 +54,7 @@ $(function() {
 		resize();
 	});
 
-  $('.content-padder').click(function() {
+  $('body').on('click', '.content-padder', function() {
     if( $( window ).width() < 960 ) {
       sidebarToggle(false);
     }
