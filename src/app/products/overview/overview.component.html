@@ -10,24 +10,24 @@
             <div class="uk-grid-small uk-grid-divider uk-child-width-1-2@s uk-child-width-1-2@m" uk-grid>
               <div class="uk-width-1-1@s uk-width-1-1@m">
                 <h6 class="uk-margin-remove uk-text-uppercase">Name</h6>
-                <h1 class="uk-card-title uk-margin-remove">Product Name</h1>
+                <h1 class="uk-card-title uk-margin-remove">{{ (product) ? product.name : null }}</h1>
                 <hr class="uk-divider-icon">
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Type</h6>
                 <a href="#" class="uk-link-reset">
                   <span class="uk-label">
-                    <span uk-icon="icon: tag; ratio: 1;"></span> Type One
+                    <span uk-icon="icon: tag; ratio: 1;"></span> {{ (product) ? product.type_id : null }}
                   </span>
                 </a>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">SKU</h6>
-                <span class="uk-text-bold">STR-TO-P1</span>
+                <span class="uk-text-bold">{{ (product) ? product.sku : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Stock</h6>
-                <span class="uk-text-bold">0</span>
+                <span class="uk-text-bold">{{ (product) ? product.stock : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Sold</h6>
@@ -35,17 +35,17 @@
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Cost</h6>
-                <span class="uk-text-bold">$0.00</span>
+                <span class="uk-text-bold">{{ (product) ? product.cost : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Selling Price</h6>
-                <span class="uk-text-bold">$0.00</span>
+                <span class="uk-text-bold">{{ (product) ? product.selling_price : null }}</span>
               </div>
               <div class="uk-width-1-1@s uk-width-1-1@m">
                 <hr class="uk-divider-icon">
                 <dl class="uk-description-list">
                     <dt>Description</dt>
-                    <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</dd>
+                    <dd>{{ (product) ? product.description : null }}</dd>
                 </dl>
               </div>
             </div>

@@ -14,33 +14,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let product of products">
               <td>
                 <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>
               </td>
               <td class="uk-table-link">
-                <a [routerLink]="['../products', 1]" class="uk-link-reset">Product Name 1</a>
+                <a [routerLink]="['../products', product.id]" class="uk-link-reset">{{product.name}}</a>
               </td>
-              <td>STR-TO-P1</td>
-              <td>Type One</td>
-              <td>233</td>
-              <td>
-                <span uk-icon="icon: close;"></span> Sold out
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>
-              </td>
-              <td class="uk-table-link">
-                <a [routerLink]="['../products', 2]" class="uk-link-reset">Product Name 2</a>
-              </td>
-              <td>STR-TT-P2</td>
-              <td>Type Two</td>
-              <td>103</td>
-              <td>
-                <span uk-icon="icon: check;"></span> In stock
-              </td>
+              <td>{{product.sku}}</td>
+              <td>{{product.type_id}}</td>
+              <td>{{product.stock}}</td>
+              <div *ngIf="(product.stock > 0); then ok else not"></div>
+              <ng-template #ok>
+                <td><span uk-icon="icon: check;"></span> In stock</td>
+              </ng-template>
+              <ng-template #not>
+                <td><span uk-icon="icon: close;"></span> Sold out</td>
+              </ng-template>
             </tr>
           </tbody>
         </table>
