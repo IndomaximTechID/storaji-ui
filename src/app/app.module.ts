@@ -19,6 +19,8 @@ import { HttpModule, Http } from '@angular/http';
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 import { UserService } from './shared/services/user.service';
+import { ProductsComponent } from './products/products.component';
+import { ProductOverviewComponent } from './products/overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { UserService } from './shared/services/user.service';
     RegisterComponent,
     SidebarComponent,
     ElementsTablesComponent,
-    ElementsArticlesComponent
+    ElementsArticlesComponent,
+    ProductsComponent,
+    ProductOverviewComponent
   ],
   imports: [
     BrowserModule,

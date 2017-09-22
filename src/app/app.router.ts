@@ -9,6 +9,8 @@ import { ElementsTablesComponent } from './elements/tables/tables.component';
 import { ElementsArticlesComponent } from './elements/articles/articles.component';
 import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.service';
 import { AnonGuardService as AnonGuard } from './shared/services/anon-guard.service';
+import { ProductsComponent } from './products/products.component';
+import { ProductOverviewComponent } from './products/overview/overview.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +18,9 @@ const routes: Routes = [
     { path: 'dashboard', canActivateChild: [AuthGuard],
       children: [
         { path: 'tables', component: ElementsTablesComponent, data: { title: 'Elements Page: Tables'} },
-        { path: 'articles', component: ElementsArticlesComponent, data: { title: 'Elements Page: Articles'} }
+        { path: 'articles', component: ElementsArticlesComponent, data: { title: 'Elements Page: Articles'} },
+        { path: 'products', component: ProductsComponent, data: { title: 'Products'} },
+        { path: 'products/:id', component: ProductOverviewComponent, data: { title: 'Product Overview'} }
       ]
     },
     { path: '404', component: ErrorComponent, data: { title: 'Not Found!'} },
