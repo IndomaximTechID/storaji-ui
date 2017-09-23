@@ -5,7 +5,7 @@ import { Product } from '../../shared/models/product';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'app-overview',
+  selector: 'product-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css'],
   providers: [ ProductService ]

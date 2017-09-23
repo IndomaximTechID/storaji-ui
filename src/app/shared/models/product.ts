@@ -1,12 +1,12 @@
 export class Product {
   constructor(
-    public id: number,
-    public sku: string,
-    public name: string,
-    public description: string,
-    public type: any,
-    public stock: number,
-    public cost: number,
-    public selling_price: number
+    public id: number = 0,
+    public sku: string = null,
+    public name: string = null,
+    public description: string = null,
+    public type: any = {id: null, name: ''},
+    public stock: number = null,
+    public cost: number = null,
+    public selling_price: number = null
   ){}
 }
