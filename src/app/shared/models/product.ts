@@ -4,7 +4,7 @@ export class Product {
     public sku: string,
     public name: string,
     public description: string,
-    public type_id: string,
+    public type: any,
     public stock: number,
     public cost: number,
     public selling_price: number

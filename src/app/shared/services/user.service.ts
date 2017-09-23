@@ -65,7 +65,7 @@ export class UserService {
       this.setUserData(<any>data);
     },
     error => {
-      this.removeUserData();
+      this.logout();
     });
 
     if(!token){

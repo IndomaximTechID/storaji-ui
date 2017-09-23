@@ -22,7 +22,7 @@
                 <a [routerLink]="['../products', product.id]" class="uk-link-reset">{{product.name}}</a>
               </td>
               <td>{{product.sku}}</td>
-              <td>{{product.type_id}}</td>
+              <td>{{(product.type) ? product.type.name : product.type}}</td>
               <td>{{product.stock}}</td>
               <div *ngIf="(product.stock > 0); then ok else not"></div>
               <ng-template #ok>
