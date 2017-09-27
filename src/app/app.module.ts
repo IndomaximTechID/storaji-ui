@@ -1,53 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRouter } from './app.router';
-import { FormsModule } from '@angular/forms';
-
-import { Globals } from './globals';
+import { HttpClientModule } from '@angular/common/http';
+import { Config } from './shared/classes/app';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ErrorComponent } from './error/error.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ElementsTablesComponent } from './elements/tables/tables.component';
-import { ElementsArticlesComponent } from './elements/articles/articles.component';
-
-// http
-import { HttpModule, Http } from '@angular/http';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-
-import { UserService } from './shared/services/user.service';
-import { ProductsComponent } from './products/products.component';
-import { ProductOverviewComponent } from './products/overview/overview.component';
-import { AddComponent } from './products/add/add.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    DashboardComponent,
-    ErrorComponent,
-    HeaderComponent,
-    LoginComponent,
-    RegisterComponent,
-    SidebarComponent,
-    ElementsTablesComponent,
-    ElementsArticlesComponent,
-    ProductsComponent,
-    ProductOverviewComponent,
-    AddComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRouter,
-    FormsModule,
-    HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    MainModule,
+    AppRoutingModule
   ],
-  providers: [Globals, UserService],
-  bootstrap: [AppComponent]
+  providers: [ Title, Config ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
