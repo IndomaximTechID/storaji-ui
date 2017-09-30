@@ -1,8 +1,8 @@
 <div id="sidebar" class="tm-sidebar-left uk-background-default" *ngIf="sidebar">
-  <ul class="uk-nav uk-nav-default">
+  <ul class="uk-nav uk-nav-default uk-iconnav uk-iconnav-vertical">
     <li class="uk-nav-header">
       Modules
     </li>
-    <li><a [routerLink]="['/dashboard/products']">Products</a></li>
+    <li><a [routerLink]="['/dashboard/products']"><i uk-icon="icon: list;"></i> <span>Products</span></a></li>
   </ul>
 </div>
