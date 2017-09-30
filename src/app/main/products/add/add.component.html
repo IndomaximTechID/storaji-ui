@@ -6,12 +6,12 @@
       <div class="uk-padding-small">
         <label for="name" class="uk-form-label">Name</label>
         <input type="text" name="name" class="uk-input" placeholder="Name"
-          required [(ngModel)]="product.name" #name="ngModel">
+          [attr.required] [(ngModel)]="product.name" #name="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="sku" class="uk-form-label">SKU</label>
         <input type="text" name="sku" class="uk-input" placeholder="SKU"
-          required [(ngModel)]="product.sku" #sku="ngModel">
+          [attr.required] [(ngModel)]="product.sku" #sku="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="type" class="uk-form-label">Type</label>
@@ -22,17 +22,17 @@
       <div class="uk-padding-small">
         <label for="stock" class="uk-form-label">Stock</label>
         <input type="number" name="stock" class="uk-input" placeholder="Stock"
-          required [(ngModel)]="product.stock" #stock="ngModel">
+          [attr.required] [(ngModel)]="product.stock" #stock="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="cost" class="uk-form-label">Cost</label>
         <input type="number" name="cost" class="uk-input" placeholder="Cost"
-          required [(ngModel)]="product.cost" #cost="ngModel">
+          [attr.required] [(ngModel)]="product.cost" #cost="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="selling_price" class="uk-form-label">Selling Price</label>
         <input type="number" name="selling_price" class="uk-input" placeholder="Selling Price"
-          required [(ngModel)]="product.selling_price" #selling_price="ngModel">
+          [attr.required] [(ngModel)]="product.selling_price" #selling_price="ngModel">
       </div>
       <div class="uk-width-1-1 uk-padding-small">
         <label for="Description" class="uk-form-label">Description</label>
