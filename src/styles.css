@@ -4,8 +4,12 @@ html, body{
   background-color: #F0F0F0;
 }
 
-.ng-invalid:not(form)  {
+.ng-dirty.ng-invalid:not(form)  {
   border: 1px solid #ff6a6a;
+}
+storaji-autocomplete, .uk-autocomplete {
+  display: inline-block;
+  width: 100%;
 }
 /**
  * Create the loop delay with
@@ -137,7 +141,17 @@ html, body{
     padding: 40px 40px 60px 40px;
     border-right: 1px #e5e5e5 solid;
     overflow-y: auto;
-	overflow-x: hidden;
+	  overflow-x: hidden;
+}
+.tm-sidebar-left .uk-nav, .tm-sidebar-left .uk-nav-header {
+  font-size: .95rem;
+}
+.tm-sidebar-left .uk-nav-header {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.tm-sidebar-left .uk-nav li > a {
+    position: relative;
 }
 .tm-sidebar-left::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);

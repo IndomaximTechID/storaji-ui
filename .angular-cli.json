@@ -20,7 +20,10 @@
       "prefix": "app",
       "styles": [
         "../node_modules/ionicons/css/ionicons.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/uikit/dist/css/uikit.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/notyf/dist/notyf.min.css",
         "styles.css"
       ],

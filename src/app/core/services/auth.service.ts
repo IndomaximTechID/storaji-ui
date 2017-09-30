@@ -8,7 +8,7 @@ import { UtilsService } from '../../shared/services/utils.service';
 
 @Injectable()
 export class AuthService {
-  private _authUrl: string = 'api/auth/'
+  private _authUrl: string = 'api/auth/';
 
   constructor( private utils: UtilsService, private http: Http, private router: Router) { }
 

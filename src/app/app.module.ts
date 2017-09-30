@@ -1,6 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgProgressModule } from 'ngx-progressbar';
 import { Config } from './shared/classes/app';
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { MainModule } from './main/main.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgProgressModule,
     MainModule,
     AppRoutingModule
   ],
