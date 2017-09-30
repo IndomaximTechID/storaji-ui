@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'storaji-dashboard',
   templateUrl: './dashboard.component.html',
   styles: []
 })
