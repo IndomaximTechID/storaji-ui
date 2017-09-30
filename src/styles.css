@@ -11,6 +11,10 @@ storaji-autocomplete, .uk-autocomplete {
   display: inline-block;
   width: 100%;
 }
+.uk-icon {
+  top: -0.075rem;
+  position: relative;
+}
 /**
  * Create the loop delay with
  * the extra keyframes

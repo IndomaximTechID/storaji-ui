@@ -32,7 +32,7 @@ export class ProductsService {
                );
   }
 
-  find(id: number): void{
+  find(id: string): void{
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
     let headers = new Headers();

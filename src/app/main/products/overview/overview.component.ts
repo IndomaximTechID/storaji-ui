@@ -21,7 +21,7 @@ export class OverviewComponent implements OnInit {
   loadProduct(){
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productService.find(+params.get('id'))
+          this._productService.find(params.get('id'))
           return this._productService.products;
         })
         .subscribe(
