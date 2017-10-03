@@ -11,7 +11,7 @@ import { AutoCompleteService } from '../../../shared/services/autocomplete.servi
   styles: []
 })
 export class AddComponent implements OnInit {
-  private product: any;
+  private product: Product;
   private productTypes: ProductType[];
 
   constructor(private _productsService: ProductsService, private _productTypesService: ProductTypesService, private autocomplete: AutoCompleteService) { }

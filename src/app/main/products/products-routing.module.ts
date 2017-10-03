@@ -4,6 +4,7 @@ import { ProductsComponent } from './products.component';
 import { SharedModule } from '../../shared/modules/shared.module';
 import { AuthGuard } from '../../core/services/auth.guard';
 import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
 import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { OverviewComponent } from './overview/overview.component';
   declarations: [
     ProductsComponent,
     AddComponent,
+    EditComponent,
     OverviewComponent
   ],
   providers: [AuthGuard],
@@ -28,6 +30,7 @@ import { OverviewComponent } from './overview/overview.component';
     RouterModule,
     ProductsComponent,
     AddComponent,
+    EditComponent,
     OverviewComponent
   ]
 

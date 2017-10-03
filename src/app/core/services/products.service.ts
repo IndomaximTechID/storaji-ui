@@ -66,6 +66,24 @@ export class ProductsService {
                );
   }
 
+  update(id: string, product: any): void{
+    this.beforeRequest();
+    const token = localStorage.getItem('oatoken');
+
+    const body = JSON.stringify(product);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + token);
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.put(this._productsUrl + id + '/update', body, options)
+               .map((res:Response) => res.json().data)
+               .subscribe(
+                 data => this.afterRequest(data),
+                 error => {console.log(error)}
+               );
+  }
+
   beforeRequest(): void{
     this.progress.start();
   }
