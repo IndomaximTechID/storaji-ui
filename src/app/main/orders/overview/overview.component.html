@@ -9,24 +9,24 @@
             <div class="uk-grid-small uk-grid-divider uk-child-width-1-2@s uk-child-width-1-2@m" uk-grid>
               <div class="uk-width-1-1@s uk-width-1-1@m">
                 <h6 class="uk-margin-remove uk-text-uppercase">Order ID</h6>
-                <h1 class="uk-card-title uk-margin-remove uk-text-uppercase" *ngIf="order">#{{ order.id.split('-')[0] }}</h1>
+                <h1 class="uk-card-title uk-margin-remove uk-text-uppercase">#{{ (order && order.id) ? order.id.split('-')[0] : null }}</h1>
                 <hr class="uk-divider-icon">
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Product Name</h6>
-                <span class="uk-text-bold" *ngIf="order">{{ order.order_detail.product.name }}</span>
+                <span class="uk-text-bold">{{ (order != null) ? order.order_detail.product.name : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Customer Name</h6>
-                <span class="uk-text-bold" *ngIf="order">{{ order.customer.full_name }}</span>
+                <span class="uk-text-bold">{{ (order != null) ? order.customer.full_name : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Amount</h6>
-                <span class="uk-text-bold" *ngIf="order">{{ order.order_detail.amount }}</span>
+                <span class="uk-text-bold">{{ (order != null) ? order.order_detail.amount : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Date</h6>
-                <span class="uk-text-bold" *ngIf="order">{{ order.created_at }}</span>
+                <span class="uk-text-bold">{{ (order != null) ? order.created_at : null }}</span>
               </div>
             </div>
           </div>
