@@ -51,9 +51,9 @@ import { StorajiComponent } from '../decorators/storaji-component';
 })
 export class StorajiAutocomplete extends AutoComplete {
   @Input() styleClass: string = 'uk-autocomplete';
-  @Input() inputStyle: any = {'max-width': '81%', 'width': '100%'};
+  @Input() inputStyle: any = {'max-width': '76.5%', 'width': '100%'};
   @Input() inputStyleClass: string = 'uk-input';
-  @Input() buttonStyle: any = {'max-width': '17.5%', 'width': '100%'};
+  @Input() buttonStyle: any;
   @Input() buttonStyleClass: string = 'uk-button uk-button-default uk-padding-small uk-padding-remove-top uk-padding-remove-bottom';
 
   constructor(public el: ElementRef, public domHandler: DomHandler, public renderer: Renderer2, public objectUtils: ObjectUtils, public cd: ChangeDetectorRef, public differs: IterableDiffers) {

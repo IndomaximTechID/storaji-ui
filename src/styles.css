@@ -11,6 +11,18 @@ storaji-autocomplete, .uk-autocomplete {
   display: inline-block;
   width: 100%;
 }
+
+storaji-autocomplete .ui-autocomplete-panel .ui-autocomplete-list {
+    padding: 0;
+}
+
+storaji-autocomplete .ui-autocomplete-list-item.ui-corner-all {
+    border-radius: 0;
+}
+
+storaji-autocomplete .ui-autocomplete-list-item.ui-state-highlight {
+    background-color: #39f;
+}
 .uk-icon {
   top: -0.075rem;
   position: relative;

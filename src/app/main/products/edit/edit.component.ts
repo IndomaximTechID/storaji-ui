@@ -22,7 +22,6 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(){
-    this.product.type_id = this.product.type.id;
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
           this._productsService.update(params.get('id'), this.product)

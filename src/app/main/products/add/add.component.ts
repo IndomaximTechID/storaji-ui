@@ -21,7 +21,6 @@ export class AddComponent implements OnInit {
   }
 
   onSubmit(){
-    this.product.type_id = this.product.type.id;
     this._productsService.add(this.product);
     this.initProduct();
   }
