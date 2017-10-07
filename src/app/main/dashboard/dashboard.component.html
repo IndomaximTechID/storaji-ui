@@ -10,15 +10,15 @@
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
                   Revenue<br/>
-                  $21,293,485.00
+                  ${{ (stat != null) ? stat.stats.revenue : null }}
               </div>
               <div class="uk-text-uppercase">
                   Cost<br/>
-                  $11,384,121.00
+                  ${{ (stat != null) ? stat.stats.cost : null }}
               </div>
               <div class="strj-items-wr uk-text-uppercase">
                   Profit<br/>
-                  $9,909,364.00
+                  ${{ (stat != null) ? stat.stats.profit : null }}
               </div>
           </div>
         </div>
@@ -26,16 +26,16 @@
           <h2 class="uk-card-title">Totals</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
-                  <a href="#">Products</a><br/>
-                  20
+                  <a [routerLink]="['./products']">Products</a><br/>
+                  {{ (stat != null) ? stat.products : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a href="#">Customers</a><br/>
-                  512
+                  <a [routerLink]="['./customers']">Customers</a><br/>
+                  {{ (stat != null) ? stat.customers : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a href="#">Transactions</a><br/>
-                  3210
+                  <a [routerLink]="['./orders']">Transactions</a><br/>
+                  {{ (stat != null) ? stat.orders : null }}
               </div>
           </div>
         </div>

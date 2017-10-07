@@ -10,30 +10,30 @@
             <div class="uk-grid-small uk-grid-divider uk-child-width-1-2@s uk-child-width-1-2@m" uk-grid>
               <div class="uk-width-1-1@s uk-width-1-1@m">
                 <h6 class="uk-margin-remove uk-text-uppercase">Customer Name</h6>
-                <h1 class="uk-card-title uk-margin-remove">{{ (customer) ? customer.full_name : null }}</h1>
+                <h1 class="uk-card-title uk-margin-remove">{{ (customer != null) ? customer.full_name : null }}</h1>
                 <hr class="uk-divider-icon">
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Company Name</h6>
-                <span class="uk-text-bold">{{ (customer) ? customer.company_name : null }}</span>
+                <span class="uk-text-bold">{{ (customer != null) ? customer.company_name : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Email</h6>
-                <span class="uk-text-bold">{{ (customer) ? customer.email : null }}</span>
+                <span class="uk-text-bold">{{ (customer != null) ? customer.email : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Postal Code, City</h6>
-                <span class="uk-text-bold">{{ (customer) ? customer.postal_code : null }}, {{ (customer) ? customer.city : null }}</span>
+                <span class="uk-text-bold">{{ (customer != null) ? customer.postal_code : null }}, {{ (customer != null) ? customer.city : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Country</h6>
-                <span class="uk-text-bold">{{ (customer) ? customer.country : null }}</span>
+                <span class="uk-text-bold">{{ (customer != null) ? customer.country : null }}</span>
               </div>
               <div class="uk-width-1-1@s uk-width-1-1@m">
                 <hr class="uk-divider-icon">
                 <dl class="uk-description-list">
                     <dt>Address</dt>
-                    <dd>{{ (customer) ? customer.address : null }}</dd>
+                    <dd>{{ (customer != null) ? customer.address : null }}</dd>
                 </dl>
               </div>
             </div>
