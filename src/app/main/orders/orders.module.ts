@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/modules/shared.module';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersService } from '../../core/services/orders.service';
 
 @NgModule({
   imports: [
     SharedModule,
-    DashboardRoutingModule
+    OrdersRoutingModule
   ],
-  providers: [OrdersService]
+  providers: [OrdersService],
+  declarations: []
 })
-export class DashboardModule { }
+export class OrdersModule { }

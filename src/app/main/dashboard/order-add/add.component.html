@@ -1,0 +1,33 @@
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-customer-add; animation: uk-animation-slide-top, uk-animation-fade">New Order</button>
+<div id="form-customer-add" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
+  <h2 class="uk-card-title">New Order</h2>
+  <form (ngSubmit)="onSubmit();customerForm.reset()" #customerForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="product" class="uk-form-label">Product</label>
+        <storaji-autocomplete [(ngModel)]="order.order_detail.product" [suggestions]="autocomplete.data" (completeMethod)="autocomplete.filter(products, $event)" [size]="30"
+            [minLength]="1" [dropdown]="true" name="product.id" field="name" [required]="true">
+        </storaji-autocomplete>
+      </div>
+      <div class="uk-padding-small">
+          <label for="customer" class="uk-form-label">Customer</label>
+          <storaji-autocomplete [(ngModel)]="order.customer" [suggestions]="autocomplete.data" (completeMethod)="autocomplete.filterCustomer(customers, $event)" [size]="30"
+              [minLength]="1" [dropdown]="true" name="customer.id" field="full_name" [required]="true">
+          </storaji-autocomplete>
+        </div>
+      <div class="uk-padding-small">
+        <label for="amount" class="uk-form-label">Amount</label>
+        <input type="number" name="amount" class="uk-input" placeholder="Amount"
+          [required]="true" [(ngModel)]="order.order_detail.amount" #amount="ngModel">
+      </div>
+      <div class="uk-width-expand uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!customerForm.form.valid">Save</button>
+        <button type="button" class="uk-button uk-button-default" uk-toggle="target: #form-customer-add; animation: uk-animation-fade"
+          (click)="initCustomer()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
