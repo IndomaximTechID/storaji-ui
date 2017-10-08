@@ -6,3 +6,13 @@ export class Stat {
     public stats?: any
   ){}
 }
+
+export class TopProduct {
+  constructor(
+    public id?: number,
+    public name?: number,
+    public stock?: number,
+    public orders?: number,
+    public sold?: number
+  ){}
+}
