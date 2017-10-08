@@ -9,9 +9,11 @@ import { NgProgressService } from 'ngx-progressbar';
 
 @Injectable()
 export class StatsService {
-  private _statsUrl: string = 'api/stats';
+  private _statsUrl: string = 'api/stats/';
 
   public stats: BehaviorSubject<any> = new BehaviorSubject(null);
+  public top_products: BehaviorSubject<any> = new BehaviorSubject(null);
+  
 
   constructor( private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
@@ -30,6 +32,21 @@ export class StatsService {
                );
   }
 
+  topProducts(): void{
+    const token = localStorage.getItem('oatoken');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + token);
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.get(this._statsUrl + 'top/products', options)
+               .map((res:Response) => res.json().data)
+               .subscribe(
+                 data => this.afterRequestTopProduct(data),
+                 error => {console.log(error)}
+               );
+  }
+
   beforeRequest(): void{
     this.progress.start();
   }
@@ -37,6 +54,11 @@ export class StatsService {
   afterRequest(data: any): void{
     this.progress.done();
     this.stats.next(data);
+  }
+
+  afterRequestTopProduct(data: any): void{
+    this.progress.done();
+    this.top_products.next(data);
   }
 
 }

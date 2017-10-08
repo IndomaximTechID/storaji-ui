@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../core/services/stats.service';
-import { Stat } from '../../core/classes/stat';
+import { Stat, TopProduct } from '../../core/classes/stat';
 
 @Component({
   selector: 'storaji-dashboard',
@@ -8,7 +8,8 @@ import { Stat } from '../../core/classes/stat';
   styles: []
 })
 export class DashboardComponent implements OnInit {
-  private stat = Stat;
+  private stat: Stat;
+  private top_products: TopProduct[];
 
   constructor(private _statsService: StatsService) { }
 
@@ -20,6 +21,12 @@ export class DashboardComponent implements OnInit {
     this._statsService.get();
     this._statsService.stats.subscribe(
       data => this.stat = data,
+      err => {console.log(err);}
+    );
+    
+    this._statsService.topProducts();
+    this._statsService.top_products.subscribe(
+      data => this.top_products = data,
       err => {console.log(err);}
     );
   }
