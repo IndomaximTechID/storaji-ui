@@ -4,6 +4,7 @@ import { ProductsService } from '../../../core/services/products.service';
 import { Product } from '../../../core/classes/product';
 import 'rxjs/add/operator/switchMap';
 
+declare var numeral: any;
 @Component({
   selector: 'products-overview',
   templateUrl: './overview.component.html',
@@ -11,6 +12,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class OverviewComponent implements OnInit {
   private product: Product;
+  private currency = numeral();
 
   constructor(private routes: ActivatedRoute, private _productService: ProductsService) { }
 

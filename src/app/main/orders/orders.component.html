@@ -15,7 +15,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let order of orders; let i=index;">
+              <td class="uk-table-link">
                 <a [routerLink]="['../orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>
+              </td>
               <td class="uk-table-link">
                 <a [routerLink]="['../customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
               </td>

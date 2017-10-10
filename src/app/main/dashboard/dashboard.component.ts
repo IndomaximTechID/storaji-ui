@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../core/services/stats.service';
 import { Stat, TopProduct } from '../../core/classes/stat';
 
+declare var numeral: any;
 @Component({
   selector: 'storaji-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,6 +10,7 @@ import { Stat, TopProduct } from '../../core/classes/stat';
 })
 export class DashboardComponent implements OnInit {
   private stat: Stat;
+  private currency = numeral();
   private top_products: TopProduct[];
 
   constructor(private _statsService: StatsService) { }
