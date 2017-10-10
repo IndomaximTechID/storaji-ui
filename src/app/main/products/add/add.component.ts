@@ -5,6 +5,7 @@ import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
 import { AutoCompleteService } from '../../../shared/services/autocomplete.service';
 
+declare var numeral: any;
 @Component({
   selector: 'products-add',
   templateUrl: './add.component.html',
@@ -21,14 +22,20 @@ export class AddComponent implements OnInit {
   }
 
   onSubmit(){
+    this.product.cost = numeral(this.product.cost).value()
+    this.product.selling_price = numeral(this.product.selling_price).value()
     this._productsService.add(this.product);
     this.initProduct();
+  }
+
+  onKeyup(e: any) {
+    e.target.value = numeral(e.target.value).format('$0,0')
   }
 
   initProduct(){
     this._productTypesService.get();
     this._productTypesService.productTypes.subscribe(
-      data => this.productTypes = data,
+      data => (data instanceof Array) ? this.productTypes = data : data,
       err => {console.log(err);}
     );
     this.product = new Product();

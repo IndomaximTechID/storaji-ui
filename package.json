@@ -30,6 +30,7 @@
     "jquery.transit": "^0.9.12",
     "ngx-progressbar": "^2.0.8",
     "notyf": "^2.0.1",
+    "numeral": "^2.0.6",
     "primeng": "^4.2.1",
     "rxjs": "^5.4.2",
     "uikit": "^3.0.0-beta.30",

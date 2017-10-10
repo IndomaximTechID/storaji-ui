@@ -14,15 +14,15 @@
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Product Name</h6>
-                <span class="uk-text-bold">{{ (order != null) ? order.order_detail.product.name : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? order.order_detail.product.name : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Customer Name</h6>
-                <span class="uk-text-bold">{{ (order != null) ? order.customer.full_name : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.customer) ? order.customer.full_name : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Amount</h6>
-                <span class="uk-text-bold">{{ (order != null) ? order.order_detail.amount : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? order.order_detail.amount : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">Date</h6>

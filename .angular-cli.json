@@ -34,6 +34,7 @@
         "../node_modules/jquery.transit/jquery.transit.js",
         "../node_modules/notyf/dist/notyf.min.js",
         "../node_modules/gasparesganga-jquery-loading-overlay/src/loadingoverlay.min.js",
+        "../node_modules/numeral/min/numeral.min.js",
         "scripts.js"
       ],
       "environmentSource": "environments/environment.ts",
