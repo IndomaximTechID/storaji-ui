@@ -54,6 +54,9 @@
               </tr>
             </thead>
             <tbody>
+              <tr *ngIf="top_products && !top_products.length">
+                <th colspan="5" class="uk-text-center">No Data</th>
+              </tr>
               <tr *ngFor="let product of top_products; let i=index;">
                 <td>#{{i+1}}</td>
                 <td>

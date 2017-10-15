@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 declare var $: any;
+declare var Notyf: any;
 
 @Injectable()
 export class UtilsService {
+  _notyf = new Notyf();
 
   constructor() { }
   loading(options: object){
@@ -30,5 +32,19 @@ export class UtilsService {
       image: '',
       custom: `<div uk-spinner></div>`
     });
+  }
+
+  notyf(action: string, msg: string): void {
+    switch (action) {
+      case 'success':
+        this._notyf.confirm(msg);
+        break;
+      case 'failed':
+        this._notyf.alert(msg);
+        break;
+
+      default:
+        break;
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "frontend"
+    "name": "storaji-ui"
   },
   "apps": [
     {
@@ -9,7 +9,9 @@
       "outDir": "dist",
       "assets": [
         { "glob": "**/*", "input": "./assets/", "output": "./assets/" },
-        { "glob": "favicon.ico", "input": "./", "output": "./" }
+        { "glob": "main.js", "input": "./", "output": "./" },
+        { "glob": "setupEvents.js", "input": "./", "output": "./" },
+        { "glob": "package.json", "input": "../", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",

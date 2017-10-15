@@ -8,7 +8,7 @@ import { Customer } from '../../core/classes/customer';
   styles: []
 })
 export class CustomersComponent implements OnInit {
-  private customers: Customer[];
+  customers: Customer[];
 
   constructor(private _customerService: CustomersService) { }
 

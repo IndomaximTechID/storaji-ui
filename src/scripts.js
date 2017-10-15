@@ -48,11 +48,13 @@ $(function() {
 
   if($( window ).width() < 960) {
     sidebarToggle(false);
+  }else{
+    sidebarToggle(true);
   }
 
 	$( window ).resize(function() {
 		resize();
-	});
+  });
 
   $('body').on('click', '.content-padder', function() {
     if( $( window ).width() < 960 ) {

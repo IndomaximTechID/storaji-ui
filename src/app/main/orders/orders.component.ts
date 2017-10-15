@@ -8,7 +8,7 @@ import { Order } from '../../core/classes/order';
   styles: []
 })
 export class OrdersComponent implements OnInit {
-  private orders: Order[];
+  orders: Order[];
 
   constructor(private _ordersService: OrdersService) { }
 

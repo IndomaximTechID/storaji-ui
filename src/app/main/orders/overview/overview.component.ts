@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
   styles: []
 })
 export class OverviewComponent implements OnInit {
-  private order: Order;
+  order: Order;
 
   constructor(private routes: ActivatedRoute, private _ordersService: OrdersService) { }
 

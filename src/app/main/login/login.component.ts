@@ -4,10 +4,8 @@ import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
 
 class Credentials {
-  constructor(
-    email: string = null,
-    password: string = null
-  ){}
+  email: string;
+  password: string;
 }
 
 @Component({
@@ -19,10 +17,10 @@ export class LoginComponent implements OnInit {
 
   credentials = new Credentials();
 
-  constructor(private app: Config, private title: Title, private auth: AuthService) { }
+  constructor(public app: Config, private title: Title, private auth: AuthService) { }
 
   ngOnInit() {
-    this.title.setTitle(this.app.name +': Login');
+    this.title.setTitle(this.app.name);
   }
 
   onSubmit(){

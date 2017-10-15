@@ -9,11 +9,11 @@ import { NgProgressService } from 'ngx-progressbar';
 
 @Injectable()
 export class ProductTypesService {
-  private _productTypesUrl: string = 'api/products/types';
+  _productTypesUrl: string = 'http://localhost:8000/api/products/types';
 
   public productTypes: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor( private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
+  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
   get(): void{
     const token = localStorage.getItem('oatoken');

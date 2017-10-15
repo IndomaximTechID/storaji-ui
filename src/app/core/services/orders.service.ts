@@ -10,11 +10,11 @@ import { NgProgressService } from 'ngx-progressbar';
 
 @Injectable()
 export class OrdersService {
-  private _ordersUrl: string = 'api/orders/';
+  _ordersUrl: string = 'http://localhost:8000/api/orders/';
 
   public orders: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor( private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
+  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
   get(): void{
     this.beforeRequest();
