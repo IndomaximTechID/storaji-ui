@@ -1,14 +1,23 @@
 {
-  "name": "frontend",
-  "version": "0.0.0",
+  "name": "storaji",
+  "version": "0.0.1",
   "license": "MIT",
+  "description": "Storaji UI is an ui for Storaji IMS, built with Angular 4 and Electron.",
+  "main": "main.js",
+  "author": {
+    "name": "Indomaxim Technology",
+    "email": "support@indomaxim.web.id",
+    "url": "https://indomaxim.web.id/"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod && electron-packager dist --platform win32 --arch all --out dist/bin/ --overwrite --ignore bin  --win32metadata.CompanyName=\"Indomaxim Technology\" --win32metadata.ProductName=\"Storaji\" --icon dist/assets/storaji.ico",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "electron dist/main.js",
+    "setup": "node tasks/build-installer.js"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +30,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@ngui/auto-complete": "^0.16.0",
     "@types/lodash": "^4.14.77",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
@@ -31,7 +41,6 @@
     "ngx-progressbar": "^2.0.8",
     "notyf": "^2.0.1",
     "numeral": "^2.0.6",
-    "primeng": "^4.2.1",
     "rxjs": "^5.4.2",
     "uikit": "^3.0.0-beta.30",
     "zone.js": "^0.8.14"
@@ -44,6 +53,9 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
+    "electron": "^1.7.9",
+    "electron-installer-windows": "^0.2.0",
+    "electron-packager": "^9.1.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
