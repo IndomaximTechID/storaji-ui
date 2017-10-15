@@ -84,6 +84,23 @@ export class ProductsService {
                );
   }
 
+  delete(id: string): void{
+    this.beforeRequest();
+    const token = localStorage.getItem('oatoken');
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + token);
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.delete(this._productsUrl + id + '/delete', options)
+               .map((res:Response) => res.json().data)
+               .subscribe(
+                 data => this.afterRequest(data),
+                 error => {console.log(error)}
+               );
+  }
+
   beforeRequest(): void{
     this.progress.start();
   }
