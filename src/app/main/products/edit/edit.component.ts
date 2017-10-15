@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
@@ -14,7 +15,7 @@ export class EditComponent implements OnInit {
   product: Product = new Product();
   productTypes: ProductType[];
 
-  constructor(private routes: ActivatedRoute, private _productsService: ProductsService, private _productTypesService: ProductTypesService) { }
+  constructor(private routes: ActivatedRoute, private _productsService: ProductsService, private _productTypesService: ProductTypesService, private location: Location) { }
 
   ngOnInit() {
     this.initProduct();
@@ -29,6 +30,19 @@ export class EditComponent implements OnInit {
         .subscribe(
           data => (data instanceof Object) ? this.product = data : data
         );
+    this.initProduct();
+  }
+
+  onDelete(){
+    this.routes.paramMap
+        .switchMap((params: ParamMap) => {
+          this._productsService.delete(params.get('id'))
+          return this._productsService.products;
+        })
+        .subscribe(
+          data => (data instanceof Object) ? this.product = data : data
+        );
+    this.location.back();
     this.initProduct();
   }
 

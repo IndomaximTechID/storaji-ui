@@ -1,5 +1,5 @@
 <button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-customer-edit; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: pencil;ratio:1.25;"></span></button>
-<button class="uk-button uk-button-danger uk-margin-small uk-margin-remove-top" type="button" uk-toggle="target: #form-customer-edit; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: trash;ratio:1.25;"></span></button>
+<button class="uk-button uk-button-danger uk-margin-small uk-margin-remove-top" type="button" uk-toggle="target: #modal-delete;"><span uk-icon="icon: trash;ratio:1.25;"></span></button>
 <div id="form-customer-edit" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
   <h2 class="uk-card-title">Edit Customer: <strong>{{customer.full_name}}</strong></h2>
   <form (ngSubmit)="onSubmit();customerForm.reset()" #customerForm="ngForm">
@@ -51,4 +51,22 @@
       </div>
     </div>
   </form>
+</div>
+<div id="modal-delete" uk-modal>
+  <div class="uk-modal-dialog">
+      <div class="uk-modal-header">
+          <h2 class="uk-modal-title uk-text-center">Delete Confirmation</h2>
+      </div>
+      <div class="uk-modal-body uk-text-center">
+          <p>Are you sure want to delete <strong>{{ (customer) ? customer.full_name : '' }}</strong>?</p>
+      </div>
+      <div class="uk-modal-footer">
+        <div class="uk-container">
+            <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onDelete()">Delete</button>
+            </div>
+        </div>
+      </div>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 
@@ -11,7 +12,7 @@ import { Customer } from '../../../core/classes/customer';
 export class EditComponent implements OnInit {
   customer: Customer = new Customer();
 
-  constructor(private routes: ActivatedRoute, private _customersService: CustomersService) { }
+  constructor(private routes: ActivatedRoute, private _customersService: CustomersService, private location: Location) { }
 
   ngOnInit() {
     this.initCustomer();
@@ -26,6 +27,20 @@ export class EditComponent implements OnInit {
         .subscribe(
           data => (data instanceof Object) ? this.customer = data : data
         );
+    this.initCustomer();
+  }
+
+  onDelete(){
+    this.routes.paramMap
+        .switchMap((params: ParamMap) => {
+          this._customersService.delete(params.get('id'))
+          return this._customersService.customers;
+        })
+        .subscribe(
+          data => (data instanceof Object) ? this.customer = data : data
+        );
+
+    this.location.back();
     this.initCustomer();
   }
 
