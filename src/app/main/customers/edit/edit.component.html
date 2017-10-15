@@ -1,0 +1,72 @@
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-customer-edit; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: pencil;ratio:1.25;"></span></button>
+<button class="uk-button uk-button-danger uk-margin-small uk-margin-remove-top" type="button" uk-toggle="target: #modal-delete;"><span uk-icon="icon: trash;ratio:1.25;"></span></button>
+<div id="form-customer-edit" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
+  <h2 class="uk-card-title">Edit Customer: <strong>{{customer.full_name}}</strong></h2>
+  <form (ngSubmit)="onSubmit();customerForm.reset()" #customerForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="full_name" class="uk-form-label">Full Name</label>
+        <input type="text" name="full_name" class="uk-input" placeholder="Full Name"
+          [required]="true" [(ngModel)]="customer.full_name" #full_name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="company_name" class="uk-form-label">Company Name</label>
+        <input type="text" name="company_name" class="uk-input" placeholder="Company Name"
+          [required]="true" [(ngModel)]="customer.company_name" #company_name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="email" class="uk-form-label">Email</label>
+        <input type="email" name="email" class="uk-input" placeholder="Email"
+          [required]="true" [(ngModel)]="customer.email" #email="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="postal_code" class="uk-form-label">Postal Code</label>
+        <input type="text" name="postal_code" class="uk-input" placeholder="Postal Code"
+          [required]="true" [(ngModel)]="customer.postal_code" #postal_code="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="country" class="uk-form-label">Country</label>
+        <input type="text" name="country" class="uk-input" placeholder="Country"
+          [required]="true" [(ngModel)]="customer.country" #country="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="city" class="uk-form-label">City</label>
+        <input type="text" name="city" class="uk-input" placeholder="City"
+          [required]="true" [(ngModel)]="customer.city" #city="ngModel">
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <label for="address" class="uk-form-label">Address</label>
+        <textarea name="address" class="uk-textarea" rows="5" placeholder="Anything you know about customer address ..."
+          [(ngModel)]="customer.address" #address="ngModel"></textarea>
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!customerForm.form.valid">
+          Save
+        </button>
+        <button type="button" class="uk-button uk-button-default"
+          (click)="initCustomer()" uk-toggle="target: #form-customer-edit; animation: uk-animation-fade">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div id="modal-delete" uk-modal>
+  <div class="uk-modal-dialog">
+      <div class="uk-modal-header">
+          <h2 class="uk-modal-title uk-text-center">Delete Confirmation</h2>
+      </div>
+      <div class="uk-modal-body uk-text-center">
+          <p>Are you sure want to delete <strong>{{ (customer) ? customer.full_name : '' }}</strong>?</p>
+      </div>
+      <div class="uk-modal-footer">
+        <div class="uk-container">
+            <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onDelete()">Delete</button>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

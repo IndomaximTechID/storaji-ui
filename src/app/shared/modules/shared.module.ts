@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UtilsService } from '../services/utils.service';
 import { NavbarComponent } from '../components/navbar.component';
 import { SidebarComponent } from '../components/sidebar.component';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { SidebarComponent } from '../components/sidebar.component';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    NguiAutoCompleteModule
   ]
 })
 export class SharedModule { }

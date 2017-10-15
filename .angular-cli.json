@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "frontend"
+    "name": "storaji-ui"
   },
   "apps": [
     {
@@ -9,7 +9,9 @@
       "outDir": "dist",
       "assets": [
         { "glob": "**/*", "input": "./assets/", "output": "./assets/" },
-        { "glob": "favicon.ico", "input": "./", "output": "./" }
+        { "glob": "main.js", "input": "./", "output": "./" },
+        { "glob": "setupEvents.js", "input": "./", "output": "./" },
+        { "glob": "package.json", "input": "../", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -20,6 +22,7 @@
       "prefix": "app",
       "styles": [
         "../node_modules/ionicons/css/ionicons.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/uikit/dist/css/uikit.min.css",
         "../node_modules/notyf/dist/notyf.min.css",
         "styles.css"
@@ -31,6 +34,7 @@
         "../node_modules/jquery.transit/jquery.transit.js",
         "../node_modules/notyf/dist/notyf.min.js",
         "../node_modules/gasparesganga-jquery-loading-overlay/src/loadingoverlay.min.js",
+        "../node_modules/numeral/min/numeral.min.js",
         "scripts.js"
       ],
       "environmentSource": "environments/environment.ts",

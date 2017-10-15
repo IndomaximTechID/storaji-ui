@@ -3,21 +3,22 @@
 <div class="content-padder content-background">
   <div class="uk-section-small">
     <div class="uk-container uk-container-large">
+      <orders-add></orders-add>
       <div>
         <div class="uk-card uk-card-default uk-card-body">
           <h2 class="uk-card-title">Financials</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
                   Revenue<br/>
-                  $21,293,485.00
+                  {{ (stat != null) ? currency.set(stat.stats.revenue).format('$0,0') : null }}
               </div>
               <div class="uk-text-uppercase">
                   Cost<br/>
-                  $11,384,121.00
+                  {{ (stat != null) ? currency.set(stat.stats.cost).format('$0,0') : null }}
               </div>
               <div class="strj-items-wr uk-text-uppercase">
                   Profit<br/>
-                  $9,909,364.00
+                  {{ (stat != null) ? currency.set(stat.stats.profit).format('$0,0') : null }}
               </div>
           </div>
         </div>
@@ -25,16 +26,16 @@
           <h2 class="uk-card-title">Totals</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
-                  <a href="#">Products</a><br/>
-                  20
+                  <a [routerLink]="['./products']">Products</a><br/>
+                  {{ (stat != null) ? stat.products : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a href="#">Customers</a><br/>
-                  512
+                  <a [routerLink]="['./customers']">Customers</a><br/>
+                  {{ (stat != null) ? stat.customers : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a href="#">Transactions</a><br/>
-                  3210
+                  <a [routerLink]="['./orders']">Transactions</a><br/>
+                  {{ (stat != null) ? stat.orders : null }}
               </div>
           </div>
         </div>
@@ -45,32 +46,34 @@
           <table class="uk-table uk-table-justify uk-table-divider">
             <thead>
               <tr>
-                <th class="uk-width-small"><span uk-icon="icon: image;"></span></th>
+                <th class="uk-width-small">No.</th>
                 <th>Name</th>
+                <th>Orders</th>
                 <th>Sold</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>
-                </td>
-                <td>Product Name 1</td>
-                <td>233</td>
-                <td>
-                  <span uk-icon="icon: close;"></span> Sold out
-                </td>
+              <tr *ngIf="top_products && !top_products.length">
+                <th colspan="5" class="uk-text-center">No Data</th>
               </tr>
-              <tr>
+              <tr *ngFor="let product of top_products; let i=index;">
+                <td>#{{i+1}}</td>
                 <td>
-                  <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>
+                  <a [routerLink]="['./products', product.id]"
+                     class="uk-link-reset">
+                     {{product.name}}
+                  </a>
                 </td>
-                <td>Product Name 2</td>
-                <td>103</td>
-                <td>
-                  <span uk-icon="icon: check;"></span> In stock
-                </td>
+                <td>{{product.orders}}</td>
+                <td>{{product.sold}}</td>
+                <div *ngIf="(product.stock > 0); then ok else not"></div>
+                <ng-template #ok>
+                  <td><span uk-icon="icon: check;"></span> In stock</td>
+                </ng-template>
+                <ng-template #not>
+                  <td><span uk-icon="icon: close;"></span> Sold out</td>
+                </ng-template>
               </tr>
             </tbody>
         </table>

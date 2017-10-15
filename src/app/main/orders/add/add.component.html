@@ -1,0 +1,42 @@
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-order-add; animation: uk-animation-slide-top, uk-animation-fade">New Order</button>
+<div id="form-order-add" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
+  <h2 class="uk-card-title">New Order</h2>
+  <form (ngSubmit)="onSubmit();orderForm.reset()" #orderForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="product" class="uk-form-label">Product</label>
+        <input ngui-auto-complete
+        class="uk-input"
+        [(ngModel)]="order.order_detail.product"
+        [source]="products"
+        list-formatter="name"
+        display-property-name="name"
+        placeholder="enter text" name="product" #product="ngModel"/>
+      </div>
+      <div class="uk-padding-small">
+          <label for="customer" class="uk-form-label">Customer</label>
+          <input ngui-auto-complete
+          class="uk-input"
+          [(ngModel)]="order.customer"
+          [source]="customers"
+          list-formatter="full_name"
+          display-property-name="full_name"
+          placeholder="enter text" name="customer" #customer="ngModel"/>
+        </div>
+      <div class="uk-padding-small">
+        <label for="amount" class="uk-form-label">Amount</label>
+        <input type="number" name="amount" class="uk-input" placeholder="Amount"
+          [required]="true" [(ngModel)]="order.order_detail.amount" #amount="ngModel"
+          (keyup)="available_stock($event);" (change)="available_stock($event);">
+      </div>
+      <div class="uk-width-expand uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!orderForm.form.valid">Save</button>
+        <button type="button" class="uk-button uk-button-default" uk-toggle="target: #form-order-add; animation: uk-animation-fade"
+          (click)="init()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

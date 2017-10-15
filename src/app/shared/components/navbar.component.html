@@ -17,7 +17,7 @@
                 <li class="uk-nav-header">Options</li>
                 <li><a routerLink="/">Edit Profile</a></li>
                 <li class="uk-nav-header">Actions</li>
-                <li><a (click)="logout()">Logout</a></li>
+                <li><a href="#modal-logout" uk-toggle>Logout</a></li>
               </ul>
             </div>
           </li>
@@ -25,4 +25,22 @@
       </div>
     </nav>
   </div>
+</div>
+<div id="modal-logout" uk-modal>
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title uk-text-center">Logout Confirmation</h2>
+        </div>
+        <div class="uk-modal-body uk-text-center">
+            <p>Are you sure want to continue to logout?</p>
+        </div>
+        <div class="uk-modal-footer">
+          <div class="uk-container">
+              <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Nah, let's go back</button>
+                  <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="logout()">Yes, Let me logout</button>
+              </div>
+          </div>
+        </div>
+    </div>
 </div>

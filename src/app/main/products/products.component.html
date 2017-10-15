@@ -1,0 +1,46 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <products-add></products-add>
+      <div class="uk-card uk-card-default uk-card-body" products-table>
+        <table class="uk-table uk-table-justify uk-table-divider">
+          <thead>
+            <tr>
+              <th class="uk-width-auto"><span uk-icon="icon: image;"></span></th>
+              <th class="uk-width-medium">Name</th>
+              <th>SKU</th>
+              <th>Type</th>
+              <th>Stock</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="products && !products.length">
+              <th colspan="6" class="uk-text-center">No Data</th>
+            </tr>
+            <tr *ngFor="let product of products">
+              <td>
+                <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>
+              </td>
+              <td class="uk-table-link">
+                <a [routerLink]="['../products', product.id]" class="uk-link-reset">{{product.name}}</a>
+              </td>
+              <td>{{product.sku}}</td>
+              <td>{{(product.type) ? product.type.name : product.type}}</td>
+              <td>{{product.stock}}</td>
+              <div *ngIf="(product.stock > 0); then ok else not"></div>
+              <ng-template #ok>
+                <td><span uk-icon="icon: check;"></span> In stock</td>
+              </ng-template>
+              <ng-template #not>
+                <td><span uk-icon="icon: close;"></span> Sold out</td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

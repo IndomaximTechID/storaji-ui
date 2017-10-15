@@ -1,6 +1,6 @@
 export class User {
   constructor(
-    id: number,
+    id: string,
     name: string,
     email: string
   ){}
