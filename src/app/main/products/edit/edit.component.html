@@ -16,9 +16,13 @@
       </div>
       <div class="uk-padding-small">
         <label for="type" class="uk-form-label">Type</label>
-        <storaji-autocomplete [(ngModel)]="product.type" [suggestions]="autocomplete.data" (completeMethod)="autocomplete.filter(productTypes, $event)" [size]="30"
-            [minLength]="1" [dropdown]="true" name="type.id" field="name" [required]="true">
-        </storaji-autocomplete>
+        <input ngui-auto-complete
+        class="uk-input"
+        [(ngModel)]="product.type"
+        [source]="productTypes"
+        list-formatter="name"
+        display-property-name="name"
+        placeholder="enter text" name="type" #type="ngModel"/>
       </div>
       <div class="uk-padding-small">
         <label for="stock" class="uk-form-label">Stock</label>

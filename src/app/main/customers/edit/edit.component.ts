@@ -9,7 +9,7 @@ import { Customer } from '../../../core/classes/customer';
   styles: []
 })
 export class EditComponent implements OnInit {
-  private customer: Customer = new Customer();
+  customer: Customer = new Customer();
 
   constructor(private routes: ActivatedRoute, private _customersService: CustomersService) { }
 

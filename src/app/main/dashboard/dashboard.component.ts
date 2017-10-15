@@ -9,9 +9,9 @@ declare var numeral: any;
   styles: []
 })
 export class DashboardComponent implements OnInit {
-  private stat: Stat;
-  private currency = numeral();
-  private top_products: TopProduct[];
+  stat: Stat;
+  currency = numeral();
+  top_products: TopProduct[];
 
   constructor(private _statsService: StatsService) { }
 

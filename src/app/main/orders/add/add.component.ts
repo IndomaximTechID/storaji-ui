@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../core/services/products.service';
 import { CustomersService } from '../../../core/services/customers.service';
-import { AutoCompleteService } from '../../../shared/services/autocomplete.service';
 import { OrdersService } from '../../../core/services/orders.service';
 import { Product } from '../../../core/classes/product';
 import { Customer } from '../../../core/classes/customer';
@@ -15,13 +14,12 @@ import { OrderDetail } from '../../../core/classes/order-detail';
   styles: []
 })
 export class AddComponent implements OnInit {
-  private products: Product[];
-  private customers: Customer[];
-  private order: Order;
+  products: Product[];
+  customers: Customer[];
+  order: Order;
 
   constructor(
     private _productsService: ProductsService,
-    private autocomplete: AutoCompleteService,
     private _customersService: CustomersService,
     private _ordersService: OrdersService
   ) { }

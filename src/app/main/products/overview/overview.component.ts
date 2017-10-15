@@ -11,8 +11,8 @@ declare var numeral: any;
   styles: []
 })
 export class OverviewComponent implements OnInit {
-  private product: Product;
-  private currency = numeral();
+  product: Product;
+  currency = numeral();
 
   constructor(private routes: ActivatedRoute, private _productService: ProductsService) { }
 

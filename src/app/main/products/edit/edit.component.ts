@@ -4,7 +4,6 @@ import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
-import { AutoCompleteService } from '../../../shared/services/autocomplete.service';
 
 @Component({
   selector: 'products-edit',
@@ -12,10 +11,10 @@ import { AutoCompleteService } from '../../../shared/services/autocomplete.servi
   styles: []
 })
 export class EditComponent implements OnInit {
-  private product: Product = new Product();
-  private productTypes: ProductType[];
+  product: Product = new Product();
+  productTypes: ProductType[];
 
-  constructor(private routes: ActivatedRoute, private _productsService: ProductsService, private _productTypesService: ProductTypesService, private autocomplete: AutoCompleteService) { }
+  constructor(private routes: ActivatedRoute, private _productsService: ProductsService, private _productTypesService: ProductTypesService) { }
 
   ngOnInit() {
     this.initProduct();

@@ -3,7 +3,6 @@ import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
-import { AutoCompleteService } from '../../../shared/services/autocomplete.service';
 
 declare var numeral: any;
 @Component({
@@ -12,10 +11,10 @@ declare var numeral: any;
   styles: []
 })
 export class AddComponent implements OnInit {
-  private product: Product;
-  private productTypes: ProductType[];
+  product: Product;
+  productTypes: ProductType[];
 
-  constructor(private _productsService: ProductsService, private _productTypesService: ProductTypesService, private autocomplete: AutoCompleteService) { }
+  constructor(private _productsService: ProductsService, private _productTypesService: ProductTypesService) { }
 
   ngOnInit() {
     this.initProduct();

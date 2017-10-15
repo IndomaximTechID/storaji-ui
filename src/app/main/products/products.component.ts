@@ -8,7 +8,7 @@ import { Product } from '../../core/classes/product';
   styles: []
 })
 export class ProductsComponent implements OnInit {
-  private products: Product[];
+  products: Product[];
 
   constructor(private _productService: ProductsService) { }
 

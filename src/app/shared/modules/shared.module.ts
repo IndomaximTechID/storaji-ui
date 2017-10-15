@@ -5,25 +5,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UtilsService } from '../services/utils.service';
 import { NavbarComponent } from '../components/navbar.component';
 import { SidebarComponent } from '../components/sidebar.component';
-import { AutoCompleteModule } from 'primeng/primeng';
-import { AutoCompleteService } from '../services/autocomplete.service';
-import { StorajiAutocompleteModule } from './storaji-autocomplete.module';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
-    StorajiAutocompleteModule
+    RouterModule
   ],
   declarations: [NavbarComponent, SidebarComponent],
-  providers: [ UtilsService, AutoCompleteService ],
+  providers: [ UtilsService ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
     SidebarComponent,
-    StorajiAutocompleteModule
+    NguiAutoCompleteModule
   ]
 })
 export class SharedModule { }

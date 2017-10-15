@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
   styles: []
 })
 export class OverviewComponent implements OnInit {
-  private customer: Customer;
+  customer: Customer;
 
   constructor(private routes: ActivatedRoute, private _customerService: CustomersService) { }
 

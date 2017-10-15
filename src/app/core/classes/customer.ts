@@ -1,7 +1,7 @@
 export class Customer {
   constructor(
     public id?: string,
-    public full_name: string = null,
+    public full_name: string = '',
     public company_name: string = null,
     public email: string = null,
     public address: string = null,

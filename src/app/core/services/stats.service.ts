@@ -9,13 +9,13 @@ import { NgProgressService } from 'ngx-progressbar';
 
 @Injectable()
 export class StatsService {
-  private _statsUrl: string = 'api/stats/';
+  _statsUrl: string = 'http://localhost:8000/api/stats/';
 
   public stats: BehaviorSubject<any> = new BehaviorSubject(null);
   public top_products: BehaviorSubject<any> = new BehaviorSubject(null);
   
 
-  constructor( private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
+  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
   get(): void{
     const token = localStorage.getItem('oatoken');

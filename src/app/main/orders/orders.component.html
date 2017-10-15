@@ -14,6 +14,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="orders && !orders.length">
+              <th colspan="3" class="uk-text-center">No Data</th>
+            </tr>
             <tr *ngFor="let order of orders; let i=index;">
               <td class="uk-table-link">
                 <a [routerLink]="['../orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>

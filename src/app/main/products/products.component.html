@@ -17,6 +17,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="products && !products.length">
+              <th colspan="6" class="uk-text-center">No Data</th>
+            </tr>
             <tr *ngFor="let product of products">
               <td>
                 <span class="uk-icon uk-icon-image" style="background-image: url(favicon.ico);"></span>

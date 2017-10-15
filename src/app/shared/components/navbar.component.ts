@@ -10,7 +10,7 @@ import { Config } from '../../shared/classes/app';
 })
 export class NavbarComponent implements OnInit {
 
-  private navbar: boolean = this.auth.isAuthenticated();
+  navbar: boolean = this.auth.isAuthenticated();
 
   constructor(private app: Config, private auth: AuthService) { }
 

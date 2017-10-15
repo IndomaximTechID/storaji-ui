@@ -9,7 +9,7 @@ import { AuthGuard } from './core/services/auth.guard';
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '404', component: ErrorComponent },
       { path: '**', component: ErrorComponent, pathMatch: 'full' }
-    ])
+    ], {useHash: true})
   ],
   declarations: [
     ErrorComponent
