@@ -5,12 +5,18 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../classes/user';
 import { UtilsService } from '../../shared/services/utils.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AuthService {
   _authUrl: string = 'http://localhost:8000/api/auth/';
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router) { }
+  constructor(
+    private utils: UtilsService,
+    private http: Http,
+    private router: Router,
+    public translate: TranslateService
+  ) { }
 
   login(credentials: any): void{
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -19,6 +25,20 @@ export class AuthService {
     this.loading('show');
 
     this.http.post(this._authUrl + 'login', credentials, options)
+        .map((res: Response) => res.json())
+        .subscribe(
+          data => this.afterLogin(data),
+          error => this.failedLogin(error)
+        );
+  }
+
+  register(credentials: any): void{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    this.loading('show');
+
+    this.http.post(this._authUrl + 'register', credentials, options)
         .map((res: Response) => res.json())
         .subscribe(
           data => this.afterLogin(data),
@@ -61,7 +81,7 @@ export class AuthService {
 
     this.utils.notyf(
       'success',
-      'Redirecting...'
+      this.translate.instant('notification.login.success')
     );
 
     setTimeout(() => {
@@ -73,7 +93,7 @@ export class AuthService {
   failedLogin(error: any): void {
     this.utils.notyf(
       'failed',
-      'Email or password didn\'t match.'
+      this.translate.instant('notification.login.failed')
     );
     this.loading('hide');
   }

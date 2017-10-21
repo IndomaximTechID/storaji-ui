@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { OrdersService } from '../../../core/services/orders.service';
 import { Order } from '../../../core/classes/order';
 import 'rxjs/add/operator/switchMap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'orders-overview',
@@ -12,7 +13,11 @@ import 'rxjs/add/operator/switchMap';
 export class OverviewComponent implements OnInit {
   order: Order;
 
-  constructor(private routes: ActivatedRoute, private _ordersService: OrdersService) { }
+  constructor(
+    private routes: ActivatedRoute,
+    private _ordersService: OrdersService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.loadOrder();

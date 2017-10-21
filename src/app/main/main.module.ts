@@ -6,6 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
+import { RegisterModule } from './register/register.module';
 
 @NgModule({
   imports: [],
@@ -16,7 +17,8 @@ import { OrdersModule } from './orders/orders.module';
     ProductsModule,
     CustomersModule,
     OrdersModule,
-    DashboardModule
+    DashboardModule,
+    RegisterModule
   ]
 })
 export class MainModule { }

@@ -7,6 +7,7 @@ import { Config } from './shared/classes/app';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './main/main.module';
+import { TranslationModule } from './/translation.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainModule } from './main/main.module';
     HttpClientModule,
     NgProgressModule,
     MainModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslationModule
   ],
   providers: [ Title, Config ],
   bootstrap: [ AppComponent ]

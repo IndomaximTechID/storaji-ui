@@ -6,35 +6,35 @@
       <orders-add></orders-add>
       <div>
         <div class="uk-card uk-card-default uk-card-body">
-          <h2 class="uk-card-title">Financials</h2>
+          <h2 class="uk-card-title">{{ 'text.stat.financial' | translate }}</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
-                  Revenue<br/>
+                  {{ 'text.stat.revenue' | translate }}<br/>
                   {{ (stat != null) ? currency.set(stat.stats.revenue).format('$0,0') : null }}
               </div>
               <div class="uk-text-uppercase">
-                  Cost<br/>
+                  {{ 'text.stat.cost' | translate }}<br/>
                   {{ (stat != null) ? currency.set(stat.stats.cost).format('$0,0') : null }}
               </div>
               <div class="strj-items-wr uk-text-uppercase">
-                  Profit<br/>
+                  {{ 'text.stat.profit' | translate }}<br/>
                   {{ (stat != null) ? currency.set(stat.stats.profit).format('$0,0') : null }}
               </div>
           </div>
         </div>
         <div class="uk-card uk-card-default uk-card-body">
-          <h2 class="uk-card-title">Totals</h2>
+          <h2 class="uk-card-title">{{ 'text.stat.total' | translate }}</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./products']">Products</a><br/>
+                  <a [routerLink]="['./products']">{{ 'module.title.product' | translate }}</a><br/>
                   {{ (stat != null) ? stat.products : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./customers']">Customers</a><br/>
+                  <a [routerLink]="['./customers']">{{ 'module.title.customer' | translate }}</a><br/>
                   {{ (stat != null) ? stat.customers : null }}
               </div>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./orders']">Transactions</a><br/>
+                  <a [routerLink]="['./orders']">{{ 'module.title.transaction' | translate }}</a><br/>
                   {{ (stat != null) ? stat.orders : null }}
               </div>
           </div>
@@ -42,15 +42,15 @@
       </div>
       <div class="uk-margin-medium-top">
         <div class="uk-card uk-card-default uk-card-body">
-          <h2 class="uk-card-title">Top Selling Products</h2>
+          <h2 class="uk-card-title">{{ 'text.stat.top-selling' | translate }}</h2>
           <table class="uk-table uk-table-justify uk-table-divider">
             <thead>
               <tr>
-                <th class="uk-width-small">No.</th>
-                <th>Name</th>
-                <th>Orders</th>
-                <th>Sold</th>
-                <th>Status</th>
+                <th class="uk-width-small">{{ 'table.number' | translate }}</th>
+                <th>{{ 'table.name' | translate }}</th>
+                <th>{{ 'module.title.order' | translate }}</th>
+                <th>{{ 'table.sold' | translate }}</th>
+                <th>{{ 'table.status' | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -69,10 +69,10 @@
                 <td>{{product.sold}}</td>
                 <div *ngIf="(product.stock > 0); then ok else not"></div>
                 <ng-template #ok>
-                  <td><span uk-icon="icon: check;"></span> In stock</td>
+                  <td><span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>
                 </ng-template>
                 <ng-template #not>
-                  <td><span uk-icon="icon: close;"></span> Sold out</td>
+                  <td><span uk-icon="icon: close;"></span> {{ 'text.sold-out' | translate }}</td>
                 </ng-template>
               </tr>
             </tbody>

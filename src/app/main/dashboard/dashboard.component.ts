@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../core/services/stats.service';
 import { Stat, TopProduct } from '../../core/classes/stat';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var numeral: any;
 @Component({
@@ -13,7 +14,10 @@ export class DashboardComponent implements OnInit {
   currency = numeral();
   top_products: TopProduct[];
 
-  constructor(private _statsService: StatsService) { }
+  constructor(
+    private _statsService: StatsService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.initStats();

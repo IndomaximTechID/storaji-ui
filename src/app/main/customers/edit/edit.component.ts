@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'customers-edit',
@@ -12,7 +13,12 @@ import { Customer } from '../../../core/classes/customer';
 export class EditComponent implements OnInit {
   customer: Customer = new Customer();
 
-  constructor(private routes: ActivatedRoute, private _customersService: CustomersService, private location: Location) { }
+  constructor(
+    private routes: ActivatedRoute,
+    private _customersService: CustomersService,
+    private location: Location,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.initCustomer();

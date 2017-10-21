@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 class Credentials {
   email: string;
@@ -17,7 +18,12 @@ export class LoginComponent implements OnInit {
 
   credentials = new Credentials();
 
-  constructor(public app: Config, private title: Title, private auth: AuthService) { }
+  constructor(
+    public app: Config,
+    private title: Title,
+    private auth: AuthService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.title.setTitle(this.app.name);

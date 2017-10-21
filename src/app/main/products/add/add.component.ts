@@ -3,6 +3,7 @@ import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var numeral: any;
 @Component({
@@ -14,7 +15,11 @@ export class AddComponent implements OnInit {
   product: Product;
   productTypes: ProductType[];
 
-  constructor(private _productsService: ProductsService, private _productTypesService: ProductTypesService) { }
+  constructor(
+    private _productsService: ProductsService,
+    private _productTypesService: ProductTypesService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.initProduct();
@@ -24,7 +29,6 @@ export class AddComponent implements OnInit {
     this.product.cost = numeral(this.product.cost).value()
     this.product.selling_price = numeral(this.product.selling_price).value()
     this._productsService.add(this.product);
-    this.initProduct();
   }
 
   onKeyup(e: any) {

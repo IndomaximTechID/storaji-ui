@@ -11,6 +11,7 @@
         { "glob": "**/*", "input": "./assets/", "output": "./assets/" },
         { "glob": "main.js", "input": "./", "output": "./" },
         { "glob": "setupEvents.js", "input": "./", "output": "./" },
+        { "glob": "setupFrame.js", "input": "./", "output": "./" },
         { "glob": "package.json", "input": "../", "output": "./" }
       ],
       "index": "index.html",
@@ -25,6 +26,8 @@
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/uikit/dist/css/uikit.min.css",
         "../node_modules/notyf/dist/notyf.min.css",
+        "../node_modules/offline-js/themes/offline-theme-dark.css",
+        "../node_modules/offline-js/themes/offline-language-english.css",
         "styles.css"
       ],
       "scripts": [
@@ -35,6 +38,7 @@
         "../node_modules/notyf/dist/notyf.min.js",
         "../node_modules/gasparesganga-jquery-loading-overlay/src/loadingoverlay.min.js",
         "../node_modules/numeral/min/numeral.min.js",
+        "../node_modules/offline-js/offline.min.js",
         "scripts.js"
       ],
       "environmentSource": "environments/environment.ts",

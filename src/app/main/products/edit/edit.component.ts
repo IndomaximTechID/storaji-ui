@@ -5,7 +5,9 @@ import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
+import { TranslateService } from '@ngx-translate/core';
 
+declare var numeral: any;
 @Component({
   selector: 'products-edit',
   templateUrl: './edit.component.html',
@@ -15,13 +17,21 @@ export class EditComponent implements OnInit {
   product: Product = new Product();
   productTypes: ProductType[];
 
-  constructor(private routes: ActivatedRoute, private _productsService: ProductsService, private _productTypesService: ProductTypesService, private location: Location) { }
+  constructor(
+    private routes: ActivatedRoute,
+    private _productsService: ProductsService,
+    private _productTypesService: ProductTypesService,
+    private location: Location,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.initProduct();
   }
 
   onSubmit(){
+    this.product.cost = numeral(this.product.cost).value()
+    this.product.selling_price = numeral(this.product.selling_price).value()
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
           this._productsService.update(params.get('id'), this.product)
@@ -30,7 +40,10 @@ export class EditComponent implements OnInit {
         .subscribe(
           data => (data instanceof Object) ? this.product = data : data
         );
-    this.initProduct();
+  }
+
+  onKeyup(e: any) {
+    e.target.value = numeral(e.target.value).format('$0,0')
   }
 
   onDelete(){
@@ -59,7 +72,11 @@ export class EditComponent implements OnInit {
           return this._productsService.products;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.product = data : data
+          data => {
+            (data instanceof Object) ? this.product = data : data
+            this.product.cost = numeral(this.product.cost).format('$0,0');
+            this.product.selling_price = numeral(this.product.selling_price).format('$0,0');
+          }
         );
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Config } from '../../shared/classes/app';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var jQuery: any;
 @Component({
@@ -12,7 +13,11 @@ declare var jQuery: any;
 export class SidebarComponent implements OnInit, AfterViewInit {
   sidebar: boolean = this.auth.isAuthenticated();
 
-  constructor(private app: Config, private auth: AuthService) { }
+  constructor(
+    private app: Config,
+    private auth: AuthService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
   }
