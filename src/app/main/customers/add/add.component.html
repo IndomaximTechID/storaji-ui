@@ -1,0 +1,51 @@
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-customer-add; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: plus;ratio:1.25;"></span></button>
+<div id="form-customer-add" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
+  <h2 class="uk-card-title">{{ 'text.new.customer' | translate }}</h2>
+  <form (ngSubmit)="onSubmit();customerForm.reset()" #customerForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="full_name" class="uk-form-label">{{ 'form.label.fullname' | translate }}</label>
+        <input type="text" name="full_name" class="uk-input" placeholder="{{ 'form.placeholder.fullname' | translate }}"
+          [required]="true" [(ngModel)]="customer.full_name" #full_name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="company_name" class="uk-form-label">{{ 'form.label.company-name' | translate }}</label>
+        <input type="text" name="company_name" class="uk-input" placeholder="{{ 'form.placeholder.company-name' | translate }}"
+          [required]="true" [(ngModel)]="customer.company_name" #company_name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="email" class="uk-form-label">{{ 'form.label.email' | translate }}</label>
+        <input type="email" name="email" class="uk-input" placeholder="{{ 'form.placeholder.email' | translate }}"
+          [required]="true" [(ngModel)]="customer.email" #email="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="postal_code" class="uk-form-label">{{ 'form.label.postal-code' | translate }}</label>
+        <input type="text" name="postal_code" class="uk-input" placeholder="{{ 'form.placeholder.postal-code' | translate }}"
+          [required]="true" [(ngModel)]="customer.postal_code" #postal_code="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="country" class="uk-form-label">{{ 'form.label.country' | translate }}</label>
+        <input type="text" name="country" class="uk-input" placeholder="{{ 'form.placeholder.country' | translate }}"
+          [required]="true" [(ngModel)]="customer.country" #country="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="city" class="uk-form-label">{{ 'form.label.city' | translate }}</label>
+        <input type="text" name="city" class="uk-input" placeholder="{{ 'form.placeholder.city' | translate }}"
+          [required]="true" [(ngModel)]="customer.city" #city="ngModel">
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <label for="address" class="uk-form-label">{{ 'form.label.address' | translate }}</label>
+        <textarea name="address" class="uk-textarea" rows="5" placeholder="{{ 'form.placeholder.address' | translate }}"
+          [(ngModel)]="customer.address" #address="ngModel"></textarea>
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!customerForm.form.valid">{{ 'form.button.save' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default" uk-toggle="target: #form-customer-add; animation: uk-animation-fade"
+          (click)="initCustomer()">
+          {{ 'form.button.cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -5,11 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UtilsService } from '../services/utils.service';
 import { NavbarComponent } from '../components/navbar.component';
 import { SidebarComponent } from '../components/sidebar.component';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   declarations: [NavbarComponent, SidebarComponent],
   providers: [ UtilsService ],
@@ -18,7 +21,9 @@ import { SidebarComponent } from '../components/sidebar.component';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    NguiAutoCompleteModule,
+    TranslateModule
   ]
 })
 export class SharedModule { }

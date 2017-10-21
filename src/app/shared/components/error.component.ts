@@ -9,7 +9,7 @@ import { Config } from '../classes/app';
 })
 export class ErrorComponent implements OnInit {
 
-    constructor(private app: Config, private title: Title) { }
+  constructor(private app: Config, private title: Title) { }
 
   ngOnInit() {
       this.title.setTitle(this.app.name + ': Error 404 - Page Not Found');

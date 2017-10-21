@@ -1,12 +1,12 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+# /dist
 /tmp
 /out-tsc
 
 # dependencies
-/node_modules
+node_modules
 
 # IDEs and editors
 /.idea
@@ -32,6 +32,7 @@
 npm-debug.log
 testem.log
 package-lock.json
+yarn.lock
 /typings
 
 # e2e

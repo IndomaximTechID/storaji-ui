@@ -1,0 +1,75 @@
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-product-edit; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: pencil;ratio:1.25;"></span></button>
+<button class="uk-button uk-button-danger uk-margin-small uk-margin-remove-top" type="button" uk-toggle="target: #modal-delete;"><span uk-icon="icon: trash;ratio:1.25;"></span></button>
+<div id="form-product-edit" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
+  <h2 class="uk-card-title">{{ 'text.edit.product' | translate }}: <strong>{{product.name}}</strong></h2>
+  <form (ngSubmit)="onSubmit();productForm.reset();initProduct();" #productForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
+        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
+          [required]="true" [(ngModel)]="product.name" #name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="sku" class="uk-form-label">{{ 'form.label.sku' | translate }}</label>
+        <input type="text" name="sku" class="uk-input" placeholder="{{ 'form.placeholder.sku' | translate }}"
+          [required]="true" [(ngModel)]="product.sku" #sku="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="type" class="uk-form-label">{{ 'form.label.type' | translate }}</label>
+        <input ngui-auto-complete
+        class="uk-input"
+        [(ngModel)]="product.type"
+        [source]="productTypes"
+        list-formatter="name"
+        display-property-name="name"
+        placeholder="{{ 'form.placeholder.type' | translate }}" name="type" #type="ngModel"/>
+      </div>
+      <div class="uk-padding-small">
+        <label for="stock" class="uk-form-label">{{ 'form.label.stock' | translate }}</label>
+        <input type="number" name="stock" class="uk-input" placeholder="{{ 'form.placeholder.stock' | translate }}"
+          [required]="true" [(ngModel)]="product.stock" #stock="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="cost" class="uk-form-label">{{ 'form.label.stock' | translate }}</label>
+        <input type="text" name="cost" class="uk-input" placeholder="{{ 'form.placeholder.cost' | translate }}"
+          [required]="true" [(ngModel)]="product.cost" #cost="ngModel" (keyup)="onKeyup($event)">
+      </div>
+      <div class="uk-padding-small">
+        <label for="selling_price" class="uk-form-label">{{ 'form.label.selling-price' | translate }}</label>
+        <input type="text" name="selling_price" class="uk-input" placeholder="{{ 'form.placeholder.selling-price' | translate }}"
+          [required]="true" [(ngModel)]="product.selling_price" #selling_price="ngModel" (keyup)="onKeyup($event)" (blur)="onKeyup($event)">
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <label for="Description" class="uk-form-label">{{ 'form.label.description' | translate }}</label>
+        <textarea name="description" class="uk-textarea" rows="5" placeholder="{{ 'form.placeholder.description' | translate }}"
+          [(ngModel)]="product.description" #description="ngModel"></textarea>
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!productForm.form.valid">{{ 'form.button.save' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default"
+          (click)="initProduct()" uk-toggle="target: #form-product-edit; animation: uk-animation-fade">
+          {{ 'form.button.cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div id="modal-delete" uk-modal>
+  <div class="uk-modal-dialog">
+      <div class="uk-modal-header">
+          <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.delete.title' | translate }}</h2>
+      </div>
+      <div class="uk-modal-body uk-text-center">
+          <p>{{ 'confirmation.delete.message' | translate }}</p>
+      </div>
+      <div class="uk-modal-footer">
+        <div class="uk-container">
+            <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.delete.cancel' | translate }}</button>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onDelete()">{{ 'confirmation.delete.continue' | translate }}</button>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

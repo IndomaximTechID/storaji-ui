@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Config } from '../../shared/classes/app';
+import { User } from '../../core/classes/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'storaji-navbar',
@@ -10,11 +12,20 @@ import { Config } from '../../shared/classes/app';
 })
 export class NavbarComponent implements OnInit {
 
-  private navbar: boolean = this.auth.isAuthenticated();
+  user: User;
+  navbar: boolean = this.auth.isAuthenticated();
 
-  constructor(private app: Config, private auth: AuthService) { }
+  constructor(
+    private app: Config,
+    private auth: AuthService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
+    this.auth.detail().subscribe(
+      (data: User) => this.user = data,
+      (err) => console.log(err)
+    );
   }
 
   logout(): void{

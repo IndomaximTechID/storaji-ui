@@ -1,0 +1,34 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <orders-add></orders-add>
+      <div class="uk-card uk-card-default uk-card-body" customers-table>
+        <table class="uk-table uk-table-justify uk-table-divider">
+          <thead>
+            <tr>
+              <th class="uk-width-auto">{{ 'table.order.id' | translate }}</th>
+              <th class="uk-width-medium">{{ 'table.customer.name' | translate }}</th>
+              <th>{{ 'table.date' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="orders && !orders.length">
+              <th colspan="3" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+            </tr>
+            <tr *ngFor="let order of orders; let i=index;">
+              <td class="uk-table-link">
+                <a [routerLink]="['../orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>
+              </td>
+              <td class="uk-table-link">
+                <a [routerLink]="['../customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
+              </td>
+              <td>{{order.created_at}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

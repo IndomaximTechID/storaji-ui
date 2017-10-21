@@ -1,7 +1,10 @@
+import { Company } from "./company";
+
 export class User {
   constructor(
-    id: number,
+    id: string,
     name: string,
-    email: string
+    email: string,
+    company?: Company
   ){}
 }

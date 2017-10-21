@@ -48,15 +48,23 @@ $(function() {
 
   if($( window ).width() < 960) {
     sidebarToggle(false);
+  }else{
+    sidebarToggle(true);
   }
 
 	$( window ).resize(function() {
 		resize();
-	});
+  });
 
   $('body').on('click', '.content-padder', function() {
     if( $( window ).width() < 960 ) {
       sidebarToggle(false);
+    }
+  });
+  $('body').on('keypress keyup blur', 'input[type="number"]', function (event) {
+    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
     }
   });
 });

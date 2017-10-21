@@ -1,0 +1,37 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-1@s uk-margin uk-margin-remove-top" uk-grid>
+        <div class="uk-width-1-1@m">
+          <div class="uk-card-body">
+            <div class="uk-grid-small uk-grid-divider uk-child-width-1-2@s uk-child-width-1-2@m" uk-grid>
+              <div class="uk-width-1-1@s uk-width-1-1@m">
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.order.id' | translate }}</h6>
+                <h1 class="uk-card-title uk-margin-remove uk-text-uppercase">#{{ (order && order.id) ? order.id.split('-')[0] : null }}</h1>
+                <hr class="uk-divider-icon">
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.product.name' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? order.order_detail.product.name : null }}</span>
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.customer-name' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order && order.customer) ? order.customer.full_name : null }}</span>
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.amount' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? order.order_detail.amount : null }}</span>
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.date' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order != null) ? order.created_at : null }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
