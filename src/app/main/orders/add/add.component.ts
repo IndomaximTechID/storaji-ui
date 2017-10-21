@@ -7,6 +7,7 @@ import { Product } from '../../../core/classes/product';
 import { Customer } from '../../../core/classes/customer';
 import { Order } from '../../../core/classes/order';
 import { OrderDetail } from '../../../core/classes/order-detail';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'orders-add',
@@ -14,14 +15,15 @@ import { OrderDetail } from '../../../core/classes/order-detail';
   styles: []
 })
 export class AddComponent implements OnInit {
-  products: Product[];
+  products: Product[] = [new Product()];
   customers: Customer[];
   order: Order;
 
   constructor(
     private _productsService: ProductsService,
     private _customersService: CustomersService,
-    private _ordersService: OrdersService
+    private _ordersService: OrdersService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -30,10 +32,13 @@ export class AddComponent implements OnInit {
 
   onSubmit(){
     this._ordersService.add(this.order);
-    this.init();
   }
 
   init(){
+    this.order = new Order();
+    this.order.order_detail = new OrderDetail();
+    this.order.order_detail.product = new Product();
+
     this._productsService.get();
     this._productsService.products.subscribe(
       data => {
@@ -51,8 +56,6 @@ export class AddComponent implements OnInit {
       data => this.customers = data,
       err => {console.log(err);}
     );
-    
-    this.order = new Order();
   }
 
   available_stock(e: any) {

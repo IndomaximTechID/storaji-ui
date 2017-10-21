@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../core/services/orders.service';
 import { Order } from '../../core/classes/order';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'storaji-orders',
@@ -10,7 +11,10 @@ import { Order } from '../../core/classes/order';
 export class OrdersComponent implements OnInit {
   orders: Order[];
 
-  constructor(private _ordersService: OrdersService) { }
+  constructor(
+    private _ordersService: OrdersService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.loadOrders();

@@ -9,16 +9,16 @@
           <thead>
             <tr>
               <th class="uk-width-auto"><span uk-icon="icon: image;"></span></th>
-              <th class="uk-width-medium">Name</th>
-              <th>SKU</th>
-              <th>Type</th>
-              <th>Stock</th>
-              <th>Status</th>
+              <th class="uk-width-medium">{{ 'table.name' | translate }}</th>
+              <th>{{ 'table.sku' | translate }}</th>
+              <th>{{ 'table.type' | translate }}</th>
+              <th>{{ 'table.stock' | translate }}</th>
+              <th>{{ 'table.status' | translate }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngIf="products && !products.length">
-              <th colspan="6" class="uk-text-center">No Data</th>
+              <th colspan="6" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
             </tr>
             <tr *ngFor="let product of products">
               <td>
@@ -32,10 +32,10 @@
               <td>{{product.stock}}</td>
               <div *ngIf="(product.stock > 0); then ok else not"></div>
               <ng-template #ok>
-                <td><span uk-icon="icon: check;"></span> In stock</td>
+                <td><span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>
               </ng-template>
               <ng-template #not>
-                <td><span uk-icon="icon: close;"></span> Sold out</td>
+                <td><span uk-icon="icon: close;"></span> {{ 'text.sold-out' | translate }}</td>
               </ng-template>
             </tr>
           </tbody>

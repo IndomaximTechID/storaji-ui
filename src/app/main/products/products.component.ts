@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { Product } from '../../core/classes/product';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'storaji-products',
@@ -10,7 +11,10 @@ import { Product } from '../../core/classes/product';
 export class ProductsComponent implements OnInit {
   products: Product[];
 
-  constructor(private _productService: ProductsService) { }
+  constructor(
+    private _productService: ProductsService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.loadProducts();

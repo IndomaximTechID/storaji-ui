@@ -8,14 +8,14 @@
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>
             <tr>
-              <th class="uk-width-auto">Order ID</th>
-              <th class="uk-width-medium">Customer Name</th>
-              <th>Date</th>
+              <th class="uk-width-auto">{{ 'table.order.id' | translate }}</th>
+              <th class="uk-width-medium">{{ 'table.customer.name' | translate }}</th>
+              <th>{{ 'table.date' | translate }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngIf="orders && !orders.length">
-              <th colspan="3" class="uk-text-center">No Data</th>
+              <th colspan="3" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
             </tr>
             <tr *ngFor="let order of orders; let i=index;">
               <td class="uk-table-link">

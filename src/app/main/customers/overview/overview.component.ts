@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 import 'rxjs/add/operator/switchMap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'customers-overview',
@@ -12,7 +13,11 @@ import 'rxjs/add/operator/switchMap';
 export class OverviewComponent implements OnInit {
   customer: Customer;
 
-  constructor(private routes: ActivatedRoute, private _customerService: CustomersService) { }
+  constructor(
+    private routes: ActivatedRoute,
+    private _customerService: CustomersService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.loadCustomer();

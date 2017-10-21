@@ -4,20 +4,31 @@
     <nav uk-navbar>
       <div class="uk-navbar-left">
         <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
+        <a routerLink="/" class="uk-navbar-item uk-logo uk-visible@s">
+          {{ (user && user.company) ? user.company.name : ''}}
+        </a>
+      </div>
+      <div class="uk-navbar-center uk-logo">
+        <img src="assets/storaji-white.png" width="60">
         <a routerLink="/" class="uk-navbar-item uk-logo">
-          {{app.name}}
+          {{ app.name }}
         </a>
       </div>
       <div class="uk-navbar-right uk-light">
         <ul class="uk-navbar-nav">
           <li class="uk-active">
-            <a href="#">Admin &nbsp;<span class="ion-ios-arrow-down"></span></a>
+            <a href="#">{{ (user) ? user.name : '' }} &nbsp;<span class="ion-ios-arrow-down"></span></a>
             <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
               <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-nav-header">Options</li>
-                <li><a routerLink="/">Edit Profile</a></li>
-                <li class="uk-nav-header">Actions</li>
-                <li><a href="#modal-logout" uk-toggle>Logout</a></li>
+                <li class="uk-nav-header">{{ 'text.i18n' | translate }}</li>
+                <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
+                <li *ngFor="let lang of translate.getLangs()" class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}">
+                  <a (click)="translate.use(lang)">
+                        {{ lang | translate }}
+                  </a>
+                </li>
+                <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
+                <li><a href="#modal-logout" uk-toggle>{{ 'module.title.logout' | translate }}</a></li>
               </ul>
             </div>
           </li>
@@ -29,16 +40,16 @@
 <div id="modal-logout" uk-modal>
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h2 class="uk-modal-title uk-text-center">Logout Confirmation</h2>
+            <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.logout.title' | translate }}</h2>
         </div>
         <div class="uk-modal-body uk-text-center">
-            <p>Are you sure want to continue to logout?</p>
+            <p>{{ 'confirmation.logout.message' | translate }}</p>
         </div>
         <div class="uk-modal-footer">
           <div class="uk-container">
               <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                  <button class="uk-button uk-button-default uk-modal-close" type="button">Nah, let's go back</button>
-                  <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="logout()">Yes, Let me logout</button>
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.logout.cancel' | translate }}</button>
+                  <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="logout()">{{ 'confirmation.logout.continue' | translate }}</button>
               </div>
           </div>
         </div>
