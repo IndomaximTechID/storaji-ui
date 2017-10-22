@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class CustomersService {
-  _customersUrl: string = `${new Config().api}/customers`;
+  _customersUrl: string = `${new Config().api}/customers/`;
 
   public customers: BehaviorSubject<any> = new BehaviorSubject(null);
 
