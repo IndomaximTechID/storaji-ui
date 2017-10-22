@@ -10,7 +10,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class StatsService {
-  _statsUrl: string = `${new Config().api}/stats/`;
+  _statsUrl: string = `${new Config().api}/stats`;
 
   public stats: BehaviorSubject<any> = new BehaviorSubject(null);
   public top_products: BehaviorSubject<any> = new BehaviorSubject(null);
@@ -40,7 +40,7 @@ export class StatsService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.get(this._statsUrl + 'top/products', options)
+    this.http.get(`${this._statsUrl}/top/products`, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequestTopProduct(data),

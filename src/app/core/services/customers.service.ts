@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class CustomersService {
-  _customersUrl: string = `${new Config().api}/customers/`;
+  _customersUrl: string = `${new Config().api}/customers`;
 
   public customers: BehaviorSubject<any> = new BehaviorSubject(null);
 
@@ -41,7 +41,7 @@ export class CustomersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.get(this._customersUrl + id, options)
+    this.http.get(`${this._customersUrl}/${id}`, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
@@ -59,7 +59,7 @@ export class CustomersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this._customersUrl + 'add', body, options)
+    this.http.post(`${this._customersUrl}/add`, body, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
@@ -77,7 +77,7 @@ export class CustomersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.put(this._customersUrl + id + '/update', body, options)
+    this.http.put(`${this._customersUrl}/${id}/update`, body, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
@@ -94,7 +94,7 @@ export class CustomersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.delete(this._customersUrl + id + '/delete', options)
+    this.http.delete(`${this._customersUrl}/${id}/delete`, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),

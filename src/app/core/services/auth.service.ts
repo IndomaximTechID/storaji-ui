@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class AuthService {
-  _authUrl: string = `${new Config().api}/auth/`;
+  _authUrl: string = `${new Config().api}/auth`;
 
   constructor(
     private utils: UtilsService,
@@ -26,7 +26,7 @@ export class AuthService {
 
     this.loading('show');
 
-    this.http.post(this._authUrl + 'login', credentials, options)
+    this.http.post(`${this._authUrl}/login`, credentials, options)
         .map((res: Response) => res.json())
         .subscribe(
           data => this.afterLogin(data),
@@ -40,7 +40,7 @@ export class AuthService {
 
     this.loading('show');
 
-    this.http.post(this._authUrl + 'register', credentials, options)
+    this.http.post(`${this._authUrl}/register`, credentials, options)
         .map((res: Response) => res.json())
         .subscribe(
           data => this.afterLogin(data),
@@ -55,7 +55,7 @@ export class AuthService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this._authUrl + 'detail', options)
+    return this.http.get(`${this._authUrl}/detail`, options)
         .map((res: Response) => res.json());
   }
 
