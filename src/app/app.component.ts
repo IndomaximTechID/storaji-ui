@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Config } from './shared/classes/app';
 
 declare var Offline: any;
 declare var jQuery: any;
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    Offline.options = {checks: {xhr: {url: 'http://localhost:8000/api'}}};
+    Offline.options = {checks: {xhr: {url: new Config().api}}};
     Offline.check();
     const overlay = jQuery('.uk-overlay-default');
     Offline.on('confirmed-up', function(){
