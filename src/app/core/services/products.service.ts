@@ -6,11 +6,12 @@ import { Observable } from 'rxjs/Rx';
 import { UtilsService } from '../../shared/services/utils.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgressService } from 'ngx-progressbar';
+import { Config } from '../../shared/classes/app';
 
 
 @Injectable()
 export class ProductsService {
-  _productsUrl: string = 'http://localhost:8000/api/products/';
+  _productsUrl: string = `${new Config().api}/products`;
 
   public products: BehaviorSubject<any> = new BehaviorSubject(null);
 
