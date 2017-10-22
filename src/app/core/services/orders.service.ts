@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class OrdersService {
-  _ordersUrl: string = `${new Config().api}/orders/`;
+  _ordersUrl: string = `${new Config().api}/orders`;
 
   public orders: BehaviorSubject<any> = new BehaviorSubject(null);
 
@@ -41,7 +41,7 @@ export class OrdersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.get(this._ordersUrl + id, options)
+    this.http.get(`${this._ordersUrl}/${id}`, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
@@ -59,25 +59,7 @@ export class OrdersService {
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this._ordersUrl + 'add', body, options)
-               .map((res:Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error)}
-               );
-  }
-
-  update(id: string, customer: any): void{
-    this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
-
-    const body = JSON.stringify(customer);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
-
-    this.http.put(this._ordersUrl + id + '/update', body, options)
+    this.http.post(`${this._ordersUrl}/add`, body, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
