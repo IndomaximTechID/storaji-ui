@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class AuthService {
-  _authUrl: string = `${new Config().api}/auth`;
+  _authUrl: string = `${new Config().api}/auth/`;
 
   constructor(
     private utils: UtilsService,

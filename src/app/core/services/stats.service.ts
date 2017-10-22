@@ -10,7 +10,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class StatsService {
-  _statsUrl: string = `${new Config().api}/stats`;
+  _statsUrl: string = `${new Config().api}/stats/`;
 
   public stats: BehaviorSubject<any> = new BehaviorSubject(null);
   public top_products: BehaviorSubject<any> = new BehaviorSubject(null);
