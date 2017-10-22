@@ -6,10 +6,12 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../classes/user';
 import { UtilsService } from '../../shared/services/utils.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Config } from '../../shared/classes/app';
+
 
 @Injectable()
 export class AuthService {
-  _authUrl: string = 'http://localhost:8000/api/auth/';
+  _authUrl: string = `${new Config().api}/auth`;
 
   constructor(
     private utils: UtilsService,
