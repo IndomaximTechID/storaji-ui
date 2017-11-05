@@ -30,7 +30,7 @@
           [required]="true" [(ngModel)]="product.stock" #stock="ngModel">
       </div>
       <div class="uk-padding-small">
-        <label for="cost" class="uk-form-label">{{ 'form.label.stock' | translate }}</label>
+        <label for="cost" class="uk-form-label">{{ 'form.label.cost' | translate }}</label>
         <input type="text" name="cost" class="uk-input" placeholder="{{ 'form.placeholder.cost' | translate }}"
           [required]="true" [(ngModel)]="product.cost" #cost="ngModel" (keyup)="onKeyup($event)">
       </div>
