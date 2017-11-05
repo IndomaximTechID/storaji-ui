@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/modules/shared.module';
 import { AuthGuard } from '../../core/services/auth.guard';
 import { AddComponent } from './add/add.component';
 import { OverviewComponent } from './overview/overview.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { OverviewComponent } from './overview/overview.component';
       { path: 'dashboard/orders', canActivateChild: [AuthGuard],
         children: [
           { path: '', component: OrdersComponent },
+          { path: 'report', component: ReportComponent },
           { path: ':id', component: OverviewComponent }
         ]
       },
@@ -21,14 +23,16 @@ import { OverviewComponent } from './overview/overview.component';
   declarations: [
     OrdersComponent,
     AddComponent,
-    OverviewComponent
+    OverviewComponent,
+    ReportComponent
   ],
   providers: [AuthGuard],
   exports: [
     RouterModule,
     OrdersComponent,
     AddComponent,
-    OverviewComponent
+    OverviewComponent,
+    ReportComponent
   ]
 
 })

@@ -1,0 +1,33 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <div class="uk-card uk-card-default uk-card-body" customers-table>
+        <table class="uk-table uk-table-justify uk-table-divider">
+          <thead>
+            <tr>
+              <th class="uk-width-auto">{{ 'table.customer.id' | translate }}</th>
+              <th class="uk-width-medium">{{ 'table.customer.name' | translate }}</th>
+              <th>{{ 'table.company.name' | translate }}</th>
+              <th>{{ 'form.label.email' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="customers && !customers.length">
+              <th colspan="4" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+            </tr>
+            <tr *ngFor="let customer of customers; let i=index;">
+              <td class="uk-text-uppercase">#{{customer.id.split('-')[0]}}</td>
+              <td class="uk-table-link">
+                <a [routerLink]="['../customers', customer.id]" class="uk-link-reset">{{customer.full_name}}</a>
+              </td>
+              <td>{{customer.company_name}}</td>
+              <td>{{customer.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
