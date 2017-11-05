@@ -57,6 +57,8 @@
             "stock": "Stok",
             "cost": "Harga Pokok",
             "selling-price": "Harga Jual",
+            "price": "Harga",
+            "total": "Total",
             "description": "Keterangan",
             "sold": "Terjual",
             "amount": "Jumlah"
@@ -85,7 +87,9 @@
         },
         "button": {
             "save": "Simpan",
-            "cancel": "Batalkan"
+            "cancel": "Batalkan",
+            "show-customers": "Munculkan pelanggan",
+            "save-as-pdf": "Simpan PDF"
         }
     },
     "text": {
@@ -100,10 +104,13 @@
             "order": "Ubah Pesanan"
         },
         "i18n": "Pilihan Bahasa",
+        "general": "Umum",
         "module": "Modul",
+        "report": "Laporan",
         "forgot-password": "Lupa kata sandi?",
         "has-account": "Sudah punya akun?",
         "has-no-account": "Belum punya akun?",
+        "customers-who-bought-this-product": "Pelanggan yang membeli produk ini",
         "stat": {
             "financial": "Keuangan",
             "top-selling": "Produk Paling Banyak Terjual",

@@ -57,6 +57,8 @@
             "stock": "Stock",
             "cost": "Cost",
             "selling-price": "Selling Price",
+            "price": "Price",
+            "total": "Total",
             "description": "Description",
             "sold": "Sold",
             "amount": "Amount"
@@ -85,7 +87,9 @@
         },
         "button": {
             "save": "Save",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "show-customers": "Show customers",
+            "save-as-pdf": "Save as PDF"
         }
     },
     "text": {
@@ -100,10 +104,13 @@
             "order": "Edit Order"
         },
         "i18n": "Language Options",
+        "general": "General",
         "module": "Modules",
+        "report": "Reports",
         "forgot-password": "Forgot your password?",
         "has-account": "Already have an account?",
         "has-no-account": "You don't have an account yet?",
+        "customers-who-bought-this-product": "Customers who bought this product",
         "stat": {
             "financial": "Financials",
             "top-selling": "Top Selling Products",
