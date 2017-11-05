@@ -86,8 +86,7 @@
             "selling-price": "Masukkan Harga Jual",
             "description": "Masukkan Keterangan",
             "amount": "Masukkan Jumlah",
-            "date_from": "Masukkan Tanggal",
-            "date_to": "Masukkan Tanggal"
+            "date": "Masukkan Tanggal"
         },
         "button": {
             "save": "Simpan",
