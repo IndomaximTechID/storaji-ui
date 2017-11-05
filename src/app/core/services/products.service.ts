@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -15,17 +15,25 @@ export class ProductsService {
 
   public products: BehaviorSubject<any> = new BehaviorSubject(null);
 
+  public customers: BehaviorSubject<any> = new BehaviorSubject(null);
+
   constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
-  get(): void{
+  get(query?: any): void{
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers});
 
-    this.http.get(this._productsUrl, options)
+    if(query){
+      let params = new URLSearchParams();
+      params.append('filter', JSON.stringify(query));
+      options.params = params;
+    }
+
+    this.http.get(`${this._productsUrl}`, options)
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
@@ -45,6 +53,22 @@ export class ProductsService {
                .map((res:Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
+                 error => {console.log(error)}
+               );
+  }
+
+  getCustomers(id: string): void{
+    this.beforeRequest();
+    const token = localStorage.getItem('oatoken');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + token);
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.get(`${this._productsUrl}/${id}/customers`, options)
+               .map((res:Response) => res.json().data)
+               .subscribe(
+                 data => this.afterRequestCustomer(data),
                  error => {console.log(error)}
                );
   }
@@ -109,6 +133,11 @@ export class ProductsService {
   afterRequest(data: any): void{
     this.progress.done();
     this.products.next(data);
+  }
+
+  afterRequestCustomer(data: any): void{
+    this.progress.done();
+    this.customers.next(data);
   }
 
 }
