@@ -37,11 +37,11 @@
                 <span class="uk-text-bold">{{ (product && product.sold) ? product.sold.amount : null }}</span>
               </div>
               <div>
-                <h6 class="uk-margin-remove uk-text-uppercase">Cost</h6>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.cost' | translate }}</h6>
                 <span class="uk-text-bold">{{ (product) ? product.cost : null }}</span>
               </div>
               <div>
-                <h6 class="uk-margin-remove uk-text-uppercase">Selling Price</h6>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.selling-price' | translate }}</h6>
                 <span class="uk-text-bold">{{ (product) ? product.selling_price : null }}</span>
               </div>
               <div class="uk-width-1-1@s uk-width-1-1@m">
@@ -54,6 +54,37 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="uk-card uk-card-default uk-card-body" customers-table>
+        <h3 class="uk-text-muted uk-text-small uk-text-bold">{{ 'text.customers-who-bought-this-product' | translate }}</h3>
+        <hr class="uk-divider-icon">
+        <button class="uk-button uk-button-primary uk-margin-small" type="button" *ngIf="!customers" (click)="loadCustomers()">{{ 'form.button.show-customers' | translate }}</button>
+        <table class="uk-table uk-table-justify uk-table-divider" *ngIf="customers">
+          <thead>
+            <tr>
+              <th class="uk-width-auto">{{ 'table.customer.id' | translate }}</th>
+              <th class="uk-width-medium">{{ 'table.customer.name' | translate }}</th>
+              <th>{{ 'table.company.name' | translate }}</th>
+              <th>{{ 'form.label.email' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="customers && !customers.length">
+              <th colspan="4" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+            </tr>
+            <tr *ngFor="let customer of customers; let i=index;">
+              <td class="uk-text-uppercase">#{{customer.id.split('-')[0]}}</td>
+              <td class="uk-table-link">
+                <a [routerLink]="['/dashboard/customers', customer.id]" class="uk-link-reset">{{customer.full_name}}</a>
+              </td>
+              <td>{{customer.company_name}}</td>
+              <td>{{customer.email}}</td>
+            </tr>
+            <tr *ngIf="customers">
+              <th class="uk-text-right" colspan="4">{{ customers.length }} {{ 'module.title.customer' | translate }}</th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
