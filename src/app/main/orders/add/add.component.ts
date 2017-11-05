@@ -8,6 +8,7 @@ import { Customer } from '../../../core/classes/customer';
 import { Order } from '../../../core/classes/order';
 import { OrderDetail } from '../../../core/classes/order-detail';
 import { TranslateService } from '@ngx-translate/core';
+import { StatsService } from '../../../core/services/stats.service';
 
 @Component({
   selector: 'orders-add',
@@ -23,6 +24,7 @@ export class AddComponent implements OnInit {
     private _productsService: ProductsService,
     private _customersService: CustomersService,
     private _ordersService: OrdersService,
+    private _statsService: StatsService,
     public translate: TranslateService
   ) { }
 
@@ -30,8 +32,10 @@ export class AddComponent implements OnInit {
     this.init();
   }
 
-  onSubmit(){
-    this._ordersService.add(this.order);
+  async onSubmit(){
+    await this._ordersService.add(this.order);
+    this._statsService.get();
+    this._statsService.topProducts();
   }
 
   init(){
