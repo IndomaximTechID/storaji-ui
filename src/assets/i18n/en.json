@@ -61,7 +61,9 @@
             "total": "Total",
             "description": "Description",
             "sold": "Sold",
-            "amount": "Amount"
+            "amount": "Amount",
+            "date_from": "Date From",
+            "date_to": "Date To"
         },
         "placeholder": {
             "email": "Enter Email",
@@ -83,7 +85,9 @@
             "cost": "Enter Cost",
             "selling-price": "Enter Selling Price",
             "description": "Enter Description",
-            "amount": "Enter Amount"
+            "amount": "Enter Amount",
+            "date_from": "Date From",
+            "date_to": "Date To"
         },
         "button": {
             "save": "Save",

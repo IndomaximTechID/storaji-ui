@@ -61,7 +61,9 @@
             "total": "Total",
             "description": "Keterangan",
             "sold": "Terjual",
-            "amount": "Jumlah"
+            "amount": "Jumlah",
+            "date_from": "Dari Tanggal",
+            "date_to": "Sampai Tanggal"
         },
         "placeholder": {
             "email": "Masukkan Email",
@@ -83,7 +85,9 @@
             "cost": "Masukkan Harga Pokok",
             "selling-price": "Masukkan Harga Jual",
             "description": "Masukkan Keterangan",
-            "amount": "Masukkan Jumlah"
+            "amount": "Masukkan Jumlah",
+            "date_from": "Masukkan Tanggal",
+            "date_to": "Masukkan Tanggal"
         },
         "button": {
             "save": "Simpan",
