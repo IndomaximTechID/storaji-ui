@@ -8,9 +8,18 @@
           <div class="uk-card-body">
             <div class="uk-grid-small uk-grid-divider uk-child-width-1-2@s uk-child-width-1-2@m" uk-grid>
               <div class="uk-width-1-1@s uk-width-1-1@m">
-                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.order.id' | translate }}</h6>
-                <h1 class="uk-card-title uk-margin-remove uk-text-uppercase">#{{ (order && order.id) ? order.id.split('-')[0] : null }}</h1>
-                <hr class="uk-divider-icon">
+                <div class="uk-child-width-expand" uk-grid>
+                  <div>
+                    <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.order.id' | translate }}</h6>
+                    <h1 class="uk-card-title uk-margin-remove uk-text-uppercase">#{{ (order && order.id) ? order.id.split('-')[0] : null }}</h1>
+                  </div>
+                  <div class="uk-text-right">
+                    <button class="uk-button uk-button-primary" type="button" [disabled]="!(order && order.order_detail)" (click)="save()">{{ 'form.button.save-as-pdf' | translate }}</button>
+                  </div>
+                  <div class="uk-width-1-1 uk-margin-remove">
+                    <hr class="uk-divider-icon">
+                  </div>
+                </div>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.product.name' | translate }}</h6>
@@ -23,6 +32,14 @@
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.amount' | translate }}</h6>
                 <span class="uk-text-bold">{{ (order && order.order_detail) ? order.order_detail.amount : null }}</span>
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.price' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price).format('$0,0') : null }}</span>
+              </div>
+              <div>
+                <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.total' | translate }}</h6>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format('$0,0') : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.date' | translate }}</h6>
