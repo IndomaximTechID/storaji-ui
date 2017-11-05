@@ -30,6 +30,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@fengyuanchen/datepicker": "^0.6.3",
     "@ngui/auto-complete": "^0.16.0",
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
@@ -44,6 +45,7 @@
     "notyf": "^2.0.1",
     "numeral": "^2.0.6",
     "offline-js": "^0.7.19",
+    "pdfmake": "^0.1.33",
     "rxjs": "^5.4.2",
     "uikit": "^3.0.0-beta.30",
     "zone.js": "^0.8.14"
