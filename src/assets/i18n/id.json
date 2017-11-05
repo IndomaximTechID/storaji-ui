@@ -92,7 +92,9 @@
             "save": "Simpan",
             "cancel": "Batalkan",
             "show-customers": "Munculkan pelanggan",
-            "save-as-pdf": "Simpan PDF"
+            "save-as-pdf": "Simpan PDF",
+            "search": "Cari",
+            "clear": "Kembalikan"
         }
     },
     "text": {
@@ -106,6 +108,7 @@
             "customer": "Ubah Pelanggan",
             "order": "Ubah Pesanan"
         },
+        "search-option": "Pilihan Pencarian",
         "i18n": "Pilihan Bahasa",
         "general": "Umum",
         "module": "Modul",

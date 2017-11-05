@@ -92,7 +92,9 @@
             "save": "Save",
             "cancel": "Cancel",
             "show-customers": "Show customers",
-            "save-as-pdf": "Save as PDF"
+            "save-as-pdf": "Save as PDF",
+            "search": "Search",
+            "clear": "Clear"
         }
     },
     "text": {
@@ -106,6 +108,7 @@
             "customer": "Edit Customer",
             "order": "Edit Order"
         },
+        "search-option": "Search Options",
         "i18n": "Language Options",
         "general": "General",
         "module": "Modules",
