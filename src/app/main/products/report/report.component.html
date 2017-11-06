@@ -24,7 +24,7 @@
           </thead>
           <tbody>
             <tr *ngIf="products && !products.length">
-              <th colspan="6" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+              <th colspan="8" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
             </tr>
             <tr *ngFor="let product of products; let i = index">
               <td>#{{i+1}}</td>

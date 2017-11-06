@@ -35,7 +35,7 @@ export class ReportComponent implements OnInit {
 
   async save() {
     const docDefinitions = {
-      pageSize: 'A5',
+      pageSize: 'A4',
       pageOrientation: 'landscape',
       content: [{
         style: 'tableExample',

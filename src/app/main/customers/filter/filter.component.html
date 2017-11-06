@@ -1,0 +1,45 @@
+<div class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top">
+  <h2 class="uk-card-title">{{ 'text.search-option' | translate }}</h2>
+  <form (ngSubmit)="onSubmit();initProduct();" #productForm="ngForm">
+    <div class="uk-grid-small uk-child-width-1-4@m" uk-grid>
+      <div class="uk-padding-small">
+        <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
+        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
+          [(ngModel)]="customer.name" #name="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="company" class="uk-form-label">{{ 'table.company.name' | translate }}</label>
+        <input type="text" name="company" class="uk-input" placeholder="{{ 'form.placeholder.company-name' | translate }}"
+          [(ngModel)]="customer.company" #company="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="city" class="uk-form-label">{{ 'form.label.city' | translate }}</label>
+        <input type="text" name="city" class="uk-input" placeholder="{{ 'form.placeholder.city' | translate }}"
+          [(ngModel)]="customer.city" #sku="ngModel">
+      </div>
+      <div class="uk-padding-small">
+        <label for="country" class="uk-form-label">{{ 'form.label.country' | translate }}</label>
+        <input type="text" name="country" class="uk-input" placeholder="{{ 'form.placeholder.country' | translate }}"
+          [(ngModel)]="customer.country" #sku="ngModel">
+      </div>
+      <div class="uk-width-1-2 uk-padding-small">
+        <label for="date_from" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
+        <input type="text" name="date_from" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}"
+          [(ngModel)]="customer.date_range.from" #date_from="ngModel" uk-datepicker>
+      </div>
+      <div class="uk-width-1-2 uk-padding-small">
+        <label for="date_to" class="uk-form-label">{{ 'form.label.date_to' | translate }}</label>
+        <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}"
+          [(ngModel)]="customer.date_range.to" #date_to="ngModel" uk-datepicker>
+      </div>
+      <div class="uk-width-1-1 uk-padding-small">
+        <button type="submit" class="uk-button uk-button-primary"
+          [disabled]="!productForm.form.valid">{{ 'form.button.search' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default"
+          (click)="initProduct()">
+          {{ 'form.button.clear' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

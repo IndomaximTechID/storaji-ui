@@ -7,6 +7,7 @@ import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ReportComponent } from './report/report.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ReportComponent } from './report/report.component';
     AddComponent,
     EditComponent,
     OverviewComponent,
-    ReportComponent
+    ReportComponent,
+    FilterComponent
   ],
   providers: [AuthGuard],
   exports: [
@@ -35,7 +37,8 @@ import { ReportComponent } from './report/report.component';
     AddComponent,
     EditComponent,
     OverviewComponent,
-    ReportComponent
+    ReportComponent,
+    FilterComponent
   ]
 
 })
