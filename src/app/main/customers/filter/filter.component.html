@@ -1,6 +1,6 @@
 <div class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top">
   <h2 class="uk-card-title">{{ 'text.search-option' | translate }}</h2>
-  <form (ngSubmit)="onSubmit();initProduct();" #productForm="ngForm">
+  <form (ngSubmit)="onSubmit();" #customerForm="ngForm">
     <div class="uk-grid-small uk-child-width-1-4@m" uk-grid>
       <div class="uk-padding-small">
         <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
@@ -15,12 +15,12 @@
       <div class="uk-padding-small">
         <label for="city" class="uk-form-label">{{ 'form.label.city' | translate }}</label>
         <input type="text" name="city" class="uk-input" placeholder="{{ 'form.placeholder.city' | translate }}"
-          [(ngModel)]="customer.city" #sku="ngModel">
+          [(ngModel)]="customer.city" #city="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="country" class="uk-form-label">{{ 'form.label.country' | translate }}</label>
         <input type="text" name="country" class="uk-input" placeholder="{{ 'form.placeholder.country' | translate }}"
-          [(ngModel)]="customer.country" #sku="ngModel">
+          [(ngModel)]="customer.country" #country="ngModel">
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="date_from" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
@@ -34,9 +34,9 @@
       </div>
       <div class="uk-width-1-1 uk-padding-small">
         <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!productForm.form.valid">{{ 'form.button.search' | translate }}</button>
+          [disabled]="!customerForm.form.valid">{{ 'form.button.search' | translate }}</button>
         <button type="button" class="uk-button uk-button-default"
-          (click)="initProduct()">
+          (click)="customerForm.reset()">
           {{ 'form.button.clear' | translate }}
         </button>
       </div>

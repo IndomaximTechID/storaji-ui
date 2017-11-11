@@ -17,6 +17,15 @@ export class Customer {
     ){}
 }
 
+export class Order {
+    constructor(
+        public id: string = null,
+        public product: string = null,
+        public customer: string = null,
+        public date_range: DateRange = new DateRange()
+    ){}
+}
+
 class DateRange {
     constructor(
         public from: string = null,

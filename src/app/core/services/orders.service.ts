@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
@@ -17,13 +17,19 @@ export class OrdersService {
 
   constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
 
-  get(): void{
+  get(query?: any): void{
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
     let options = new RequestOptions({ headers: headers });
+    
+    if(query){
+      let params = new URLSearchParams();
+      params.append('filter', JSON.stringify(query));
+      options.params = params;
+    }
 
     this.http.get(this._ordersUrl, options)
                .map((res:Response) => res.json().data)

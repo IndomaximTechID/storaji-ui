@@ -67,6 +67,7 @@
         },
         "placeholder": {
             "email": "Masukkan Email",
+            "order-id": "Masukkan ID Pesanan",
             "password": "Masukkan Kata Sandi",
             "product": "Masukkan Produk",
             "customer": "Masukkan Pelanggan",
@@ -94,7 +95,7 @@
             "show-customers": "Munculkan pelanggan",
             "save-as-pdf": "Simpan PDF",
             "search": "Cari",
-            "clear": "Kembalikan"
+            "clear": "Bersihkan"
         }
     },
     "text": {

@@ -67,6 +67,7 @@
         },
         "placeholder": {
             "email": "Enter Email",
+            "order-id": "Enter Order ID",
             "password": "Enter Password",
             "product": "Enter Product",
             "customer": "Enter Customer",
