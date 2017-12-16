@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { Product } from './product';
 
 export class OrderDetail {
   constructor(
@@ -6,5 +6,5 @@ export class OrderDetail {
     public product_id?: string,
     public amount: number = 0,
     public product: Product = new Product()
-  ){}
+  ) { }
 }

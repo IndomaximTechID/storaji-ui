@@ -1,0 +1,52 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <storaji-products-filter></storaji-products-filter>
+      <div class="uk-card uk-card-default uk-card-body" products-table>
+        <div class="uk-display-block uk-text-right">
+          <button class="uk-button uk-button-primary" type="button" (click)="save()"
+                  [disabled]="!products">{{ 'form.button.save-as-pdf' | translate }}</button>
+        </div>
+        <table class="uk-table uk-table-justify uk-table-divider">
+          <thead>
+            <tr>
+              <th>{{ 'table.number' | translate }}</th>
+              <th class="uk-width-medium">{{ 'table.name' | translate }}</th>
+              <th>{{ 'table.sku' | translate }}</th>
+              <th>{{ 'table.type' | translate }}</th>
+              <th>{{ 'table.stock' | translate }}</th>
+              <th>{{ 'form.label.cost' | translate }}</th>
+              <th>{{ 'form.label.selling-price' | translate }}</th>
+              <th>{{ 'table.status' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="products && !products.length">
+              <th colspan="8" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+            </tr>
+            <tr *ngFor="let product of products; let i = index">
+              <td>#{{i+1}}</td>
+              <td class="uk-table-link">
+                <a [routerLink]="['/dashboard/products', product.id]" class="uk-link-reset">{{product.name}}</a>
+              </td>
+              <td>{{product.sku}}</td>
+              <td>{{(product.type) ? product.type.name : product.type}}</td>
+              <td>{{product.stock}}</td>
+              <td>{{currency.set(product.cost).format('$0,0')}}</td>
+              <td>{{currency.set(product.selling_price).format('$0,0')}}</td>
+              <div *ngIf="(product.stock > 0); then ok else not"></div>
+              <ng-template #ok>
+                <td><span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>
+              </ng-template>
+              <ng-template #not>
+                <td><span uk-icon="icon: close;"></span> {{ 'text.sold-out' | translate }}</td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts(){
+  loadProducts() {
     this._productService.get();
     this._productService.products.subscribe(
       data => (data instanceof Array) ? this.products = data : data

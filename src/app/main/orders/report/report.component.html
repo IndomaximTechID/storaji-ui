@@ -1,0 +1,48 @@
+<storaji-navbar></storaji-navbar>
+<storaji-sidebar></storaji-sidebar>
+<div class="content-padder content-background">
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <storaji-orders-filter></storaji-orders-filter>
+      <div class="uk-card uk-card-default uk-card-body" customers-table>
+        <div class="uk-display-block uk-text-right">
+          <button class="uk-button uk-button-primary" type="button" (click)="save()"
+                  [disabled]="!orders">{{ 'form.button.save-as-pdf' | translate }}</button>
+        </div>
+        <table class="uk-table uk-table-justify uk-table-divider">
+          <thead>
+            <tr>
+              <th class="uk-width-auto">{{ 'table.order.id' | translate }}</th>
+              <th>{{ 'table.product.name' | translate }}</th>
+              <th>{{ 'table.customer.name' | translate }}</th>
+              <th>{{ 'form.label.amount' | translate }}</th>
+              <th>{{ 'form.label.price' | translate }}</th>
+              <th>{{ 'form.label.total' | translate }}</th>
+              <th>{{ 'table.date' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="orders && !orders.length">
+              <th colspan="7" class="uk-text-center">{{ 'table.no-data' | translate }}</th>
+            </tr>
+            <tr *ngFor="let order of orders; let i=index;">
+              <td class="uk-table-link">
+                <a [routerLink]="['/dashboard/orders', order.id]" class="uk-link-reset uk-text-uppercase">#{{order.id.split('-')[0]}}</a>
+              </td>
+              <td class="uk-table-link">
+                <a [routerLink]="['/dashboard/products', order.order_detail.product.id]" class="uk-link-reset">{{order.order_detail.product.name}}</a>
+              </td>
+              <td class="uk-table-link">
+                <a [routerLink]="['/dashboard/customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
+              </td>
+              <td>{{order.order_detail.amount}}</td>
+              <td>{{currency.set(order.order_detail.product.selling_price).format('$0,0')}}</td>
+              <td>{{currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format('$0,0')}}</td>
+              <td>{{order.created_at}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

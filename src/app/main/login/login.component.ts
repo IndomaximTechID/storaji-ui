@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.title.setTitle(this.app.name);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.auth.login(this.credentials);
   }
 

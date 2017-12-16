@@ -8,9 +8,10 @@ import { Customer } from '../../../core/classes/customer';
 import { Order } from '../../../core/classes/order';
 import { OrderDetail } from '../../../core/classes/order-detail';
 import { TranslateService } from '@ngx-translate/core';
+import { StatsService } from '../../../core/services/stats.service';
 
 @Component({
-  selector: 'orders-add',
+  selector: 'storaji-orders-add',
   templateUrl: './add.component.html',
   styles: []
 })
@@ -23,6 +24,7 @@ export class AddComponent implements OnInit {
     private _productsService: ProductsService,
     private _customersService: CustomersService,
     private _ordersService: OrdersService,
+    private _statsService: StatsService,
     public translate: TranslateService
   ) { }
 
@@ -30,11 +32,13 @@ export class AddComponent implements OnInit {
     this.init();
   }
 
-  onSubmit(){
-    this._ordersService.add(this.order);
+  async onSubmit() {
+    await this._ordersService.add(this.order);
+    this._statsService.get();
+    this._statsService.topProducts();
   }
 
-  init(){
+  init() {
     this.order = new Order();
     this.order.order_detail = new OrderDetail();
     this.order.order_detail.product = new Product();
@@ -44,22 +48,26 @@ export class AddComponent implements OnInit {
       data => {
         const available_stock: Product[] = [];
         _.forEach(data, (product: Product) => {
-          if (product.stock > 0) available_stock.push(product);
+          if (product.stock > 0) {
+            available_stock.push(product);
+          }
         });
         this.products = available_stock;
       },
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
 
     this._customersService.get();
     this._customersService.customers.subscribe(
       data => this.customers = data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
   }
 
   available_stock(e: any) {
-    if (e.target.value > this.order.order_detail.product.stock) return e.target.value = this.order.order_detail.product.stock;
+    if (e.target.value > this.order.order_detail.product.stock) {
+      return e.target.value = this.order.order_detail.product.stock;
+    }
   }
 
 }

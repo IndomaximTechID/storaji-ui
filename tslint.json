@@ -117,13 +117,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "storaji",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "storaji",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

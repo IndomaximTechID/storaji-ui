@@ -4,7 +4,7 @@ export class Stat {
     public customers?: number,
     public orders?: number,
     public stats?: any
-  ){}
+  ) { }
 }
 
 export class TopProduct {
@@ -14,5 +14,5 @@ export class TopProduct {
     public stock?: number,
     public orders?: number,
     public sold?: number
-  ){}
+  ) { }
 }

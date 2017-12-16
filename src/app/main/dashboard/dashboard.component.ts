@@ -27,13 +27,13 @@ export class DashboardComponent implements OnInit {
     this._statsService.get();
     this._statsService.stats.subscribe(
       data => this.stat = data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
-    
+
     this._statsService.topProducts();
     this._statsService.top_products.subscribe(
       data => this.top_products = data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
   }
 

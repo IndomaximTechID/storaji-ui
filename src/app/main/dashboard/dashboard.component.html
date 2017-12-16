@@ -3,7 +3,7 @@
 <div class="content-padder content-background">
   <div class="uk-section-small">
     <div class="uk-container uk-container-large">
-      <orders-add></orders-add>
+      <storaji-orders-add></storaji-orders-add>
       <div>
         <div class="uk-card uk-card-default uk-card-body">
           <h2 class="uk-card-title">{{ 'text.stat.financial' | translate }}</h2>
@@ -21,26 +21,21 @@
                   {{ (stat != null) ? currency.set(stat.stats.profit).format('$0,0') : null }}
               </div>
           </div>
-        </div>
-        <div class="uk-card uk-card-default uk-card-body">
           <h2 class="uk-card-title">{{ 'text.stat.total' | translate }}</h2>
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./products']">{{ 'module.title.product' | translate }}</a><br/>
-                  {{ (stat != null) ? stat.products : null }}
+                  <a [routerLink]="['./products']">{{ (stat != null) ? stat.products : 0 }} {{ 'module.title.product' | translate }}</a>
               </div>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./customers']">{{ 'module.title.customer' | translate }}</a><br/>
-                  {{ (stat != null) ? stat.customers : null }}
+                  <a [routerLink]="['./customers']">{{ (stat != null) ? stat.customers : 0 }} {{ 'module.title.customer' | translate }}</a>
               </div>
               <div class="uk-text-uppercase">
-                  <a [routerLink]="['./orders']">{{ 'module.title.transaction' | translate }}</a><br/>
-                  {{ (stat != null) ? stat.orders : null }}
+                  <a [routerLink]="['./orders']">{{ (stat != null) ? stat.orders : 0 }} {{ 'module.title.transaction' | translate }}</a>
               </div>
           </div>
         </div>
       </div>
-      <div class="uk-margin-medium-top">
+      <div class="uk-margin-small-top">
         <div class="uk-card uk-card-default uk-card-body">
           <h2 class="uk-card-title">{{ 'text.stat.top-selling' | translate }}</h2>
           <table class="uk-table uk-table-justify uk-table-divider">

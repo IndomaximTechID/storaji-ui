@@ -10,5 +10,5 @@ export class Product {
     public sold: any = {amount: 0},
     public cost: number = null,
     public selling_price: number = null
-  ){}
+  ) { }
 }

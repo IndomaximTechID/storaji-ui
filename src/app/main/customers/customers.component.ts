@@ -20,7 +20,7 @@ export class CustomersComponent implements OnInit {
     this.loadCustomers();
   }
 
-  loadCustomers(){
+  loadCustomers() {
     this._customerService.get();
     this._customerService.customers.subscribe(
       data => (data instanceof Array) ? this.customers = data : data
