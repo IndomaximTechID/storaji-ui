@@ -8,7 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: 'customers-report',
+  selector: 'storaji-customers-report',
   templateUrl: './report.component.html',
   styles: []
 })
@@ -24,7 +24,7 @@ export class ReportComponent implements OnInit {
     this.loadCustomers();
   }
 
-  loadCustomers(){
+  loadCustomers() {
     this._customerService.get();
     this._customerService.customers.subscribe(
       data => (data instanceof Array) ? this.customers = data : data
@@ -58,7 +58,10 @@ export class ReportComponent implements OnInit {
                 style: 'tableHeader'
               },
               {
-                text: [this.translate.instant('form.label.postal-code'), this.translate.instant('form.label.city')].join(', ').toUpperCase(),
+                text: [
+                  this.translate.instant('form.label.postal-code'),
+                  this.translate.instant('form.label.city')
+                ].join(', ').toUpperCase(),
                 style: 'tableHeader'
               },
               {
@@ -100,7 +103,7 @@ export class ReportComponent implements OnInit {
     };
     await this.customers.forEach((item, i) => {
       docDefinitions.content[0].table.body.push([
-        i+1,
+        i + 1,
         item.full_name,
         item.company_name,
         item.email,

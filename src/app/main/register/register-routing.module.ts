@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RegisterComponent } from "./register.component";
+import { RegisterComponent } from './register.component';
 import { SharedModule } from '../../shared/modules/shared.module';
 import { GuestGuard } from '../../core/services/guest.guard';
 

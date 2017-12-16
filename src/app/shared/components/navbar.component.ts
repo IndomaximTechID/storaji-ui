@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   navbar: boolean = this.auth.isAuthenticated();
 
   constructor(
-    private app: Config,
+    public app: Config,
     private auth: AuthService,
     public translate: TranslateService
   ) { }
@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  logout(): void{
+  logout(): void {
     this.auth.logout();
   }
 

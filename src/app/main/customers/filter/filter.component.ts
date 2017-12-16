@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 declare var numeral: any;
 declare var jQuery: any;
 @Component({
-  selector: 'customers-filter',
+  selector: 'storaji-customers-filter',
   templateUrl: './filter.component.html',
   styles: []
 })
@@ -26,7 +26,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
     jQuery('input[uk-datepicker]').datepicker();
   }
 
-  onSubmit(){
+  onSubmit() {
     this._customersService.get(this.customer);
   }
 

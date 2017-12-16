@@ -1,10 +1,17 @@
+class DateRange {
+    constructor(
+        public from: string = null,
+        public to: string = null
+    ) { }
+}
+
 export class Product {
     constructor(
       public sku: string = null,
       public name: string = null,
       public type: any = null,
       public date_range: DateRange = new DateRange()
-    ){}
+    ) { }
 }
 
 export class Customer {
@@ -14,7 +21,7 @@ export class Customer {
         public city: string = null,
         public country: string = null,
         public date_range: DateRange = new DateRange()
-    ){}
+    ) { }
 }
 
 export class Order {
@@ -23,12 +30,5 @@ export class Order {
         public product: string = null,
         public customer: string = null,
         public date_range: DateRange = new DateRange()
-    ){}
-}
-
-class DateRange {
-    constructor(
-        public from: string = null,
-        public to: string = null
-    ){}
+    ) { }
 }

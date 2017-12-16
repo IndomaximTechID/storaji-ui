@@ -1,11 +1,14 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo() {
-    return browser.get('/');
+  navigateTo(path: string = '') {
+    path = (path === '/')
+      ? ''
+      : path;
+    return browser.get(`/${path}`);
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getLoginHeader() {
+    return element(by.css('storaji-root storaji-login .uk-card-body h2')).getText();
   }
 }

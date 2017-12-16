@@ -6,12 +6,10 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "app/www",
       "assets": [
         { "glob": "**/*", "input": "./assets/", "output": "./assets/" },
-        { "glob": "main.js", "input": "./", "output": "./" },
-        { "glob": "setupEvents.js", "input": "./", "output": "./" },
-        { "glob": "setupFrame.js", "input": "./", "output": "./" },
+        { "glob": "**/*", "input": "./electron", "output": "../" },
         { "glob": "package.json", "input": "../", "output": "./" }
       ],
       "index": "index.html",
@@ -20,7 +18,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "storaji",
       "styles": [
         "../node_modules/ionicons/css/ionicons.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",

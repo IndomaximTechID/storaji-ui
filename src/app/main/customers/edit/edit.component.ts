@@ -6,7 +6,7 @@ import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'customers-edit',
+  selector: 'storaji-customers-edit',
   templateUrl: './edit.component.html',
   styles: []
 })
@@ -24,10 +24,10 @@ export class EditComponent implements OnInit {
     this.initCustomer();
   }
 
-  onSubmit(){
+  onSubmit() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._customersService.update(params.get('id'), this.customer)
+          this._customersService.update(params.get('id'), this.customer);
           return this._customersService.customers;
         })
         .subscribe(
@@ -36,10 +36,10 @@ export class EditComponent implements OnInit {
     this.initCustomer();
   }
 
-  onDelete(){
+  onDelete() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._customersService.delete(params.get('id'))
+          this._customersService.delete(params.get('id'));
           return this._customersService.customers;
         })
         .subscribe(
@@ -50,10 +50,10 @@ export class EditComponent implements OnInit {
     this.initCustomer();
   }
 
-  initCustomer(){
+  initCustomer() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._customersService.find(params.get('id'))
+          this._customersService.find(params.get('id'));
           return this._customersService.customers;
         })
         .subscribe(

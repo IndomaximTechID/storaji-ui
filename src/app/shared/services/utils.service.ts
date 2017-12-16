@@ -7,7 +7,7 @@ export class UtilsService {
   _notyf = new Notyf();
 
   constructor() { }
-  loading(options: object){
+  loading(options: object) {
     const defaultOpts = {
       selector: 'storaji-root',
       action: 'show',
@@ -16,7 +16,7 @@ export class UtilsService {
 
     const opts = Object.assign(defaultOpts, options);
 
-    if( opts.nice ){
+    if ( opts.nice ) {
       return $(opts.selector).LoadingOverlay(opts.action, {
         image: '',
         color: 'rgba(28, 35, 54, 0.45)',

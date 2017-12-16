@@ -5,137 +5,137 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 import { UtilsService } from '../../shared/services/utils.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { NgProgressService } from 'ngx-progressbar';
+import { NgProgress } from 'ngx-progressbar';
 import { Config } from '../../shared/classes/app';
 
 
 @Injectable()
 export class ProductsService {
-  _productsUrl: string = `${new Config().api}/products`;
+  _productsUrl = `${new Config().api}/products`;
 
   public products: BehaviorSubject<any> = new BehaviorSubject(null);
 
   public customers: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgressService) { }
+  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
 
-  get(query?: any): void{
+  get(query?: any): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers});
+    const options = new RequestOptions({ headers: headers});
 
-    if(query){
-      let params = new URLSearchParams();
+    if (query) {
+      const params = new URLSearchParams();
       params.append('filter', JSON.stringify(query));
       options.params = params;
     }
 
     this.http.get(`${this._productsUrl}`, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  find(id: string): void{
+  find(id: string): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     this.http.get(`${this._productsUrl}/${id}`, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  getCustomers(id: string): void{
+  getCustomers(id: string): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     this.http.get(`${this._productsUrl}/${id}/customers`, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequestCustomer(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  add(product: any): void{
+  add(product: any): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
 
     const body = JSON.stringify(product);
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     this.http.post(`${this._productsUrl}/add`, body, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  update(id: string, product: any): void{
+  update(id: string, product: any): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
 
     const body = JSON.stringify(product);
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     this.http.put(`${this._productsUrl}/${id}/update`, body, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  delete(id: string): void{
+  delete(id: string): void {
     this.beforeRequest();
     const token = localStorage.getItem('oatoken');
-    
-    let headers = new Headers();
+
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     this.http.delete(`${this._productsUrl}/${id}/delete`, options)
-               .map((res:Response) => res.json().data)
+               .map((res: Response) => res.json().data)
                .subscribe(
                  data => this.afterRequest(data),
-                 error => {console.log(error)}
+                 error => {console.log(error); }
                );
   }
 
-  beforeRequest(): void{
+  beforeRequest(): void {
     this.progress.start();
   }
 
-  afterRequest(data: any): void{
+  afterRequest(data: any): void {
     this.progress.done();
     this.products.next(data);
   }
 
-  afterRequestCustomer(data: any): void{
+  afterRequestCustomer(data: any): void {
     this.progress.done();
     this.customers.next(data);
   }

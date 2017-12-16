@@ -36,12 +36,12 @@ export class RegisterComponent implements OnInit {
     this._companyTypes.get();
     this._companyTypes.companyTypes.subscribe(
       data => (data instanceof Array) ? this.companyTypes = data : data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
     this.title.setTitle(this.app.name);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.auth.register(this.credentials);
   }
 

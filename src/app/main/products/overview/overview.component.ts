@@ -8,7 +8,7 @@ import { Customer } from '../../../core/classes/customer';
 
 declare var numeral: any;
 @Component({
-  selector: 'products-overview',
+  selector: 'storaji-products-overview',
   templateUrl: './overview.component.html',
   styles: []
 })
@@ -27,31 +27,34 @@ export class OverviewComponent implements OnInit {
     this.loadProduct();
   }
 
-  async loadProduct(){
+  async loadProduct() {
     await this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productService.find(params.get('id'))
+          this._productService.find(params.get('id'));
           return this._productService.products;
         })
         .subscribe(
           data => {
-            (data instanceof Object) ? this.product = data : data
+            if (data instanceof Object) {
+              this.product = data;
+            }
           }
         );
   }
 
-  async loadCustomers(){
+  async loadCustomers() {
     await this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productService.getCustomers(params.get('id'))
+          this._productService.getCustomers(params.get('id'));
           return this._productService.customers;
         })
         .subscribe(
           data => {
-            (data instanceof Array) ? this.customers = data : data
-            console.log(this.customers)
+            if (data instanceof Array) {
+              this.customers = data;
+            }
           }
-        )
+        );
   }
 
 }

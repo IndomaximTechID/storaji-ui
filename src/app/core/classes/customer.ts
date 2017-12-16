@@ -8,5 +8,5 @@ export class Customer {
     public postal_code: string = null,
     public city: string = null,
     public country: string = null
-  ){}
+  ) { }
 }

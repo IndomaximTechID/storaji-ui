@@ -20,12 +20,12 @@ export class OrdersComponent implements OnInit {
     this.loadOrders();
   }
 
-  loadOrders(){
+  loadOrders() {
     this._ordersService.get();
     this._ordersService.orders.subscribe(
       data => (data instanceof Array) ? this.orders = data : data
     );
-    
+
   }
 
 }

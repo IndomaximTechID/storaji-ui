@@ -7,7 +7,7 @@ import { Config } from './shared/classes/app';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './main/main.module';
-import { TranslationModule } from './/translation.module';
+import { TranslationModule } from './translation.module';
 
 @NgModule({
   declarations: [

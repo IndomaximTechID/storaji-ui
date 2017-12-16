@@ -1,4 +1,4 @@
-import { CompanyType } from "./company_type";
+import { CompanyType } from './company_type';
 
 export class Company {
   constructor(
@@ -6,5 +6,5 @@ export class Company {
     public name: string = '',
     public type_id?: string,
     public type?: CompanyType
-  ){}
+  ) { }
 }

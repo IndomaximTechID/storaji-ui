@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(jQuery(window).width() < 960){
+    if (jQuery(window).width() < 960) {
       jQuery('#sidebar').css({
         display: 'none', transform: 'translate(-300px, 0px)', opacity: 0
       });

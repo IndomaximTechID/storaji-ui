@@ -9,7 +9,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
 @Component({
-  selector: 'orders-report',
+  selector: 'storaji-orders-report',
   templateUrl: './report.component.html',
   styles: []
 })
@@ -26,12 +26,12 @@ export class ReportComponent implements OnInit {
     this.loadOrders();
   }
 
-  loadOrders(){
+  loadOrders() {
     this._ordersService.get();
     this._ordersService.orders.subscribe(
       data => (data instanceof Array) ? this.orders = data : data
     );
-    
+
   }
 
   async save() {

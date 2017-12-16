@@ -4,7 +4,7 @@ import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'customers-add',
+  selector: 'storaji-customers-add',
   templateUrl: './add.component.html',
   styles: []
 })
@@ -20,12 +20,12 @@ export class AddComponent implements OnInit {
     this.initCustomer();
   }
 
-  onSubmit(){
+  onSubmit() {
     this._customersService.add(this.customer);
     this.initCustomer();
   }
 
-  initCustomer(){
+  initCustomer() {
     this.customer = new Customer();
   }
 
