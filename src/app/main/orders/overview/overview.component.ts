@@ -11,7 +11,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
 @Component({
-  selector: 'orders-overview',
+  selector: 'storaji-orders-overview',
   templateUrl: './overview.component.html',
   styles: []
 })
@@ -29,10 +29,10 @@ export class OverviewComponent implements OnInit {
     this.loadOrder();
   }
 
-  loadOrder(){
+  loadOrder() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._ordersService.find(params.get('id'))
+          this._ordersService.find(params.get('id'));
           return this._ordersService.orders;
         })
         .subscribe(
@@ -45,16 +45,16 @@ export class OverviewComponent implements OnInit {
       pageSize: 'A5',
       pageOrientation: 'landscape',
       content: [
-        { 
+        {
           text: this.translate.instant('table.order.id').toUpperCase(),
-          style: 'header' 
+          style: 'header'
         },
-        { 
+        {
           text: ['#', this.order.id.split('-')[0].toUpperCase()].join(''),
           style: 'subheader'
         },
         {
-            canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*40, y2: 5, lineWidth: 1 }],
+            canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }],
             margin: [0, 10],
         },
         {
@@ -149,7 +149,7 @@ export class OverviewComponent implements OnInit {
             columnGap: 15,
         }
       }
-    }
+    };
     pdfMake.createPdf(docDefinitions).download(
       [
         this.translate.instant('module.title.order').toUpperCase(),

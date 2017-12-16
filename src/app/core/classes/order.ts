@@ -1,5 +1,5 @@
-import { Customer } from "./customer";
-import { OrderDetail } from "./order-detail";
+import { Customer } from './customer';
+import { OrderDetail } from './order-detail';
 
 export class Order {
   constructor(
@@ -9,5 +9,5 @@ export class Order {
     public order_detail: OrderDetail = new OrderDetail(),
     public created_at?: Date,
     public updated_at?: Date
-  ){}
+  ) { }
 }

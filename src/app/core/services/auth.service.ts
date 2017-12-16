@@ -11,7 +11,7 @@ import { Config } from '../../shared/classes/app';
 
 @Injectable()
 export class AuthService {
-  _authUrl: string = `${new Config().api}/auth`;
+  _authUrl = `${new Config().api}/auth`;
 
   constructor(
     private utils: UtilsService,
@@ -20,9 +20,9 @@ export class AuthService {
     public translate: TranslateService
   ) { }
 
-  login(credentials: any): void{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+  login(credentials: any): void {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     this.loading('show');
 
@@ -34,9 +34,9 @@ export class AuthService {
         );
   }
 
-  register(credentials: any): void{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+  register(credentials: any): void {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     this.loading('show');
 
@@ -48,21 +48,21 @@ export class AuthService {
         );
   }
 
-  detail(): Observable<User>{
-    let token = localStorage.getItem('oatoken');
-    let headers = new Headers();
+  detail(): Observable<User> {
+    const token = localStorage.getItem('oatoken');
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + token);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
     return this.http.get(`${this._authUrl}/detail`, options)
         .map((res: Response) => res.json());
   }
 
-  isAuthenticated(): boolean{
-    let token = localStorage.getItem('oatoken');
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('oatoken');
 
-    if(!token) {
+    if (!token) {
       return false;
     }
 
@@ -71,14 +71,14 @@ export class AuthService {
       error => this.logout()
     );
 
-    if(!token) {
+    if (!token) {
       return false;
     }
 
     return true;
   }
 
-  afterLogin(data: any): void{
+  afterLogin(data: any): void {
     localStorage.setItem('oatoken', data.token);
 
     this.utils.notyf(
@@ -89,7 +89,7 @@ export class AuthService {
     setTimeout(() => {
       this.loading('hide');
       this.router.navigate(['/dashboard']);
-    }, 2000)
+    }, 2000);
   }
 
   failedLogin(error: any): void {
@@ -100,12 +100,12 @@ export class AuthService {
     this.loading('hide');
   }
 
-  logout(): void{
+  logout(): void {
     this.unset();
     this.router.navigate(['/login']);
   }
 
-  unset(): void{
+  unset(): void {
     localStorage.clear();
   }
 

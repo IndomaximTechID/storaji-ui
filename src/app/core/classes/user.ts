@@ -1,4 +1,4 @@
-import { Company } from "./company";
+import { Company } from './company';
 
 export class User {
   constructor(
@@ -6,5 +6,5 @@ export class User {
     name: string,
     email: string,
     company?: Company
-  ){}
+  ) { }
 }

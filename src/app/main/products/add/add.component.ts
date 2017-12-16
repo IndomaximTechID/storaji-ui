@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 declare var numeral: any;
 @Component({
-  selector: 'products-add',
+  selector: 'storaji-products-add',
   templateUrl: './add.component.html',
   styles: []
 })
@@ -25,21 +25,21 @@ export class AddComponent implements OnInit {
     this.initProduct();
   }
 
-  onSubmit(){
-    this.product.cost = numeral(this.product.cost).value()
-    this.product.selling_price = numeral(this.product.selling_price).value()
+  onSubmit() {
+    this.product.cost = numeral(this.product.cost).value();
+    this.product.selling_price = numeral(this.product.selling_price).value();
     this._productsService.add(this.product);
   }
 
   onKeyup(e: any) {
-    e.target.value = numeral(e.target.value).format('$0,0')
+    e.target.value = numeral(e.target.value).format('$0,0');
   }
 
-  initProduct(){
+  initProduct() {
     this._productTypesService.get();
     this._productTypesService.productTypes.subscribe(
       data => (data instanceof Array) ? this.productTypes = data : data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
     this.product = new Product();
   }

@@ -12,7 +12,7 @@ $(function() {
       });
 
       if( $( window ).width() > 960 ) {
-        padder.transition({marginLeft: sidebar.css('width')}, 250, 'in-out');
+        padder.transition({marginLeft: '300px'}, 250, 'in-out');
       }
     } else {
       sidebar.css({'display': 'block', 'x': '0px'});

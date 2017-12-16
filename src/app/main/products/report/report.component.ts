@@ -9,7 +9,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
 @Component({
-  selector: 'products-report',
+  selector: 'storaji-products-report',
   templateUrl: './report.component.html',
   styles: []
 })
@@ -26,7 +26,7 @@ export class ReportComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts(){
+  loadProducts() {
     this._productService.get();
     this._productService.products.subscribe(
       data => (data instanceof Array) ? this.products = data : data
@@ -35,7 +35,7 @@ export class ReportComponent implements OnInit {
 
   async save() {
     const docDefinitions = {
-      pageSize: 'A5',
+      pageSize: 'A4',
       pageOrientation: 'landscape',
       content: [{
         style: 'tableExample',
@@ -106,7 +106,7 @@ export class ReportComponent implements OnInit {
     };
     await this.products.forEach((item, i) => {
       docDefinitions.content[0].table.body.push([
-        i+1,
+        i + 1,
         item.name,
         item.sku,
         item.type.name,

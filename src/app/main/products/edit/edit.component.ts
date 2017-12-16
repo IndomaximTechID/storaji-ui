@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 declare var numeral: any;
 @Component({
-  selector: 'products-edit',
+  selector: 'storaji-products-edit',
   templateUrl: './edit.component.html',
   styles: []
 })
@@ -29,12 +29,12 @@ export class EditComponent implements OnInit {
     this.initProduct();
   }
 
-  onSubmit(){
-    this.product.cost = numeral(this.product.cost).value()
-    this.product.selling_price = numeral(this.product.selling_price).value()
+  onSubmit() {
+    this.product.cost = numeral(this.product.cost).value();
+    this.product.selling_price = numeral(this.product.selling_price).value();
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productsService.update(params.get('id'), this.product)
+          this._productsService.update(params.get('id'), this.product);
           return this._productsService.products;
         })
         .subscribe(
@@ -43,13 +43,13 @@ export class EditComponent implements OnInit {
   }
 
   onKeyup(e: any) {
-    e.target.value = numeral(e.target.value).format('$0,0')
+    e.target.value = numeral(e.target.value).format('$0,0');
   }
 
-  onDelete(){
+  onDelete() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productsService.delete(params.get('id'))
+          this._productsService.delete(params.get('id'));
           return this._productsService.products;
         })
         .subscribe(
@@ -59,21 +59,23 @@ export class EditComponent implements OnInit {
     this.initProduct();
   }
 
-  initProduct(){
+  initProduct() {
     this._productTypesService.get();
     this._productTypesService.productTypes.subscribe(
       data => this.productTypes = data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
-    
+
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._productsService.find(params.get('id'))
+          this._productsService.find(params.get('id'));
           return this._productsService.products;
         })
         .subscribe(
           data => {
-            (data instanceof Object) ? this.product = data : data
+            if (data instanceof Object) {
+              this.product = data;
+            }
             this.product.cost = numeral(this.product.cost).format('$0,0');
             this.product.selling_price = numeral(this.product.selling_price).format('$0,0');
           }

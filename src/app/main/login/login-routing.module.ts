@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from "./login.component";
+import { LoginComponent } from './login.component';
 import { SharedModule } from '../../shared/modules/shared.module';
 import { GuestGuard } from '../../core/services/guest.guard';
 

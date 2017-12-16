@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'customers-overview',
+  selector: 'storaji-customers-overview',
   templateUrl: './overview.component.html',
   styles: []
 })
@@ -23,10 +23,10 @@ export class OverviewComponent implements OnInit {
     this.loadCustomer();
   }
 
-  loadCustomer(){
+  loadCustomer() {
     this.routes.paramMap
         .switchMap((params: ParamMap) => {
-          this._customerService.find(params.get('id'))
+          this._customerService.find(params.get('id'));
           return this._customerService.customers;
         })
         .subscribe(

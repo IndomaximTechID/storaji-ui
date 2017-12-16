@@ -1,23 +1,72 @@
 {
   "name": "storaji",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-beta.0",
   "license": "MIT",
   "description": "Manage your company stocks with us.",
-  "main": "main.js",
+  "main": "app/main.js",
   "author": {
     "name": "Indomaxim Technology",
     "email": "support@indomaxim.web.id",
     "url": "https://indomaxim.web.id/"
   },
+  "build": {
+    "appId": "com.indomaxim.storaji",
+    "productName": "Storaji",
+    "releaseInfo": {
+      "releaseNotesFile": "src/electron/releaseNotes.md"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "IndomaximTechID",
+        "repo": "storaji"
+      }
+    ],
+    "files": [
+      "app/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "src/assets/storaji.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Storaji",
+      "oneClick": false,
+      "perMachine": true,
+      "menuCategory": true,
+      "artifactName": "StorajiSetup.exe",
+      "installerSidebar": "src/assets/installerSidebar.bmp",
+      "uninstallerSidebar": "src/assets/installerSidebar.bmp"
+    }
+  },
   "scripts": {
+    "build": "run-s build:app build:only",
+    "build:app": "ng build --prod",
+    "build:only": "build -w",
+    "build:release": "build -w -p always",
+    "electron": "electron app/main.js",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod && electron-packager dist --platform win32 --arch all --out dist/bin/ --overwrite --ignore bin  --win32metadata.CompanyName=\"Indomaxim Technology\" --win32metadata.ProductName=\"Storaji\" --icon dist/assets/storaji.ico",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "electron": "electron dist/main.js",
-    "setup": "node tasks/build-installer.js"
+    "ng:e2e": "ng e2e",
+    "ng:test": "ng test --watch=false",
+    "ng:lint": "ng lint",
+    "ng:serve": "ng serve",
+    "postinstall": "electron-builder install-app-deps",
+    "prestart": "run-s build:app",
+    "release": "run-s build:app build:release",
+    "start": "run-s electron",
+    "test": "run-s ng:e2e ng:lint ng:test"
   },
   "private": true,
   "dependencies": {
@@ -36,13 +85,17 @@
     "@ngx-translate/http-loader": "^2.0.0",
     "@types/lodash": "^4.14.77",
     "core-js": "^2.4.1",
+    "electron-is-dev": "0.3.0",
+    "electron-log": "2.2.12",
+    "electron-updater": "2.16.3",
     "font-awesome": "^4.7.0",
     "gasparesganga-jquery-loading-overlay": "^1.5.3",
     "ionicons": "^2.0.1",
     "jquery": "^3.2.1",
     "jquery.transit": "^0.9.12",
-    "ngx-progressbar": "^2.0.8",
+    "ngx-progressbar": "^2.1.1",
     "notyf": "^2.0.1",
+    "npm-run-all": "^4.1.2",
     "numeral": "^2.0.6",
     "offline-js": "^0.7.19",
     "pdfmake": "^0.1.33",
@@ -59,8 +112,7 @@
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
     "electron": "^1.7.9",
-    "electron-installer-windows": "^0.2.0",
-    "electron-packager": "^9.1.0",
+    "electron-builder": "19.49.2",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",

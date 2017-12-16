@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 declare var numeral: any;
 declare var jQuery: any;
 @Component({
-  selector: 'products-filter',
+  selector: 'storaji-products-filter',
   templateUrl: './filter.component.html',
   styles: []
 })
@@ -31,15 +31,15 @@ export class FilterComponent implements OnInit, AfterViewInit {
     jQuery('input[uk-datepicker]').datepicker();
   }
 
-  onSubmit(){
+  onSubmit() {
     this._productsService.get(this.product);
   }
 
-  initProduct(){
+  initProduct() {
     this._productTypesService.get();
     this._productTypesService.productTypes.subscribe(
       data => (data instanceof Array) ? this.productTypes = data : data,
-      err => {console.log(err);}
+      err => {console.log(err); }
     );
   }
 
