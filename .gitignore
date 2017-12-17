@@ -33,8 +33,6 @@ node_modules
 /libpeerconnection.log
 npm-debug.log
 testem.log
-package-lock.json
-yarn.lock
 /typings
 
 # e2e
