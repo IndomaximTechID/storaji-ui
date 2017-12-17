@@ -66,8 +66,7 @@
     "prestart": "run-s build:app",
     "release": "run-s build:app build:release",
     "start": "run-s electron",
-    "test": "run-s ng:e2e ng:lint ng:test",
-    "test:ci": "run-s -l \"ng:e2e -- --no-progress --config=protractor-ci.conf.js\" ng:lint -l \"ng:test -- --single-run --no-progress --browser=ChromeNoSandbox\""
+    "test": "run-s ng:e2e ng:lint ng:test"
   },
   "private": true,
   "dependencies": {
