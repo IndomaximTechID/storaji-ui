@@ -92,7 +92,7 @@
     "ng:serve": "ng serve",
     "postinstall": "electron-builder install-app-deps",
     "prestart": "run-s build:app",
-    "release": "run-s -l \"build -p always\"",
+    "release": "run-s -l \"builder -p onTagOrDraft\"",
     "start": "run-s electron",
     "test": "run-s ng:e2e ng:lint ng:test"
   },
@@ -139,7 +139,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
-    "electron": "^1.7.9",
+    "electron": "~1.7.9",
     "electron-builder": "19.49.2",
     "icon-gen": "^1.2.0",
     "jasmine-core": "~2.6.2",
