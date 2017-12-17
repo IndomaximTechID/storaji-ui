@@ -5,6 +5,7 @@
 /app
 /tmp
 /out-tsc
+/src/assets/icons
 
 # dependencies
 node_modules

@@ -28,8 +28,34 @@
     "directories": {
       "output": "dist"
     },
+    "mac": {
+      "icon": "src/assets/icons/storaji.icns",
+      "category": "public.app-category.business",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "src/assets/icons/favicon-32.png",
+      "category": "Office",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
     "win": {
-      "icon": "src/assets/storaji.ico",
+      "icon": "src/assets/icons/storaji.ico",
       "target": [
         {
           "target": "nsis",
@@ -52,19 +78,21 @@
     }
   },
   "scripts": {
-    "build": "run-s build:app build:only",
-    "build:app": "ng build --prod",
-    "build:only": "build -w",
-    "build:release": "build -w -p always",
+    "build": "run-s icons -l \"build:app --prod\" \"build:installer {*}\" --",
+    "build:app": "run-s \"ng:build {*}\" --",
+    "build:installer": "run-s \"builder {*}\" --",
+    "builder": "build",
     "electron": "electron app/main.js",
+    "icons": "icon-gen -r -i src/assets/storaji.svg -o src/assets/icons -n ico=storaji,icns=storaji",
     "ng": "ng",
+    "ng:build": "ng build",
     "ng:e2e": "ng e2e",
     "ng:test": "ng test --watch=false",
     "ng:lint": "ng lint",
     "ng:serve": "ng serve",
     "postinstall": "electron-builder install-app-deps",
     "prestart": "run-s build:app",
-    "release": "run-s build:app build:release",
+    "release": "run-s -l \"build -p always\"",
     "start": "run-s electron",
     "test": "run-s ng:e2e ng:lint ng:test"
   },
@@ -113,6 +141,7 @@
     "codelyzer": "~3.1.1",
     "electron": "^1.7.9",
     "electron-builder": "19.49.2",
+    "icon-gen": "^1.2.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
