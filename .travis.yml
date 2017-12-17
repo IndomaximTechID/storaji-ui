@@ -2,23 +2,18 @@ language: node_js
 matrix:
   include:
   - os: linux
-    node_js: '8'
-    sudo: required
-    env: DISPLAY=':99.0'
-    dist: trusty
-    addons:
-      apt:
-        sources:
-        - google-chrome
-        packages:
-        - google-chrome-stable
+    services: docker
+    language: generic
   - os: osx
     osx_image: xcode9.0
     node_js: '8'
     sudo: required
-    env: HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    env:
+    - HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 before_cache:
-- rm -rf $HOME/.cache/electron-builder/wine
+- rm -rf $HOME/.cache/electron-builder/wine*
 cache:
   yarn: true
   directories:
@@ -30,33 +25,32 @@ before_install:
   if [ "$TRAVIS_OS_NAME" = "osx" ]; then
     brew update > /dev/null
     brew cask install google-chrome
-  else
-    sudo dpkg --add-architecture i386
-    wget https://dl.winehq.org/wine-builds/Release.key
-    sudo apt-key add Release.key
-    sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
-    sudo apt-get update
-    sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib winehq-stable icnsutils graphicsmagick
+    mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
+    export PATH="/tmp/git-lfs:$PATH"
   fi
 install:
 - yarn
 before_script:
-- |
-  if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    sh -e /etc/init.d/xvfb start
-  fi
+- git lfs pull
 script:
-- yarn test
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    yarn build -wl
+    docker run --rm \
+      --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
+      -v ${PWD}:/project \
+      -v ~/.cache/electron:/root/.cache/electron \
+      -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+      electronuserland/builder:wine-chrome \
+      /bin/bash -c "xvfb :99 -ac &" \
+      /bin/bash -c "export DISPLAY=:99.0" \
+      /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn test && yarn build -wl && yarn release"
   else
     yarn build -m
+    yarn release
   fi
-- yarn release
 branches:
   except:
   - "/^v\\d+\\.\\d+\\.\\d+$/"
 env:
-  global:
-    secure: FOctMLLr2/BgZsM8IWM9ILCQYlaKAtJaj5rkG+SfZBP8vTeuNFBHoAMxo4b9KBtNJmcnAUu94kRBe41knQwoRz32ZvF9VkqTjkM0BUDiwrRdnf+BxFALmg3Tm3FsILbESxVHNFTfszcLcXqoaawsDHcUkLpjgBXoD9XRXaqs7r/cXHfItSLaAR4kgvNbI+sU/NO0CureAFhADE9OyUniwbZbZ/8iYgw9PMd5e9bpMt7I/w7AUkvZcs5UkBfDrsMs+8m955C47KffZJ6xk4+z266mBhnpzCox6tlHlCESD8nVhfOZozP3R5HOH40SpJeslB4Oeuq8gGSXp/kA47aPybyZ5td2KO7jx+lE9X0gqFd0K8DBB2eglMRZpZL6dKFi52imM5JU5XHXLIDNyFovZ7427Ue/iUiZNIjyE1ym+5fOzo4lKWi7aLVqeHaKS47PNPelpSLw8vhIdop1VKNGQMwxLdvZ5FD1uJ3P9tBBNtDeH/ekqQ0hcMSqW3l5T3VUEVq+DBm15x+sQ3n62EcEj+0mCGbIX9G8Yg0GroPXqLHc4D4q+oxvEna37ceARS5peU/jst13IvSH03GRNVd0jAtrsLpUMFrchK4KJBM+GncnwzaErd5mBf3QH4Emr6u9hHuUsUqoJCDPZ/s0DMbEl32/7vzE8oR9IiRbMXJF+tg=
+  matrix:
+    secure: sUSOD7yWh7MxJVLf2RsbdPW39tWGoJ4pfL/7EkxAh0Z7O1AcMsgz5TYSZezCjmtFq3aABRTnvi4ctddWjJovmEteYBxMJZtCteSEc84H8MScV55XXFGo0ifne5c7v2JmZ+ZBo9iljC1TD0GDfJjcloX0EjWZ/zGjW/NE1yWjW3Z4XQ9QuLAYX+0uEUSxCYod9RGrVm4zqHT+TVtonzR51ainav1aV2EG5Jf0pMDq6TtSy8L9JkfWl1B9KyOjvf3mOaJLsbAx2S//eichp/+BeBGk0kSOxLfd8+Lo+4T12jsVVjx/u7qwxjv1Q71PDFAhKDou/5vK6gev0Ssnh5lsqrZ/+t2mupETNR44SBGW4y2mPyCFl20SGPQZ8Ci6NHL/pulC6Ud1txsyldJUm/ZncesBWP6oaSygXdr7YWQsEhkVUOW4cFTfzf8pTPZczmRcHbLi8z/bt+eEWX/u9aiiK8O4r5W86eb9NifulklUQRuz5trJHgTTF7vr9PjfS6vXWTJvCcIUHOywRhrCnwjF+tr8iQzF6od3C0XQFkz5bt7b81IqO2HTXl9HL7ViKffbqtfgdKlHwPMN+riTjG7HDePOC9qoZYJC8593NfraRSAtt2M9DIdUFrF6wELObjVj+cPp+IwwoCNDdvT5HLvEe44GlsdBhnMOul/TxnvfYiM=

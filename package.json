@@ -1,6 +1,6 @@
 {
   "name": "storaji",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.2",
   "license": "MIT",
   "description": "Manage your company stocks with us.",
   "main": "app/main.js",
@@ -30,16 +30,7 @@
     },
     "mac": {
       "icon": "src/assets/icons/storaji.icns",
-      "category": "public.app-category.business",
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
+      "category": "public.app-category.business"
     },
     "linux": {
       "icon": "src/assets/icons/favicon-32.png",
