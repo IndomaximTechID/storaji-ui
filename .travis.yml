@@ -12,17 +12,14 @@ matrix:
         - google-chrome-stable
     node_js: '8'
     sudo: required
-    env:
-      secure: 'bg5pPVvelxediAUFjWttjonEA+vBdO4jmgCdC0C4tjEoJCspjnFrDHNiG1SqOvwVgy6v6ixAkq53ETHQWeAAMa4QmSagNW2tcsHW6w3FI5V5vmezUd1JHAHdMzzyihUyU7kgrFWNQwhpMBXE6Wt9WtpAJ7Vd0W+ytKvn2YSZRvu7h6oBtxNkUO8fWyCqCo4QIFDmJcdcwwR++vvQJsRnbjPu3eAWW2k0m7ll7rWW8E8V9iNyVxxq6fuxM7jnD/LUgaazHkHhcBmkhXXtgaYPxYNvEiibGUsXk6yNK2ZqmW6sYZNZxjPWI4TmEYh5VpJDKi1rbBR8t9/7fuPPixONFlveEK4cGsOqh4Qtm9LZHD2cUkzH/sniuvnsjToA0WZaHUw2vgFtPvjR4qyuUe8iImoROKy0u8r9/MxkXvkEZvXjPFYBttjVW013o7hv4v3omikjEzbHPhV1ycMHvgKh2Gwklx9HtZRdPObWqnBcp6BMHu4epFIBO+C9UA5OpQxgR3jm552UiDhdLOzqo42640eOv9dynGULSIKDA8g4OARY1D5L3eJMOao483zsTiK6isgQS8iwTbfl0sTuJqJvpi3VywnD/KAxVKCS3/cpYw9XwpoESHq98ly1SbpurWOBYizJwZ7sUGPFssvjnvbRJBwzrqmJNjI6FE8BrDmvMYU='
   - os: osx
     osx_image: xcode9.0
     node_js: '8'
     sudo: required
     env:
-      - secure: 'bg5pPVvelxediAUFjWttjonEA+vBdO4jmgCdC0C4tjEoJCspjnFrDHNiG1SqOvwVgy6v6ixAkq53ETHQWeAAMa4QmSagNW2tcsHW6w3FI5V5vmezUd1JHAHdMzzyihUyU7kgrFWNQwhpMBXE6Wt9WtpAJ7Vd0W+ytKvn2YSZRvu7h6oBtxNkUO8fWyCqCo4QIFDmJcdcwwR++vvQJsRnbjPu3eAWW2k0m7ll7rWW8E8V9iNyVxxq6fuxM7jnD/LUgaazHkHhcBmkhXXtgaYPxYNvEiibGUsXk6yNK2ZqmW6sYZNZxjPWI4TmEYh5VpJDKi1rbBR8t9/7fuPPixONFlveEK4cGsOqh4Qtm9LZHD2cUkzH/sniuvnsjToA0WZaHUw2vgFtPvjR4qyuUe8iImoROKy0u8r9/MxkXvkEZvXjPFYBttjVW013o7hv4v3omikjEzbHPhV1ycMHvgKh2Gwklx9HtZRdPObWqnBcp6BMHu4epFIBO+C9UA5OpQxgR3jm552UiDhdLOzqo42640eOv9dynGULSIKDA8g4OARY1D5L3eJMOao483zsTiK6isgQS8iwTbfl0sTuJqJvpi3VywnD/KAxVKCS3/cpYw9XwpoESHq98ly1SbpurWOBYizJwZ7sUGPFssvjnvbRJBwzrqmJNjI6FE8BrDmvMYU='
-      - HOMEBREW_CASK_OPTS='--appdir=/Applications'
-      - ELECTRON_CACHE=$HOME/.cache/electron
-      - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+    - HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 cache:
   yarn: true
   directories:
@@ -30,6 +27,7 @@ cache:
   - "$HOME/.cache/electron"
   - "$HOME/.cache/electron-builder"
 before_install:
+- export GITHUB_TOKEN=$GH_TOKEN
 - |
   if [ "$TRAVIS_OS_NAME" = "osx" ]; then
     brew update > /dev/null
@@ -62,3 +60,6 @@ script:
 branches:
   except:
   - "/^v\\d+\\.\\d+\\.\\d+$/"
+env:
+  global:
+    - secure: hxDz7lhDEocxHq5K/4h4SNKbe3xoEt9+wxxJ4jP5Vw8Se8x1aan/3Ujku89Y6zFLDX2oR65WH5FmZACslGgRk1sFxrkPhyXAVcWedtU7KeTdnsHbdBP68BQxPazTSuRp4vwxujqAV2TG2oxOLFEKfZUu+B9Ry2dJV9OTWYvEGN3IBVuS2pAiz8F/OFJI8xa3FJYkcB1qg/3o+DIK2sPJyoRhgwHatKEEHMYqzHSt0F7yQU751w6j53ScRIsz35zhkPgF0bE1Do/1+cqQc4ZAjj3qQQnG8SBa/kUVYpiP9cvMdIdiKfKSYOmFuREjfEpR7Aab5MSKQK86ULWcs4jqqBx4hGaC/baE5TWZ/UtwJdmiYcQnR36Yu12V4S+vtG9hvCgMc8SUYYaGlNbDd79G+cLGerCoP9q/ngK/E3BcPmwbkWev7pexCByPiHdFyQD4izkZKJoNh7wHRG6a+yfk0u372JQvEh+kurcXnTedXfTkve91yXqfiu3tK/vRi1zb+Xl6LD7tQVmsGEkGQCkspMuu/QQrEd2H/uoLF8K5JmMyWwOuQZrkmeMthmVVRDIldUctFQP2/uS8l3Kk47VV/9tHI+6BU+VGMCmXkWbDF2oIhijxhWb+I7iDUl2wLyqYjXCI/kYx1qEYJx3y5KoJyMiP1KgXf7qOUiAbn7NbHMU=

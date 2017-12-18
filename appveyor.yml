@@ -2,8 +2,13 @@ image: Visual Studio 2017
 
 environment:
   nodejs_version: '8'
-  github_token:
-    secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
+  global:
+    GITHUB_TOKEN:
+      secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
+    CYG_ROOT: C:/cygwin
+    CYG_CACHE: C:/cygwin/var/cache/setup
+    CYG_MIRROR: http://mirrors.kernel.org/sourceware/cygwin/
+    CYG_ARCH: x86_64
 
 platform:
   - x64
@@ -15,11 +20,14 @@ cache:
   - '%USERPROFILE%\.electron'
 
 install:
+  - 'appveyor DownloadFile http://cygwin.com/setup-%CYG_ARCH%.exe -FileName setup.exe'
+  - 'setup.exe -gqnNdO -R "%CYG_ROOT%" -s "%CYG_MIRROR%" -l "%CYG_CACHE%" -P make,git,gcc-core,gcc-g++,ocaml,ocaml-camlp4,ocaml-compiler-libs,libncurses-devel,unzip,libmpfr-devel,patch,flexdll,libglpk-devel >NUL'
+  - '%CYG_ROOT%/bin/bash -lc "cygcheck -dc cygwin gcc-core"'
   - ps: Install-Product node 8 x64
-  - yarn
+  - '%CYG_ROOT%/bin/bash -lc "yarn"'
 
 test_script:
-  - yarn test
+  - '%CYG_ROOT%/bin/bash -lc "yarn test"'
 
 build_script:
-  - yarn release -w
+  - '%CYG_ROOT%/bin/bash -lc "env GITHUB_TOKEN=%GITHUB_TOKEN% && yarn release -w"'
