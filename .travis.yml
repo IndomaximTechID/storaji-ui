@@ -12,14 +12,17 @@ matrix:
         - google-chrome-stable
     node_js: '8'
     sudo: required
+    env:
+      secure: 'bg5pPVvelxediAUFjWttjonEA+vBdO4jmgCdC0C4tjEoJCspjnFrDHNiG1SqOvwVgy6v6ixAkq53ETHQWeAAMa4QmSagNW2tcsHW6w3FI5V5vmezUd1JHAHdMzzyihUyU7kgrFWNQwhpMBXE6Wt9WtpAJ7Vd0W+ytKvn2YSZRvu7h6oBtxNkUO8fWyCqCo4QIFDmJcdcwwR++vvQJsRnbjPu3eAWW2k0m7ll7rWW8E8V9iNyVxxq6fuxM7jnD/LUgaazHkHhcBmkhXXtgaYPxYNvEiibGUsXk6yNK2ZqmW6sYZNZxjPWI4TmEYh5VpJDKi1rbBR8t9/7fuPPixONFlveEK4cGsOqh4Qtm9LZHD2cUkzH/sniuvnsjToA0WZaHUw2vgFtPvjR4qyuUe8iImoROKy0u8r9/MxkXvkEZvXjPFYBttjVW013o7hv4v3omikjEzbHPhV1ycMHvgKh2Gwklx9HtZRdPObWqnBcp6BMHu4epFIBO+C9UA5OpQxgR3jm552UiDhdLOzqo42640eOv9dynGULSIKDA8g4OARY1D5L3eJMOao483zsTiK6isgQS8iwTbfl0sTuJqJvpi3VywnD/KAxVKCS3/cpYw9XwpoESHq98ly1SbpurWOBYizJwZ7sUGPFssvjnvbRJBwzrqmJNjI6FE8BrDmvMYU='
   - os: osx
     osx_image: xcode9.0
     node_js: '8'
     sudo: required
     env:
-    - HOMEBREW_CASK_OPTS='--appdir=/Applications'
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      - secure: 'bg5pPVvelxediAUFjWttjonEA+vBdO4jmgCdC0C4tjEoJCspjnFrDHNiG1SqOvwVgy6v6ixAkq53ETHQWeAAMa4QmSagNW2tcsHW6w3FI5V5vmezUd1JHAHdMzzyihUyU7kgrFWNQwhpMBXE6Wt9WtpAJ7Vd0W+ytKvn2YSZRvu7h6oBtxNkUO8fWyCqCo4QIFDmJcdcwwR++vvQJsRnbjPu3eAWW2k0m7ll7rWW8E8V9iNyVxxq6fuxM7jnD/LUgaazHkHhcBmkhXXtgaYPxYNvEiibGUsXk6yNK2ZqmW6sYZNZxjPWI4TmEYh5VpJDKi1rbBR8t9/7fuPPixONFlveEK4cGsOqh4Qtm9LZHD2cUkzH/sniuvnsjToA0WZaHUw2vgFtPvjR4qyuUe8iImoROKy0u8r9/MxkXvkEZvXjPFYBttjVW013o7hv4v3omikjEzbHPhV1ycMHvgKh2Gwklx9HtZRdPObWqnBcp6BMHu4epFIBO+C9UA5OpQxgR3jm552UiDhdLOzqo42640eOv9dynGULSIKDA8g4OARY1D5L3eJMOao483zsTiK6isgQS8iwTbfl0sTuJqJvpi3VywnD/KAxVKCS3/cpYw9XwpoESHq98ly1SbpurWOBYizJwZ7sUGPFssvjnvbRJBwzrqmJNjI6FE8BrDmvMYU='
+      - HOMEBREW_CASK_OPTS='--appdir=/Applications'
+      - ELECTRON_CACHE=$HOME/.cache/electron
+      - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 cache:
   yarn: true
   directories:
@@ -42,7 +45,6 @@ before_install:
 install:
 - yarn
 before_script:
-- export GITHUB_TOKEN=$GITHUB_TOKEN
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
     export DISPLAY=:99.0
@@ -60,6 +62,3 @@ script:
 branches:
   except:
   - "/^v\\d+\\.\\d+\\.\\d+$/"
-env:
-  global:
-    secure: akWURxNXSWCEEDGM2JjFPushnL05bqmIgVyiMCHeCZQMk2QVePR7x8tL9vFQASBaAn0klUNkYiYYvE5kdnxzvxP3l/PYLvR+khGZL8hpn5pF7G2hRX53Medh1O0y7bLIksknaFKiwTlrhHfN0tpCY8jyLDvkUbuaMqD/UklhLkjdj5Xb6GPjYOh8rCvk2x4F1Vj5IiqGBV/jfUHeOOSv8Qrj8GVbXjdTHU/2uGi0eagbiA5aWoH8psQrC24MKZI65c4TB2XvOYWH1VIhVv3H6pEzCGOomHtNKhHAh1ItTLJpueouyHna3tTIX7o7/CBxmKUAVZafgDEY/IH6HASNIpsORnJxi51VVwcUALacrM+Wl2ED9l6gv7wBJnbhaTVbNNTDUL6wB+ed8WhcvcikQGetGC6/WMc6XUT191UZxPZazjtm5VT0JZ2wPbVJlzXzHTP4sHq9hEXBczVWRY8dtPO03nN8pJ4MUVBUMtCfiHb9+XMbTbBCVbrn4UwaT83tkYkldpG6aCXWQLNJphf+D1rODjd8BLkK/UraxOvfkG8RNJzTsFZVLKghTYje6UmBxDDr4A1/YZpwOy8MZFwY6rudqiCzwB/0rqa/9lEcweEj/CcAX+gEUaHLK6md8d6b/LG/Pkg2Hi6DgIM1toM0+wXhNsiLnyTpvVp5CSYKPk8=

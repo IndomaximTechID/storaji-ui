@@ -22,3 +22,7 @@ test_script:
 
 build_script:
   - yarn release -w
+
+environment:
+  GITHUB_TOKEN:
+    secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
