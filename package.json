@@ -69,9 +69,9 @@
     }
   },
   "scripts": {
-    "build": "run-s icons -l \"build:app --prod\" \"build:installer {*}\" --",
-    "build:app": "run-s \"ng:build {*}\" --",
-    "build:installer": "run-s \"builder {*}\" --",
+    "build": "run-s icons -l \"build:app --prod\" \"build:installer {@}\" --",
+    "build:app": "run-s \"ng:build {@}\" --",
+    "build:installer": "run-s \"builder {@}\" --",
     "builder": "build",
     "electron": "electron app/main.js",
     "icons": "icon-gen -r -i src/assets/storaji.svg -o src/assets/icons -n ico=storaji,icns=storaji",
