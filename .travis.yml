@@ -1,4 +1,5 @@
 language: node_js
+
 matrix:
   include:
   - os: linux
@@ -7,59 +8,67 @@ matrix:
     addons:
       apt:
         sources:
-        - google-chrome
+          - google-chrome
         packages:
-        - google-chrome-stable
+          - google-chrome-stable
     node_js: '8'
     sudo: required
+
   - os: osx
     osx_image: xcode9.0
     node_js: '8'
     sudo: required
     env:
-    - HOMEBREW_CASK_OPTS='--appdir=/Applications'
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+      - HOMEBREW_CASK_OPTS='--appdir=/Applications'
+      - ELECTRON_CACHE=$HOME/.cache/electron
+      - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
 cache:
   yarn: true
   directories:
-  - node_modules
-  - "$HOME/.cache/electron"
-  - "$HOME/.cache/electron-builder"
+    - node_modules
+    - "$HOME/.cache/electron"
+    - "$HOME/.cache/electron-builder"
+
 before_install:
-- export GITHUB_TOKEN=$GH_TOKEN
-- |
-  if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-    brew update > /dev/null
-    brew cask install google-chrome
-    mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
-    export PATH="/tmp/git-lfs:$PATH"
-  else
-    sudo apt-get install --no-install-recommends -y  software-properties-common icnsutils graphicsmagick build-essential g++ g++-multilib gcc gcc-multilib default-jre
-    sudo apt-get update
-    # clean
-    sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
-  fi
+  - export GITHUB_TOKEN=$GH_TOKEN
+  - |
+    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+      brew update > /dev/null
+      brew cask install google-chrome
+      mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
+      export PATH="/tmp/git-lfs:$PATH"
+    else
+      sudo apt-get install --no-install-recommends -y  software-properties-common icnsutils graphicsmagick build-essential g++ g++-multilib gcc gcc-multilib default-jre
+      sudo apt-get update
+      # clean
+      sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+    fi
+
 install:
-- yarn
+  - yarn
+
 before_script:
-- |
-  if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    export DISPLAY=:99.0
-    sh -e /etc/init.d/xvfb start
-  fi
-- git lfs pull
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      export DISPLAY=:99.0
+      sh -e /etc/init.d/xvfb start
+    fi
+  - git lfs pull
+
 script:
-- yarn test
-- |
-  if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    yarn release -l
-  else
-    yarn release -m
-  fi
+  - yarn test
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      yarn release -l
+    else
+      yarn release -m
+    fi
+
 branches:
-  except:
-  - "/^v\\d+\\.\\d+\\.\\d+$/"
+  only:
+    - master
+
 env:
   global:
     - secure: hxDz7lhDEocxHq5K/4h4SNKbe3xoEt9+wxxJ4jP5Vw8Se8x1aan/3Ujku89Y6zFLDX2oR65WH5FmZACslGgRk1sFxrkPhyXAVcWedtU7KeTdnsHbdBP68BQxPazTSuRp4vwxujqAV2TG2oxOLFEKfZUu+B9Ry2dJV9OTWYvEGN3IBVuS2pAiz8F/OFJI8xa3FJYkcB1qg/3o+DIK2sPJyoRhgwHatKEEHMYqzHSt0F7yQU751w6j53ScRIsz35zhkPgF0bE1Do/1+cqQc4ZAjj3qQQnG8SBa/kUVYpiP9cvMdIdiKfKSYOmFuREjfEpR7Aab5MSKQK86ULWcs4jqqBx4hGaC/baE5TWZ/UtwJdmiYcQnR36Yu12V4S+vtG9hvCgMc8SUYYaGlNbDd79G+cLGerCoP9q/ngK/E3BcPmwbkWev7pexCByPiHdFyQD4izkZKJoNh7wHRG6a+yfk0u372JQvEh+kurcXnTedXfTkve91yXqfiu3tK/vRi1zb+Xl6LD7tQVmsGEkGQCkspMuu/QQrEd2H/uoLF8K5JmMyWwOuQZrkmeMthmVVRDIldUctFQP2/uS8l3Kk47VV/9tHI+6BU+VGMCmXkWbDF2oIhijxhWb+I7iDUl2wLyqYjXCI/kYx1qEYJx3y5KoJyMiP1KgXf7qOUiAbn7NbHMU=

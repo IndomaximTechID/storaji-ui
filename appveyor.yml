@@ -23,3 +23,7 @@ test_script:
 
 build_script:
   - yarn release -w
+
+branches:
+    only:
+      - master
