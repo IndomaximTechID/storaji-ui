@@ -4,15 +4,8 @@ matrix:
   - os: linux
     group: deprecated-2017Q4
     dist: trusty
-    addons:
-      apt:
-        sources:
-          - google-chrome
-        packages:
-          - google-chrome-stable
     env:
-      - DISPLAY=':99.0'
-      - secure: i5npNbgB7XWw31iY49TK941VT72DzLdFF3i7zJQFgX7hXmUQUD0GEefcjyGfWF0yglX03v96ygdcTtMcnGTOnm7UTX13g3ziAo3wd1lOqm0aMZlvpOWnTxGVoy5B9A+luVXhUkm1ZdxDSGaOnOJ0vYj7Jc5bldInbOiKkDcpBixf0T2zS5Gm+Zp2IQbh21O0/mSxy1prKlOVwqESIBtYPBrS+264mC39CDb+o/AJwig3+6LOB8NuUkfvHnK1pT4gzxXr3DefhCb+i5MvWqdsqiolvYbohU0uNp7+6R9lDOsyHM+DzBHGvm+0KvVzzyTCy6kR6bRsRWkPBDkiFO9eDg4adpV7kN3iy+0aZoYGjidCyx1Td9XSF65UIh7R8iziLNiUO3qCO1XO+SLggNLmYQ9UUO6IODDjaO1otdMJaBTCymJxg91n1/DGChmRc5d9LyQhG4M6UVI1tPczNqRgnup7AcXMe0f1m8uHJa8xvGvYwiZm/DODPIddePiUVgvIkpeIK9/aond3g1Z/a2rLGl0Mx7vNHo7biWRXaphwz9F+a1SZMxlnYhiTWsiJFehzFkJshzKBT1QeJmVRn4Ew1icHhfsNVghtuuvGbAQfqCxi8YiGCLVB+4iodCJEBN9Ee5FRCg7r9YQjwL8PJrSI9cqZ6kMnrNP0TxVOCIFC6Qs=
+      secure: i5npNbgB7XWw31iY49TK941VT72DzLdFF3i7zJQFgX7hXmUQUD0GEefcjyGfWF0yglX03v96ygdcTtMcnGTOnm7UTX13g3ziAo3wd1lOqm0aMZlvpOWnTxGVoy5B9A+luVXhUkm1ZdxDSGaOnOJ0vYj7Jc5bldInbOiKkDcpBixf0T2zS5Gm+Zp2IQbh21O0/mSxy1prKlOVwqESIBtYPBrS+264mC39CDb+o/AJwig3+6LOB8NuUkfvHnK1pT4gzxXr3DefhCb+i5MvWqdsqiolvYbohU0uNp7+6R9lDOsyHM+DzBHGvm+0KvVzzyTCy6kR6bRsRWkPBDkiFO9eDg4adpV7kN3iy+0aZoYGjidCyx1Td9XSF65UIh7R8iziLNiUO3qCO1XO+SLggNLmYQ9UUO6IODDjaO1otdMJaBTCymJxg91n1/DGChmRc5d9LyQhG4M6UVI1tPczNqRgnup7AcXMe0f1m8uHJa8xvGvYwiZm/DODPIddePiUVgvIkpeIK9/aond3g1Z/a2rLGl0Mx7vNHo7biWRXaphwz9F+a1SZMxlnYhiTWsiJFehzFkJshzKBT1QeJmVRn4Ew1icHhfsNVghtuuvGbAQfqCxi8YiGCLVB+4iodCJEBN9Ee5FRCg7r9YQjwL8PJrSI9cqZ6kMnrNP0TxVOCIFC6Qs=
     node_js: '8'
     sudo: required
   - os: osx
@@ -40,7 +33,7 @@ before_install:
     export PATH="/tmp/git-lfs:$PATH"
   else
     sudo apt-get update
-    sudo apt-get install -y --no-install-recommends software-properties-common icnsutils graphicsmagick xvfb default-jre
+    sudo apt-get install -y --no-install-recommends software-properties-common icnsutils graphicsmagick
     sudo dpkg --add-architecture i386
     curl -L https://dl.winehq.org/wine-builds/Release.key > Release.key
     sudo apt-key add Release.key
@@ -50,6 +43,7 @@ before_install:
     sudo apt-get install -y --no-install-recommends winehq-stable
     export WINEDEBUG='-all,err+all'
     export WINEDLLOVERRIDES='winemenubuilder.exe=d'
+    export CHROME_BIN=chromium-browser
     # clean
     sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/* && unlink Release.key
   fi
@@ -59,13 +53,14 @@ before_script:
 - git lfs pull
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+    export DISPLAY=:99.0
     sh -e /etc/init.d/xvfb start
+    sleep 3
   fi
 script:
 - yarn test
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    yarn test
     yarn build -wl -p always
   else
     yarn build -m -p always

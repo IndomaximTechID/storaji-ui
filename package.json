@@ -29,7 +29,6 @@
       "output": "dist"
     },
     "mac": {
-      "icon": "src/assets/icons/storaji.icns",
       "category": "public.app-category.business"
     },
     "linux": {
@@ -45,7 +44,6 @@
       ]
     },
     "win": {
-      "icon": "src/assets/icons/storaji.ico",
       "target": [
         {
           "target": "nsis",
@@ -62,9 +60,7 @@
       "oneClick": false,
       "perMachine": true,
       "menuCategory": true,
-      "artifactName": "StorajiSetup.exe",
-      "installerSidebar": "src/assets/installerSidebar.bmp",
-      "uninstallerSidebar": "src/assets/installerSidebar.bmp"
+      "artifactName": "StorajiSetup.exe"
     }
   },
   "scripts": {
@@ -84,7 +80,8 @@
     "prestart": "run-s build:app",
     "release": "run-s -l \"builder -p onTagOrDraft\"",
     "start": "run-s electron",
-    "test": "run-s ng:e2e ng:lint ng:test"
+    "test": "run-s ng:e2e ng:lint ng:test",
+    "test:ci": "run-s -l \"ng:e2e --no-progress --config=protractor-ci.conf.js\" ng:lint -l \"ng:test --single-run --no-progress --browser=ChromeNoSandbox\""
   },
   "private": true,
   "dependencies": {
