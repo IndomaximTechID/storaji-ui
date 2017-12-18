@@ -33,7 +33,6 @@
       "category": "public.app-category.business"
     },
     "linux": {
-      "icon": "src/assets/icons/favicon-32.png",
       "category": "Office",
       "target": [
         {
