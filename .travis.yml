@@ -2,10 +2,14 @@ language: node_js
 matrix:
   include:
   - os: linux
-    group: deprecated-2017Q4
+    group: stable
     dist: trusty
-    env:
-      secure: i5npNbgB7XWw31iY49TK941VT72DzLdFF3i7zJQFgX7hXmUQUD0GEefcjyGfWF0yglX03v96ygdcTtMcnGTOnm7UTX13g3ziAo3wd1lOqm0aMZlvpOWnTxGVoy5B9A+luVXhUkm1ZdxDSGaOnOJ0vYj7Jc5bldInbOiKkDcpBixf0T2zS5Gm+Zp2IQbh21O0/mSxy1prKlOVwqESIBtYPBrS+264mC39CDb+o/AJwig3+6LOB8NuUkfvHnK1pT4gzxXr3DefhCb+i5MvWqdsqiolvYbohU0uNp7+6R9lDOsyHM+DzBHGvm+0KvVzzyTCy6kR6bRsRWkPBDkiFO9eDg4adpV7kN3iy+0aZoYGjidCyx1Td9XSF65UIh7R8iziLNiUO3qCO1XO+SLggNLmYQ9UUO6IODDjaO1otdMJaBTCymJxg91n1/DGChmRc5d9LyQhG4M6UVI1tPczNqRgnup7AcXMe0f1m8uHJa8xvGvYwiZm/DODPIddePiUVgvIkpeIK9/aond3g1Z/a2rLGl0Mx7vNHo7biWRXaphwz9F+a1SZMxlnYhiTWsiJFehzFkJshzKBT1QeJmVRn4Ew1icHhfsNVghtuuvGbAQfqCxi8YiGCLVB+4iodCJEBN9Ee5FRCg7r9YQjwL8PJrSI9cqZ6kMnrNP0TxVOCIFC6Qs=
+    addons:
+      apt:
+        sources:
+        - google-chrome
+        packages:
+        - google-chrome-stable
     node_js: '8'
     sudo: required
   - os: osx
@@ -13,17 +17,15 @@ matrix:
     node_js: '8'
     sudo: required
     env:
-      - HOMEBREW_CASK_OPTS='--appdir=/Applications'
-      - ELECTRON_CACHE=$HOME/.cache/electron
-      - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-      - secure: i5npNbgB7XWw31iY49TK941VT72DzLdFF3i7zJQFgX7hXmUQUD0GEefcjyGfWF0yglX03v96ygdcTtMcnGTOnm7UTX13g3ziAo3wd1lOqm0aMZlvpOWnTxGVoy5B9A+luVXhUkm1ZdxDSGaOnOJ0vYj7Jc5bldInbOiKkDcpBixf0T2zS5Gm+Zp2IQbh21O0/mSxy1prKlOVwqESIBtYPBrS+264mC39CDb+o/AJwig3+6LOB8NuUkfvHnK1pT4gzxXr3DefhCb+i5MvWqdsqiolvYbohU0uNp7+6R9lDOsyHM+DzBHGvm+0KvVzzyTCy6kR6bRsRWkPBDkiFO9eDg4adpV7kN3iy+0aZoYGjidCyx1Td9XSF65UIh7R8iziLNiUO3qCO1XO+SLggNLmYQ9UUO6IODDjaO1otdMJaBTCymJxg91n1/DGChmRc5d9LyQhG4M6UVI1tPczNqRgnup7AcXMe0f1m8uHJa8xvGvYwiZm/DODPIddePiUVgvIkpeIK9/aond3g1Z/a2rLGl0Mx7vNHo7biWRXaphwz9F+a1SZMxlnYhiTWsiJFehzFkJshzKBT1QeJmVRn4Ew1icHhfsNVghtuuvGbAQfqCxi8YiGCLVB+4iodCJEBN9Ee5FRCg7r9YQjwL8PJrSI9cqZ6kMnrNP0TxVOCIFC6Qs=
-before_cache:
-- rm -rf $HOME/.cache/electron-builder/wine*
+    - HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 cache:
   yarn: true
   directories:
-    - "$HOME/.cache/electron"
-    - "$HOME/.cache/electron-builder"
+  - node_modules
+  - "$HOME/.cache/electron"
+  - "$HOME/.cache/electron-builder"
 before_install:
 - |
   if [ "$TRAVIS_OS_NAME" = "osx" ]; then
@@ -32,39 +34,32 @@ before_install:
     mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
     export PATH="/tmp/git-lfs:$PATH"
   else
+    sudo apt-get install --no-install-recommends -y  software-properties-common icnsutils graphicsmagick build-essential g++ g++-multilib gcc gcc-multilib default-jre
     sudo apt-get update
-    sudo apt-get install -y --no-install-recommends software-properties-common icnsutils graphicsmagick
-    sudo dpkg --add-architecture i386
-    curl -L https://dl.winehq.org/wine-builds/Release.key > Release.key
-    sudo apt-key add Release.key
-    sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu
-    sudo apt-get update
-    sudo apt-get -y remove software-properties-common libdbus-glib-1-2 python3-dbus python3-gi python3-pycurl python3-software-properties
-    sudo apt-get install -y --no-install-recommends winehq-stable
-    export WINEDEBUG='-all,err+all'
-    export WINEDLLOVERRIDES='winemenubuilder.exe=d'
-    export CHROME_BIN=chromium-browser
     # clean
-    sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/* && unlink Release.key
+    sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
   fi
 install:
 - yarn
 before_script:
-- git lfs pull
+- export GITHUB_TOKEN=$GITHUB_TOKEN
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
     export DISPLAY=:99.0
     sh -e /etc/init.d/xvfb start
-    sleep 3
   fi
+- git lfs pull
 script:
 - yarn test
 - |
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-    yarn build -wl -p always
+    yarn release -l
   else
-    yarn build -m -p always
+    yarn release -m
   fi
 branches:
   except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+  - "/^v\\d+\\.\\d+\\.\\d+$/"
+env:
+  global:
+    secure: akWURxNXSWCEEDGM2JjFPushnL05bqmIgVyiMCHeCZQMk2QVePR7x8tL9vFQASBaAn0klUNkYiYYvE5kdnxzvxP3l/PYLvR+khGZL8hpn5pF7G2hRX53Medh1O0y7bLIksknaFKiwTlrhHfN0tpCY8jyLDvkUbuaMqD/UklhLkjdj5Xb6GPjYOh8rCvk2x4F1Vj5IiqGBV/jfUHeOOSv8Qrj8GVbXjdTHU/2uGi0eagbiA5aWoH8psQrC24MKZI65c4TB2XvOYWH1VIhVv3H6pEzCGOomHtNKhHAh1ItTLJpueouyHna3tTIX7o7/CBxmKUAVZafgDEY/IH6HASNIpsORnJxi51VVwcUALacrM+Wl2ED9l6gv7wBJnbhaTVbNNTDUL6wB+ed8WhcvcikQGetGC6/WMc6XUT191UZxPZazjtm5VT0JZ2wPbVJlzXzHTP4sHq9hEXBczVWRY8dtPO03nN8pJ4MUVBUMtCfiHb9+XMbTbBCVbrn4UwaT83tkYkldpG6aCXWQLNJphf+D1rODjd8BLkK/UraxOvfkG8RNJzTsFZVLKghTYje6UmBxDDr4A1/YZpwOy8MZFwY6rudqiCzwB/0rqa/9lEcweEj/CcAX+gEUaHLK6md8d6b/LG/Pkg2Hi6DgIM1toM0+wXhNsiLnyTpvVp5CSYKPk8=
