@@ -2,9 +2,10 @@ image: Visual Studio 2017
 
 environment:
   nodejs_version: '8'
+  github_token:
+    secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
 
 platform:
-  - x86
   - x64
 
 cache:
@@ -22,7 +23,3 @@ test_script:
 
 build_script:
   - yarn release -w
-
-environment:
-  GITHUB_TOKEN:
-    secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
