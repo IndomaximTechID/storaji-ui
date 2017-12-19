@@ -1,0 +1,29 @@
+image: Visual Studio 2017
+
+environment:
+  nodejs_version: '8'
+  GH_TOKEN:
+    secure: sh3jXgCzFFK4cUiQYJSvrXn++EKrVfi7JbNIO1zT6MKKhFrQ7sUY4lVt6cAxlpq3
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+  - '%LOCALAPPDATA%\electron\Cache'
+  - '%LOCALAPPDATA%\electron-builder\cache'
+  - '%USERPROFILE%\.electron'
+
+install:
+  - ps: Install-Product node 8 x64
+  - yarn
+
+test_script:
+  - yarn test
+
+build_script:
+  - yarn release -w
+
+branches:
+    only:
+      - master
