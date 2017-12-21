@@ -1,6 +1,6 @@
 {
   "name": "storaji",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "license": "MIT",
   "description": "Manage your company stocks with us.",
   "main": "app/main.js",

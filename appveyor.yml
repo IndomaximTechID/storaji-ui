@@ -22,8 +22,4 @@ test_script:
   - yarn test
 
 build_script:
-  - yarn release -w
-
-branches:
-    only:
-      - master
+  - if [%APPVEYOR_REPO_BRANCH%]==[master] yarn release -w
