@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { OrdersService } from '../../../core/services/orders.service';
-import { Order } from '../../../core/classes/order';
+import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { TranslateService } from '@ngx-translate/core';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import { OrdersService } from '../../../core/services/orders.service';
+import { Order } from '../../../core/classes/order';
 
 declare var numeral: any;
 @Component({
@@ -21,6 +22,7 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     private routes: ActivatedRoute,
+    private location: Location,
     private _ordersService: OrdersService,
     public translate: TranslateService
   ) { }
@@ -38,6 +40,20 @@ export class OverviewComponent implements OnInit {
         .subscribe(
           data => (data instanceof Object) ? this.order = data : data
         );
+  }
+
+  onDelete() {
+    this.routes.paramMap
+        .switchMap((params: ParamMap) => {
+          this._ordersService.delete(params.get('id'));
+          return this._ordersService.orders;
+        })
+        .subscribe(
+          data => (data instanceof Object) ? this.order = data : data
+        );
+
+    this.location.back();
+    this.loadOrder();
   }
 
   save() {
