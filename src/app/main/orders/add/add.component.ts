@@ -18,7 +18,7 @@ import { StatsService } from '../../../core/services/stats.service';
 export class AddComponent implements OnInit {
   products: Product[] = [new Product()];
   customers: Customer[];
-  order: Order;
+  orders: Order[];
 
   constructor(
     private _productsService: ProductsService,
@@ -33,15 +33,15 @@ export class AddComponent implements OnInit {
   }
 
   async onSubmit() {
-    await this._ordersService.add(this.order);
+    await this._ordersService.add(this.orders);
     this._statsService.get();
     this._statsService.topProducts();
   }
 
   init() {
-    this.order = new Order();
-    this.order.order_detail = new OrderDetail();
-    this.order.order_detail.product = new Product();
+    this.orders = [new Order()];
+    this.orders[0].order_detail = new OrderDetail();
+    this.orders[0].order_detail.product = new Product();
 
     this._productsService.get();
     this._productsService.products.subscribe(
@@ -64,9 +64,13 @@ export class AddComponent implements OnInit {
     );
   }
 
-  available_stock(e: any) {
-    if (e.target.value > this.order.order_detail.product.stock) {
-      return e.target.value = this.order.order_detail.product.stock;
+  add() {
+    this.orders.push(new Order());
+  }
+
+  available_stock(e: any, i: number) {
+    if (e.target.value > this.orders[i].order_detail.product.stock) {
+      return e.target.value = this.orders[i].order_detail.product.stock;
     }
   }
 
