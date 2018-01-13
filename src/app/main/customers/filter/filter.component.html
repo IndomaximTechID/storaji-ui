@@ -24,13 +24,11 @@
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="date_from" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
-        <input type="text" name="date_from" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}"
-          [(ngModel)]="customer.date_range.from" #date_from="ngModel" uk-datepicker>
+        <input type="text" name="date_from" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}" uk-datepicker>
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="date_to" class="uk-form-label">{{ 'form.label.date_to' | translate }}</label>
-        <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}"
-          [(ngModel)]="customer.date_range.to" #date_to="ngModel" uk-datepicker>
+        <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}" uk-datepicker>
       </div>
       <div class="uk-width-1-1 uk-padding-small">
         <button type="submit" class="uk-button uk-button-primary"

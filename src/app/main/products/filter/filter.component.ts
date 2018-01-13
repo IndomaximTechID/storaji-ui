@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
 import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/filter';
 import { ProductType } from '../../../core/classes/product-type';
-import { TranslateService } from '@ngx-translate/core';
 
 declare var numeral: any;
 declare var jQuery: any;
@@ -32,6 +33,11 @@ export class FilterComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+    _.map(jQuery('input[uk-datepicker]'), el => {
+      const input = jQuery(el)[0];
+      this.product.date_range[input.name.slice().replace('date_', '')] = input.value;
+      return el;
+    });
     this._productsService.get(this.product);
   }
 
