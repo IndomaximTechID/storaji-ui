@@ -17,9 +17,10 @@ cache:
 install:
   - ps: Install-Product node 8 x64
   - yarn
+  - yarn webdriver-update
 
 test_script:
-  - yarn test
+  - yarn test -wu false
 
 build_script:
   - if [%APPVEYOR_REPO_BRANCH%]==[master] yarn release -w
