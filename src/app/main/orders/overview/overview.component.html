@@ -36,11 +36,11 @@
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.price' | translate }}</h6>
-                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price).format('$0,0') : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price).format(format()) : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.total' | translate }}</h6>
-                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format('$0,0') : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format(format()) : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.date' | translate }}</h6>

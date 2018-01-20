@@ -26,6 +26,10 @@ export class ReportComponent implements OnInit {
     this.loadProducts();
   }
 
+  format(): string {
+    return localStorage.getItem('format');
+  }
+
   loadProducts() {
     this._productService.get();
     this._productService.products.subscribe(
@@ -111,8 +115,8 @@ export class ReportComponent implements OnInit {
         item.sku,
         item.type.name,
         item.stock,
-        this.currency.set(item.cost).format('$0,0'),
-        this.currency.set(item.selling_price).format('$0,0'),
+        this.currency.set(item.cost).format(localStorage.getItem('format')),
+        this.currency.set(item.selling_price).format(localStorage.getItem('format')),
         (item.stock > 0) ? this.translate.instant('text.in-stock') : this.translate.instant('text.sold-out')
       ]);
     });

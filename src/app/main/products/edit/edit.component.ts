@@ -43,7 +43,7 @@ export class EditComponent implements OnInit {
   }
 
   onKeyup(e: any) {
-    e.target.value = numeral(e.target.value).format('$0,0');
+    e.target.value = numeral(e.target.value).format(localStorage.getItem('format'));
   }
 
   onDelete() {
@@ -76,8 +76,8 @@ export class EditComponent implements OnInit {
             if (data instanceof Object) {
               this.product = data;
             }
-            this.product.cost = numeral(this.product.cost).format('$0,0');
-            this.product.selling_price = numeral(this.product.selling_price).format('$0,0');
+            this.product.cost = numeral(this.product.cost).format(localStorage.getItem('format'));
+            this.product.selling_price = numeral(this.product.selling_price).format(localStorage.getItem('format'));
           }
         );
   }

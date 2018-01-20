@@ -1,0 +1,156 @@
+{
+    "intro": "Manage your company stocks with us",
+    "module": {
+        "title": {
+            "login": "Zaloguj",
+            "logout": "Wyloguj",
+            "register": "Zarejestruj",
+            "product": "Produkt",
+            "customer": "Klient",
+            "transaction": "Transakcja",
+            "dashboard": "Kokpit",
+            "order": "Zamówienie"
+        }
+    },
+    "table": {
+        "number": "Nr",
+        "name": "Nazwa",
+        "sold": "Sprzedany",
+        "status": "Status",
+        "stock": "Magazyn",
+        "sku": "SKU",
+        "type": "Typ",
+        "no-data": "Brak danych",
+        "customer": {
+            "id": "ID Klienta",
+            "name": "Nazwa Klienta"
+        },
+        "company": {
+            "name": "Nazwa Firmy"
+        },
+        "order": {
+            "id": "ID zamówienia"
+        },
+        "product": {
+            "name": "Nazwa Produktu"
+        },
+        "date": "Data"
+    },
+    "form": {
+        "label": {
+            "email": "Email",
+            "password": "Hasło",
+            "old-password": "Stare Hasło",
+            "new-password": "Nowe Hasło",
+            "product": "Produkt",
+            "customer": "Klient",
+            "name": "Nazwa",
+            "fullname": "Pełna Nazwa",
+            "company-name": "Nazwa Firmy",
+            "customer-name": "Nazwa Klienta",
+            "city": "Miasto",
+            "country": "Kraj",
+            "postal-code": "Kod Pocztowy",
+            "address": "Adres",
+            "type": "Typ",
+            "sku": "SKU",
+            "stock": "Magazyn",
+            "cost": "Koszt",
+            "selling-price": "Cena Sprzedaży",
+            "price": "Cena",
+            "total": "Suma",
+            "description": "Opis",
+            "sold": "Sprzedane",
+            "amount": "Ilość",
+            "date_from": "Data od",
+            "date_to": "Data do"
+        },
+        "placeholder": {
+            "email": "Wpisz Email",
+            "order-id": "Wpisz ID Zamówienia",
+            "password": "Wpisz Hasło",
+            "old-password": "Wpisz Stare Hasło",
+            "new-password": "Wpisz Nowe Hasło",
+            "product": "Wpisz Produkt",
+            "customer": "Wpisz Klienta",
+            "fullname": "Wpisz Pełną Nazwę",
+            "customer-name": "Wpisz Nazwę Klienta",
+            "company-name": "Wpisz Nazwę Firmy",
+            "company-type": "Wpisz Kategorię Firmy",
+            "name": "Wpisz Nazwę",
+            "city": "Wpisz Miasto",
+            "country": "Wpisz Kraj",
+            "postal-code": "Wpisz Kod Pocztowy",
+            "address": "Wpisz Adres",
+            "type": "Wpisz typ",
+            "sku": "Wpisz nr SKU",
+            "stock": "Wpisz ilość na magazynie",
+            "cost": "Wpisz koszt",
+            "selling-price": "Wpisz cenę sprzedaży",
+            "description": "Wpisz opis",
+            "amount": "Wpisz ilość",
+            "date": "Wpisz datę"
+        },
+        "button": {
+            "save": "Zapisz",
+            "cancel": "Anuluj",
+            "show-customers": "Pokaż klientów",
+            "save-as-pdf": "Zapisz jako PDF",
+            "search": "Szukaj",
+            "clear": "Wyczyść"
+        }
+    },
+    "text": {
+        "new": {
+            "product": "Nowy Produkt",
+            "customer": "Nowy Klient",
+            "order": "Nowe Zamówienie"
+        },
+        "edit": {
+            "product": "Edytuj Produkt",
+            "customer": "Edytuj Klienta",
+            "order": "Edytuj Zamówienie",
+            "profile": "Edytuj Profil",
+            "currency": "Zmień Walutę"
+        },
+        "search-option": "Opcje Wyszukiwania",
+        "i18n": "Opcje Językowe",
+        "general": "Główne",
+        "module": "Moduły",
+        "report": "Raporty",
+        "forgot-password": "Zapomniałeś hasła?",
+        "has-account": "Masz już konto?",
+        "has-no-account": "Nie masz jeszcze założonego konta?",
+        "customers-who-bought-this-product": "Klienci, którzy kupili ten produkt",
+        "stat": {
+            "financial": "Finanse",
+            "top-selling": "Najlepiej Sprzedające Się Produkty",
+            "revenue": "Dochód",
+            "profit": "Zysk",
+            "cost": "Koszt",
+            "total": "Suma"
+        },
+        "in-stock": "Na Magazynie",
+        "sold-out": "Wyprzedane"
+    },
+    "confirmation": {
+        "logout": {
+            "title": "Potwierdzenie Wylogowania",
+            "message": "Czy jesteś pewny, że chcesz się wylogować?",
+            "continue": "Tak, wyloguj mnie",
+            "cancel": "Nie, wracajmy"
+        },
+        "delete": {
+            "title": "Potwierdzenie skasowania",
+            "message": "Czy napewno chcesz to skasować?",
+            "continue": "Usuń",
+            "cancel": "Anuluj"
+        }
+    },
+    "notification": {
+        "login": {
+            "success": "Przekierowuje do kokpitu ...",
+            "failed": "Email i hasło nie pasują."
+        }
+    }
+}

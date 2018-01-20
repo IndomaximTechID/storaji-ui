@@ -34,8 +34,8 @@
               <td>{{product.sku}}</td>
               <td>{{(product.type) ? product.type.name : product.type}}</td>
               <td>{{product.stock}}</td>
-              <td>{{currency.set(product.cost).format('$0,0')}}</td>
-              <td>{{currency.set(product.selling_price).format('$0,0')}}</td>
+              <td>{{currency.set(product.cost).format(format())}}</td>
+              <td>{{currency.set(product.selling_price).format(format())}}</td>
               <div *ngIf="(product.stock > 0); then ok else not"></div>
               <ng-template #ok>
                 <td><span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>

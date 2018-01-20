@@ -17,18 +17,35 @@
       <div class="uk-navbar-right uk-light">
         <ul class="uk-navbar-nav">
           <li class="uk-active">
-            <a href="#">{{ (user) ? user.name : '' }} &nbsp;<span class="ion-ios-arrow-down"></span></a>
-            <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
+            <a href="#"><span uk-icon="icon: settings; ratio: 1.2;" class="uk-margin-small-top"></span></a>
+            <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;" class="uk-width-medium">
               <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li class="uk-nav-header">Hi, {{ (user) ? user.name : '' }}!</li>
+                <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
+                <li>
+                  <a href="#modal-edit-profile" (click)="loadData()" uk-toggle>
+                    {{ 'text.edit.profile' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#modal-currency" uk-toggle>
+                    {{ 'text.edit.currency' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#modal-logout" uk-toggle>
+                    {{ 'module.title.logout' | translate }}
+                  </a>
+                </li>
                 <li class="uk-nav-header">{{ 'text.i18n' | translate }}</li>
                 <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
-                <li *ngFor="let lang of translate.getLangs()" class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}">
+                <li *ngFor="let lang of translate.getLangs()"
+                    class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}" 
+                    [style.display]="(lang === '_i18n') ? 'none' : null">
                   <a (click)="translate.use(lang)">
                         {{ lang | translate }}
                   </a>
                 </li>
-                <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
-                <li><a href="#modal-logout" uk-toggle>{{ 'module.title.logout' | translate }}</a></li>
               </ul>
             </div>
           </li>
@@ -55,3 +72,28 @@
         </div>
     </div>
 </div>
+<div id="modal-currency" uk-modal>
+  <div class="uk-modal-dialog uk-width-large">
+      <div class="uk-modal-header">
+          <h2 class="uk-modal-title uk-text-center">{{ 'text.edit.currency' | translate }}</h2>
+      </div>
+      <div class="uk-modal-body uk-text-center">
+        <select class="uk-select uk-text-uppercase" [(ngModel)]="selectedCurrency" name="currency" #currency="ngModel">
+          <option *ngFor="let item of currencies" [value]="item.id" [selected]="item.id === selectedCurrency">
+            {{ item.id }} ( {{ item.symbol }} )
+          </option>
+        </select>
+      </div>
+      <div class="uk-modal-footer">
+        <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+            <div class="uk-text-center">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'form.button.cancel' | translate }}</button>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onChangeCurrency()">
+                    {{ 'form.button.save' | translate }}
+                </button>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+<storaji-profile-edit [user]="user" (change)="onChange($event)"></storaji-profile-edit>

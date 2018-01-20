@@ -56,6 +56,10 @@ export class OverviewComponent implements OnInit {
     this.loadOrder();
   }
 
+  format(): string {
+    return localStorage.getItem('format');
+  }
+
   save() {
     const docDefinitions = {
       pageSize: 'A5',
@@ -115,7 +119,7 @@ export class OverviewComponent implements OnInit {
                   style: 'item'
             },
             {
-              text: this.currency.set(this.order.order_detail.product.selling_price).format('$0,0'),
+              text: this.currency.set(this.order.order_detail.product.selling_price).format(localStorage.getItem('format')),
               style: 'item'
             }
           ],
@@ -135,7 +139,10 @@ export class OverviewComponent implements OnInit {
         {
           columns: [
             {
-              text: this.currency.set(this.order.order_detail.product.selling_price * this.order.order_detail.amount).format('$0,0'),
+              text: this
+                    .currency
+                    .set(this.order.order_detail.product.selling_price * this.order.order_detail.amount)
+                    .format(localStorage.getItem('format')),
               style: 'item'
             },
             {

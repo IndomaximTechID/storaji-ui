@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest';
 import { Config } from './shared/classes/app';
 
 declare const Offline: any;
@@ -14,13 +17,25 @@ declare const ipcRenderer: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(translate: TranslateService) {
-    translate.addLangs(['en', 'id']);
-    // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('en');
+  constructor(translate: TranslateService, private http: HttpClient) {
+    if (!localStorage.getItem('currency')) {
+      localStorage.setItem('currency', 'en');
+      localStorage.setItem('format', '$0,0');
+    }
+    const getGlobal = this.http.get('assets/i18n/_i18n.json');
+    const getDefault = this.http.get('assets/i18n/en.json');
 
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('en');
+    Observable.combineLatest(getGlobal, getDefault).subscribe(
+      (res) => {
+        // this language will be used as a fallback when a translation isn't found in current language
+        translate.setTranslation('_i18n', Object.assign({}, res[0], res[1]));
+        translate.addLangs(['_i18n', ...Object.keys(res[0])]);
+        translate.setDefaultLang('_i18n');
+
+        // the lang to use, if the lang isn't available, it will use the current loader to get them
+        translate.use('en');
+      }
+    );
   }
 
   ngOnInit() {

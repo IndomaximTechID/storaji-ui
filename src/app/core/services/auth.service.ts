@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   unset(): void {
-    localStorage.clear();
+    localStorage.removeItem('oatoken');
   }
 
   loading(act: string): void {

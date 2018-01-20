@@ -32,7 +32,7 @@ export class AddComponent implements OnInit {
   }
 
   onKeyup(e: any) {
-    e.target.value = numeral(e.target.value).format('$0,0');
+    e.target.value = numeral(e.target.value).format(localStorage.getItem('format'));
   }
 
   initProduct() {

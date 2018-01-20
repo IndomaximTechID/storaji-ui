@@ -1,6 +1,4 @@
 {
-    "en": "English",
-    "id": "Bahasa Indonesia",
     "intro": "Manage your company stocks with us",
     "module": {
         "title": {
@@ -42,6 +40,8 @@
         "label": {
             "email": "Email",
             "password": "Password",
+            "old-password": "Old Password",
+            "new-password": "New Password",
             "product": "Product",
             "customer": "Customer",
             "name": "Name",
@@ -69,6 +69,8 @@
             "email": "Enter Email",
             "order-id": "Enter Order ID",
             "password": "Enter Password",
+            "old-password": "Enter Old Password",
+            "new-password": "Enter New Password",
             "product": "Enter Product",
             "customer": "Enter Customer",
             "fullname": "Enter Full Name",
@@ -107,7 +109,9 @@
         "edit": {
             "product": "Edit Product",
             "customer": "Edit Customer",
-            "order": "Edit Order"
+            "order": "Edit Order",
+            "profile": "Edit Profile",
+            "currency": "Change Currency"
         },
         "search-option": "Search Options",
         "i18n": "Language Options",

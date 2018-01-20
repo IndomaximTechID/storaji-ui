@@ -10,15 +10,15 @@
           <div class="uk-grid-small uk-grid-divider uk-child-width-expand@s uk-text-left" uk-grid>
               <div class="uk-text-uppercase">
                   {{ 'text.stat.revenue' | translate }}<br/>
-                  {{ (stat != null) ? currency.set(stat.stats.revenue).format('$0,0') : null }}
+                  {{ (stat != null) ? currency.set(stat.stats.revenue).format(format()) : null }}
               </div>
               <div class="uk-text-uppercase">
                   {{ 'text.stat.cost' | translate }}<br/>
-                  {{ (stat != null) ? currency.set(stat.stats.cost).format('$0,0') : null }}
+                  {{ (stat != null) ? currency.set(stat.stats.cost).format(format()) : null }}
               </div>
               <div class="strj-items-wr uk-text-uppercase">
                   {{ 'text.stat.profit' | translate }}<br/>
-                  {{ (stat != null) ? currency.set(stat.stats.profit).format('$0,0') : null }}
+                  {{ (stat != null) ? currency.set(stat.stats.profit).format(format()) : null }}
               </div>
           </div>
           <h2 class="uk-card-title">{{ 'text.stat.total' | translate }}</h2>

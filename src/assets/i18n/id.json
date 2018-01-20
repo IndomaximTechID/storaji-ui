@@ -1,6 +1,4 @@
 {
-    "en": "English",
-    "id": "Bahasa Indonesia",
     "intro": "Kelola stok gudang Perusahaan anda dengan kami",
     "module": {
         "title": {
@@ -42,6 +40,8 @@
         "label": {
             "email": "Email",
             "password": "Kata Sandi",
+            "old-password": "Kata Sandi Lama",
+            "new-password": "Kata Sandi Baru",
             "product": "Produk",
             "customer": "Pelanggan",
             "name": "Nama",
@@ -69,6 +69,8 @@
             "email": "Masukkan Email",
             "order-id": "Masukkan ID Pesanan",
             "password": "Masukkan Kata Sandi",
+            "old-password": "Masukkan Kata Sandi Lama",
+            "new-password": "Masukkan Kata Sandi Baru",
             "product": "Masukkan Produk",
             "customer": "Masukkan Pelanggan",
             "fullname": "Masukkan Nama Lengkap",
@@ -107,7 +109,9 @@
         "edit": {
             "product": "Ubah Produk",
             "customer": "Ubah Pelanggan",
-            "order": "Ubah Pesanan"
+            "order": "Ubah Pesanan",
+            "profile": "Ubah Profil",
+            "currency": "Ganti Mata Uang"
         },
         "search-option": "Pilihan Pencarian",
         "i18n": "Pilihan Bahasa",

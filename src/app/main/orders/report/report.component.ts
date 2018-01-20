@@ -34,6 +34,10 @@ export class ReportComponent implements OnInit {
 
   }
 
+  format(): string {
+    return localStorage.getItem('format');
+  }
+
   async save() {
     const docDefinitions = {
       pageSize: 'A4',
@@ -107,8 +111,8 @@ export class ReportComponent implements OnInit {
         item.order_detail.product.name,
         item.customer.full_name,
         item.order_detail.amount,
-        this.currency.set(item.order_detail.product.selling_price).format('$0,0'),
-        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price).format('$0,0'),
+        this.currency.set(item.order_detail.product.selling_price).format(localStorage.getItem('format')),
+        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price).format(localStorage.getItem('format')),
         item.created_at,
       ]);
     });

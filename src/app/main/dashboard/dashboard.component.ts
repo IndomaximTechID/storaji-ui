@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
     this.initStats();
   }
 
+  format(): string {
+    return localStorage.getItem('format');
+  }
+
   initStats() {
     this._statsService.get();
     this._statsService.stats.subscribe(

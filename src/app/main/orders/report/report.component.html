@@ -36,8 +36,8 @@
                 <a [routerLink]="['/dashboard/customers', order.customer.id]" class="uk-link-reset">{{order.customer.full_name}}</a>
               </td>
               <td>{{order.order_detail.amount}}</td>
-              <td>{{currency.set(order.order_detail.product.selling_price).format('$0,0')}}</td>
-              <td>{{currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format('$0,0')}}</td>
+              <td>{{currency.set(order.order_detail.product.selling_price).format(format())}}</td>
+              <td>{{currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format(format())}}</td>
               <td>{{order.created_at}}</td>
             </tr>
           </tbody>
