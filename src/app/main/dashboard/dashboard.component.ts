@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../../core/services/stats.service';
 import { Stat, TopProduct } from '../../core/classes/stat';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../shared/services/utils.service';
 
 declare var numeral: any;
 @Component({
@@ -16,7 +17,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _statsService: StatsService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class DashboardComponent implements OnInit {
   }
 
   format(): string {
-    return localStorage.getItem('format');
+    return this.utils.getCurrentFormat();
   }
 
   initStats() {

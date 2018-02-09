@@ -9,6 +9,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { OrdersService } from '../../../core/services/orders.service';
 import { Order } from '../../../core/classes/order';
+import { UtilsService } from '../../../shared/services/utils.service';
 
 declare var numeral: any;
 @Component({
@@ -24,7 +25,8 @@ export class OverviewComponent implements OnInit {
     private routes: ActivatedRoute,
     private location: Location,
     private _ordersService: OrdersService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class OverviewComponent implements OnInit {
   }
 
   format(): string {
-    return localStorage.getItem('format');
+    return this.utils.getCurrentFormat();
   }
 
   save() {

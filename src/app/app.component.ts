@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import { Config } from './shared/classes/app';
+import { UtilsService } from './shared/services/utils.service';
 
 declare const Offline: any;
 declare const jQuery: any;
@@ -17,11 +18,13 @@ declare const ipcRenderer: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(translate: TranslateService, private http: HttpClient) {
-    if (!localStorage.getItem('currency')) {
-      localStorage.setItem('currency', 'en');
-      localStorage.setItem('format', '$0,0');
-    }
+  constructor(
+    translate: TranslateService,
+    private http: HttpClient,
+    private utils: UtilsService,
+  ) {
+    const currency = this.utils.getCurrentCurrency();
+    const lang = this.utils.getCurrentLang();
     const getGlobal = this.http.get('assets/i18n/_i18n.json');
     const getDefault = this.http.get('assets/i18n/en.json');
 
@@ -33,7 +36,14 @@ export class AppComponent implements OnInit {
         translate.setDefaultLang('_i18n');
 
         // the lang to use, if the lang isn't available, it will use the current loader to get them
-        translate.use('en');
+
+        !currency
+          ? this.utils.setCurrency('en')
+          : this.utils.setCurrency(currency);
+
+        !lang
+          ? this.utils.setLang('en')
+          : this.utils.setLang(lang);
       }
     );
   }

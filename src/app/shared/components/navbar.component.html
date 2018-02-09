@@ -42,7 +42,7 @@
                 <li *ngFor="let lang of translate.getLangs()"
                     class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}" 
                     [style.display]="(lang === '_i18n') ? 'none' : null">
-                  <a (click)="translate.use(lang)">
+                  <a (click)="onChangeLanguage(lang)">
                         {{ lang | translate }}
                   </a>
                 </li>

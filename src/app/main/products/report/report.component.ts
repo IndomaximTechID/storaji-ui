@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { UtilsService } from '../../../shared/services/utils.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
@@ -19,7 +20,8 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private _productService: ProductsService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -27,7 +29,7 @@ export class ReportComponent implements OnInit {
   }
 
   format(): string {
-    return localStorage.getItem('format');
+    return this.utils.getCurrentFormat();
   }
 
   loadProducts() {

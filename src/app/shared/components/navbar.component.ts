@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Config } from '../../shared/classes/app';
 import { User } from '../../core/classes/user';
+import { UtilsService } from '../services/utils.service';
 
 declare var numeral: any;
 @Component({
@@ -14,12 +15,13 @@ declare var numeral: any;
 export class NavbarComponent implements OnInit {
   user: User;
   navbar: boolean = this.auth.isAuthenticated();
-  selectedCurrency: string = localStorage.getItem('currency');
+  selectedCurrency: string = this.utils.getCurrentCurrency();
   currencies: Array<any>;
 
   constructor(
     public app: Config,
     private auth: AuthService,
+    private utils: UtilsService,
     public translate: TranslateService
   ) { }
 
@@ -36,12 +38,11 @@ export class NavbarComponent implements OnInit {
   }
 
   onChangeCurrency() {
-    numeral.locales[this.selectedCurrency].currency.symbol.length !== 3
-      ? localStorage.setItem('format', '$0,0')
-      : localStorage.setItem('format', '0,0 $');
+    this.utils.setCurrency(this.selectedCurrency);
+  }
 
-    numeral.locale(this.selectedCurrency);
-    localStorage.setItem('currency', this.selectedCurrency);
+  onChangeLanguage(language: string) {
+    this.utils.setLang(language);
   }
 
   initUser() {

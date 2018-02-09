@@ -6,6 +6,7 @@ import { Company } from '../../core/classes/company';
 import { CompanyTypesService } from '../../core/services/company-types.service';
 import { CompanyType } from '../../core/classes/company_type';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../shared/services/utils.service';
 
 class Credentials {
   name: string;
@@ -29,7 +30,8 @@ export class RegisterComponent implements OnInit {
     private title: Title,
     private auth: AuthService,
     private _companyTypes: CompanyTypesService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,10 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.auth.register(this.credentials);
+  }
+
+  onChangeLanguage(language: string) {
+    this.utils.setLang(language);
   }
 
 }

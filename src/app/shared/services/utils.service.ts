@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 declare var $: any;
 declare var Notyf: any;
+declare var numeral: any;
 
 @Injectable()
 export class UtilsService {
   _notyf = new Notyf();
 
-  constructor() { }
-  loading(options: object) {
+  constructor(
+    private translate: TranslateService,
+  ) { }
+  loading(options: object): void {
     const defaultOpts = {
       selector: 'storaji-root',
       action: 'show',
@@ -46,5 +51,31 @@ export class UtilsService {
       default:
         break;
     }
+  }
+
+  setLang(language: string): void {
+    this.translate.use(language);
+    localStorage.setItem('language', language);
+  }
+
+  getCurrentLang(): string {
+    return localStorage.getItem('language');
+  }
+
+  setCurrency(currency: string): void {
+    numeral.locales[currency].currency.symbol.length !== 3
+      ? localStorage.setItem('format', '$0,0')
+      : localStorage.setItem('format', '0,0 $');
+
+    numeral.locale(currency);
+    localStorage.setItem('currency', currency);
+  }
+
+  getCurrentCurrency(): string {
+    return localStorage.getItem('currency');
+  }
+
+  getCurrentFormat(): string {
+    return localStorage.getItem('format');
   }
 }

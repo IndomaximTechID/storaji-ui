@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../shared/services/utils.service';
 
 class Credentials {
   email: string;
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     public app: Config,
     private title: Title,
     private auth: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.auth.login(this.credentials);
+  }
+
+  onChangeLanguage(language: string) {
+    this.utils.setLang(language);
   }
 
 }
