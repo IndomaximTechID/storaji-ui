@@ -10,13 +10,14 @@
     <a href="https://github.com/IndomaximTechID/storaji"><img src="https://img.shields.io/github/release/IndomaximTechID/storaji/all.svg" alt="GitHub version"></a>
     <a href="https://travis-ci.org/IndomaximTechID/storaji-ui"><img src="https://api.travis-ci.org/IndomaximTechID/storaji-ui.svg?branch=master" alt="Travis"></a>
     <a href="https://ci.appveyor.com/project/lowsprofile/storaji-ui"><img src="https://ci.appveyor.com/api/projects/status/github/indomaximtechid/storaji-ui?branch=master&svg=true" alt="AppVeyor"></a>
+    <a href="https://github.com/IndomaximTechID/storaji/releases"><img src="https://img.shields.io/github/downloads/indomaximtechid/storaji/total.svg" alt="Downloads"></a>
   </p>
 </p>
 
 ## Downloads
 macOS 10.9+ | Windows 7+ | Linux
 -----------------| ---| ---|
-<a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.7/Storaji-1.0.0-beta.7.dmg'>Download v1.0.0-beta.7</a> | <a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.7/StorajiSetup.exe'>Download v1.0.0-beta.7</a> | <a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.7/storaji-1.0.0-beta.7-x86_64.AppImage'>Download v1.0.0-beta.7</a> |
+<a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.8/Storaji-1.0.0-beta.8.dmg'>Download v1.0.0-beta.8</a> | <a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.8/StorajiSetup.exe'>Download v1.0.0-beta.8</a> | <a href='https://github.com/IndomaximTechID/storaji/releases/download/v1.0.0-beta.8/storaji-1.0.0-beta.8-x86_64.AppImage'>Download v1.0.0-beta.8</a> |
 
 [More Download Options](https://github.com/IndomaximTechID/storaji/releases)
 
@@ -27,6 +28,7 @@ macOS 10.9+ | Windows 7+ | Linux
 - [Laravel](https://laravel.com/)
 - [UIkit](https://getuikit.com/)
 - [Tus](https://tus.io/)
+- [Highcharts](https://highcharts.com/)
 
 ## Features
 - :zap: Fast!!!
@@ -36,7 +38,8 @@ macOS 10.9+ | Windows 7+ | Linux
 - :busts_in_silhouette: Customers Management.
 - :truck: Orders Management and Order Overview.
 - :ship: Multiple Orders.
-- :chart_with_upwards_trend: Statistics.
+- :chart_with_upwards_trend: Statistics
+- :chart_with_downwards_trend: Graph of The Week **(NEW!!!)**.
 - :top: Top Selling Products.
 - :open_hands: Customers List on Product Overview.
 - :bookmark_tabs: Reports for Products, Orders, Customers.

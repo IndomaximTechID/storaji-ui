@@ -1,11 +1,6 @@
 System improvements:
-- Update electron core
-- Update electron-builder
-- Update electron-updater
+- Bugfix language doesn't save to local storage.
+- Clean up some sources.
 
-New Features:
-- Change currency
-- Update profile
-
-New Language supports:
-- Polish Language ( thanks to @PrzemekSkw )
+New features:
+- Now Graph is available with line chart of this and last week on Dashboard.
