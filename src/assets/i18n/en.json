@@ -130,6 +130,11 @@
             "cost": "Cost",
             "total": "Totals"
         },
+        "graph": {
+            "title": "Graph Of The Week",
+            "current": "Current Week Revenue",
+            "last": "Last Week Revenue"
+        },
         "in-stock": "In stock",
         "sold-out": "Sold out"
     },

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import 'moment/min/locales.min';
 
 declare var $: any;
 declare var Notyf: any;
@@ -8,6 +10,7 @@ declare var numeral: any;
 @Injectable()
 export class UtilsService {
   _notyf = new Notyf();
+  _moment = moment;
 
   constructor(
     private translate: TranslateService,
@@ -55,6 +58,7 @@ export class UtilsService {
 
   setLang(language: string): void {
     this.translate.use(language);
+    this._moment.locale(language);
     localStorage.setItem('language', language);
   }
 
@@ -77,5 +81,20 @@ export class UtilsService {
 
   getCurrentFormat(): string {
     return localStorage.getItem('format');
+  }
+
+  get moment() {
+    const lang = this.getCurrentLang();
+    !lang
+      ? this.setLang('en')
+      : this.setLang(lang);
+    return this._moment;
+  }
+
+  get isoWeekDays() {
+    return this._moment.weekdays().map(o => {
+      const V = this._moment.weekdays().indexOf(o) + 1;
+      return this.moment().isoWeekday(V).format('dddd');
+    });
   }
 }

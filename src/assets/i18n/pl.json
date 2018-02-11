@@ -130,6 +130,11 @@
             "cost": "Koszt",
             "total": "Suma"
         },
+        "graph": {
+            "title": "Wykres Tygodnia",
+            "current": "Przychody z bieżącego tygodnia",
+            "last": "Przychody zeszłego tygodnia"
+        },
         "in-stock": "Na Magazynie",
         "sold-out": "Wyprzedane"
     },

@@ -130,6 +130,11 @@
             "cost": "Biaya",
             "total": "Total"
         },
+        "graph": {
+            "title": "Grafik Mingguan",
+            "current": "Pendapatan Minggu Ini",
+            "last": "Pendapatan Minggu Lalu"
+        },
         "in-stock": "Stok ada",
         "sold-out": "Stok habis"
     },
