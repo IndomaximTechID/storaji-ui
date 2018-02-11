@@ -235,6 +235,22 @@
   version "0.0.45"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.0.45.tgz#830df863b9677c42d7220cfaf28741c06789f1e0"
 
+"@types/geojson@*":
+  version "7946.0.1"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.1.tgz#1fc41280e42f08f0d568401a556bc97c34f5262e"
+
+"@types/highcharts@^4.2.47":
+  version "4.2.57"
+  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-4.2.57.tgz#f756907fc1756c3148a6226efabd3520a8929db9"
+  dependencies:
+    "@types/geojson" "*"
+
+"@types/highcharts@^5.0.16":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-5.0.16.tgz#c85281ac496961d72c867d0b1667d43a088e7f51"
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/jasmine@*", "@types/jasmine@~2.5.53":
   version "2.5.54"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.54.tgz#a6b5f2ae2afb6e0307774e8c7c608e037d491c63"
@@ -372,6 +388,13 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular2-highcharts@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/angular2-highcharts/-/angular2-highcharts-0.5.5.tgz#f4a19ea96d63524420fd5c65136ac027b05266fd"
+  dependencies:
+    "@types/highcharts" "^4.2.47"
+    highcharts "^5.0.7"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -3077,6 +3100,14 @@ heimdalljs@^0.2.0, heimdalljs@^0.2.4:
   dependencies:
     rsvp "~3.2.1"
 
+highcharts@^5.0.7:
+  version "5.0.14"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-5.0.14.tgz#0ef14cca9f1345408568b533dae1478950d96810"
+
+highcharts@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-6.0.6.tgz#c896ece8cdbab18b4f8b7b33ab9647aa7150c510"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -4109,6 +4140,10 @@ lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, l
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
+lodash@^4.17.5:
+  version "4.17.5"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+
 log4js@^0.6.31:
   version "0.6.38"
   resolved "https://registry.yarnpkg.com/log4js/-/log4js-0.6.38.tgz#2c494116695d6fb25480943d3fc872e662a522fd"
@@ -4365,6 +4400,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
 ms@0.7.1:
   version "0.7.1"
