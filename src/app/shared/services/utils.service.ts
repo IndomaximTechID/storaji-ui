@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import 'moment/min/locales.min';
+import { Headers, RequestOptions } from '@angular/http';
 
 declare var $: any;
 declare var Notyf: any;
@@ -15,6 +16,30 @@ export class UtilsService {
   constructor(
     private translate: TranslateService,
   ) { }
+  
+  get token(): string {
+    return localStorage.getItem('oatoken');
+  }
+
+  setToken(token: string): string {
+    localStorage.setItem('oatoken', token);
+    return this.token;
+  }
+
+  unsetToken(): void {
+    localStorage.removeItem('oatoken');
+  }
+
+  makeOptions(headers: Headers = this.makeHeaders()): RequestOptions {
+    return new RequestOptions({headers});
+  }
+
+  makeHeaders(customHeaders: any = {}): Headers {
+    const defaultOptions = { 'Content-Type': 'application/json' };
+    const opts = Object.assign({}, defaultOptions, customHeaders);
+    return new Headers(opts);
+  }
+
   loading(options: object): void {
     const defaultOpts = {
       selector: 'storaji-root',

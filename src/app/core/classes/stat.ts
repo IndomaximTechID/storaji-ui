@@ -1,26 +1,26 @@
 export class Stat {
-  constructor(
-    public products?: number,
-    public customers?: number,
-    public orders?: number,
-    public stats?: any,
-    public graph: Graph = new Graph()
-  ) { }
+  products: number;
+  customers: number;
+  orders: number;
+  stats: StatDetail = new StatDetail();
+  graph: Graph = new Graph();
+}
+
+export class StatDetail {
+  cost: number;
+  profit: number;
+  revenue: number;
 }
 
 export class Graph {
-  constructor(
-    public current: number[] = [],
-    public last: number[] = []
-  ) {}
+  current: number[] = [];
+  last: number[] = [];
 }
 
 export class TopProduct {
-  constructor(
-    public id?: number,
-    public name?: number,
-    public stock?: number,
-    public orders?: number,
-    public sold?: number
-  ) { }
+  id: number;
+  name: number;
+  stock: number;
+  orders: number;
+  sold: number;
 }

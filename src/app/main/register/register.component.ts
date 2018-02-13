@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
+import { isUndefined } from 'lodash';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
 import { Company } from '../../core/classes/company';
 import { CompanyTypesService } from '../../core/services/company-types.service';
 import { CompanyType } from '../../core/classes/company_type';
-import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '../../shared/services/utils.service';
 
 class Credentials {
@@ -20,35 +22,47 @@ class Credentials {
   templateUrl: './register.component.html',
   styles: []
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   credentials = new Credentials();
-  companyTypes: CompanyType[];
+  companyTypes: CompanyType[] | CompanyType;
+  private _registerSub: Subscription = undefined;
+  private _companyTypeSub: Subscription = undefined;
 
   constructor(
     public app: Config,
-    private title: Title,
-    private auth: AuthService,
-    private _companyTypes: CompanyTypesService,
+    private _title: Title,
+    private _auth: AuthService,
+    private _companyTypesService: CompanyTypesService,
     public translate: TranslateService,
-    private utils: UtilsService
+    private _utils: UtilsService
   ) { }
 
   ngOnInit() {
-    this._companyTypes.get();
-    this._companyTypes.companyTypes.subscribe(
-      data => (data instanceof Array) ? this.companyTypes = data : data,
+    this._companyTypeSub = this._companyTypesService.get().subscribe(
+      data => this.companyTypes = data,
       err => {console.log(err); }
     );
-    this.title.setTitle(this.app.name);
+
+    this._title.setTitle(this.app.name);
+  }
+
+  ngOnDestroy() {
+    if (!isUndefined(this._registerSub)) {
+      this._registerSub.unsubscribe();
+    }
+
+    if (!isUndefined(this._companyTypeSub)) {
+      this._companyTypeSub.unsubscribe();
+    }
   }
 
   onSubmit() {
-    this.auth.register(this.credentials);
+    this._registerSub = this._auth.register(this.credentials).subscribe();
   }
 
   onChangeLanguage(language: string) {
-    this.utils.setLang(language);
+    this._utils.setLang(language);
   }
 
 }

@@ -1,72 +1,80 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
 import { User } from '../classes/user';
 import { UtilsService } from '../../shared/services/utils.service';
-import { TranslateService } from '@ngx-translate/core';
 import { Config } from '../../shared/classes/app';
+import { isUndefined } from 'lodash';
 
 
 @Injectable()
 export class AuthService {
-  _authUrl = `${new Config().api}/auth`;
+  private _authUrl = `${new Config().api}/auth`;
+  private _detailSub: Subscription = undefined;
 
   constructor(
-    private utils: UtilsService,
-    private http: Http,
-    private router: Router,
+    private _utils: UtilsService,
+    private _http: Http,
+    private _router: Router,
     public translate: TranslateService
   ) { }
 
-  login(credentials: any): void {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
-
+  login(credentials: any): Observable<any> {
     this.loading('show');
 
-    this.http.post(`${this._authUrl}/login`, credentials, options)
-        .map((res: Response) => res.json())
-        .subscribe(
-          data => this.afterLogin(data),
-          error => this.failedLogin(error)
-        );
+    return this._http.post(
+      `${this._authUrl}/login`,
+      credentials,
+      this._utils.makeOptions()
+    )
+      .map((res: Response) => res.json())
+      .do(
+        data => this.afterLogin(data),
+        error => this.failedLogin(error)
+      );
   }
 
-  register(credentials: any): void {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
-
+  register(credentials: any): Observable<any> {
     this.loading('show');
 
-    this.http.post(`${this._authUrl}/register`, credentials, options)
-        .map((res: Response) => res.json())
-        .subscribe(
-          data => this.afterLogin(data),
-          error => this.failedLogin(error)
-        );
+    return this._http.post(
+      `${this._authUrl}/register`,
+      credentials,
+      this._utils.makeOptions()
+    )
+      .map((res: Response) => res.json())
+      .do(
+        data => this.afterLogin(data),
+        error => this.failedLogin(error)
+      );
   }
 
   detail(): Observable<User> {
     const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
+    const headers = this._utils.makeHeaders({
+      'Authorization': 'Bearer ' + token
+    });
 
-    return this.http.get(`${this._authUrl}/detail`, options)
+    return this._http.get(`${this._authUrl}/detail`, this._utils.makeOptions(headers))
         .map((res: Response) => res.json());
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('oatoken');
+    const { token } = this._utils;
 
     if (!token) {
       return false;
     }
 
-    this.detail().subscribe(
+    if (!isUndefined(this._detailSub)) {
+      this._detailSub.unsubscribe();
+    }
+
+    this._detailSub = this.detail().subscribe(
       data => <User>data,
       error => this.logout()
     );
@@ -79,21 +87,22 @@ export class AuthService {
   }
 
   afterLogin(data: any): void {
-    localStorage.setItem('oatoken', data.token);
+    const { token } = data;
+    this._utils.setToken(token);
 
-    this.utils.notyf(
+    this._utils.notyf(
       'success',
       this.translate.instant('notification.login.success')
     );
 
     setTimeout(() => {
       this.loading('hide');
-      this.router.navigate(['/dashboard']);
+      this._router.navigate(['/dashboard']);
     }, 2000);
   }
 
   failedLogin(error: any): void {
-    this.utils.notyf(
+    this._utils.notyf(
       'failed',
       this.translate.instant('notification.login.failed')
     );
@@ -101,16 +110,12 @@ export class AuthService {
   }
 
   logout(): void {
-    this.unset();
-    this.router.navigate(['/login']);
-  }
-
-  unset(): void {
-    localStorage.removeItem('oatoken');
+    this._utils.unsetToken();
+    this._router.navigate(['/login']);
   }
 
   loading(act: string): void {
-    this.utils.loading({
+    this._utils.loading({
       selector: 'storaji-login .uk-card',
       action: act
     });
