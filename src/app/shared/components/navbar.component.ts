@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../../core/services/auth.service';
 import { Config } from '../../shared/classes/app';
 import { User } from '../../core/classes/user';
@@ -12,16 +13,18 @@ declare var numeral: any;
   styles: [],
   providers: [AuthService]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
+  private _sub: Subscription = undefined;
+
   user: User;
-  navbar: boolean = this.auth.isAuthenticated();
-  selectedCurrency: string = this.utils.getCurrentCurrency();
+  navbar: boolean = this._auth.isAuthenticated();
+  selectedCurrency: string = this._utils.currency;
   currencies: Array<any>;
 
   constructor(
     public app: Config,
-    private auth: AuthService,
-    private utils: UtilsService,
+    private _auth: AuthService,
+    private _utils: UtilsService,
     public translate: TranslateService
   ) { }
 
@@ -37,12 +40,16 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
+  }
+
   onChangeCurrency() {
-    this.utils.setCurrency(this.selectedCurrency);
+    this._utils.setCurrency(this.selectedCurrency);
   }
 
   onChangeLanguage(language: string) {
-    this.utils.setLang(language);
+    this._utils.setLang(language);
   }
 
   initUser() {
@@ -50,11 +57,13 @@ export class NavbarComponent implements OnInit {
   }
 
   loadData() {
+    this._utils.unsubscribeSub(this._sub);
     this.initUser();
-    this.auth.detail().subscribe(
-      (data: User) => this.user = data,
-      (err) => console.log(err)
-    );
+    this._sub = this._auth.detail()
+      .subscribe(
+        (data: User) => this.user = data,
+        (err) => console.log(err)
+      );
   }
 
   onChange(evt: any) {
@@ -62,7 +71,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    this.auth.logout();
+    this._auth.logout();
   }
 
 }

@@ -12,9 +12,7 @@ import { Stat, TopProduct } from '../classes/stat';
 @Injectable()
 export class StatsService {
   private _statsUrl = `${new Config().api}/stats`;
-  private _headers = this._utils.makeHeaders({
-    'Authorization': 'Bearer ' + this._utils.token,
-  });
+  private _headers = this._utils.makeHeaders({ withToken: true });
 
   constructor(
     private _utils: UtilsService,

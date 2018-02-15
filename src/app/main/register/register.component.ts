@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
-import { isUndefined } from 'lodash';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
 import { Company } from '../../core/classes/company';
@@ -23,9 +22,9 @@ class Credentials {
   styles: []
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
   credentials = new Credentials();
   companyTypes: CompanyType[] | CompanyType;
+  
   private _registerSub: Subscription = undefined;
   private _companyTypeSub: Subscription = undefined;
 
@@ -39,6 +38,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this._utils.unsubscribeSub(this._companyTypeSub);
     this._companyTypeSub = this._companyTypesService.get().subscribe(
       data => this.companyTypes = data,
       err => {console.log(err); }
@@ -48,16 +48,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!isUndefined(this._registerSub)) {
-      this._registerSub.unsubscribe();
-    }
-
-    if (!isUndefined(this._companyTypeSub)) {
-      this._companyTypeSub.unsubscribe();
-    }
+    this._utils.unsubscribeSub(this._registerSub);
+    this._utils.unsubscribeSub(this._companyTypeSub);
   }
 
   onSubmit() {
+    this._utils.unsubscribeSub(this._registerSub);
     this._registerSub = this._auth.register(this.credentials).subscribe();
   }
 

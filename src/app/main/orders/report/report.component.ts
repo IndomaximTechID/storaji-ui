@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../../core/services/orders.service';
 import { Order } from '../../../core/classes/order';
 import { TranslateService } from '@ngx-translate/core';
-
+import { isArray } from 'lodash';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import { UtilsService } from '../../../shared/services/utils.service';
@@ -31,13 +31,13 @@ export class ReportComponent implements OnInit {
   loadOrders() {
     this._ordersService.get();
     this._ordersService.orders.subscribe(
-      data => (data instanceof Array) ? this.orders = data : data
+      data => isArray(data) ? this.orders = data : data
     );
 
   }
 
   format(): string {
-    return this.utils.getCurrentFormat();
+    return this.utils.format;
   }
 
   async save() {
@@ -113,8 +113,8 @@ export class ReportComponent implements OnInit {
         item.order_detail.product.name,
         item.customer.full_name,
         item.order_detail.amount,
-        this.currency.set(item.order_detail.product.selling_price).format(localStorage.getItem('format')),
-        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price).format(localStorage.getItem('format')),
+        this.currency.set(item.order_detail.product.selling_price).format(this.utils.format),
+        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price).format(this.utils.format),
         item.created_at,
       ]);
     });

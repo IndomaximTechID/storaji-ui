@@ -3,7 +3,7 @@
 <div class="content-padder content-background">
   <div class="uk-section-small">
     <div class="uk-container uk-container-large">
-      <storaji-products-edit></storaji-products-edit>
+      <storaji-products-edit [product]="product" (update)="onUpdate($event)"></storaji-products-edit>
       <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-1@s uk-margin uk-margin-remove-top" uk-grid>
         <div class="uk-width-1-3@m uk-card-media-left uk-cover-container uk-background-muted" uk-form-custom>
           <input type="file" name="picture" (change)="onUpload($event)">

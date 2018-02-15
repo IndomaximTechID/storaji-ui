@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { isObject } from 'lodash';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +32,7 @@ export class EditComponent implements OnInit {
           return this._customersService.customers;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.customer = data : data
+          data => isObject(data) ? this.customer = data : data
         );
     this.initCustomer();
   }
@@ -43,7 +44,7 @@ export class EditComponent implements OnInit {
           return this._customersService.customers;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.customer = data : data
+          data => isObject(data) ? this.customer = data : data
         );
 
     this.location.back();
@@ -57,7 +58,7 @@ export class EditComponent implements OnInit {
           return this._customersService.customers;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.customer = data : data
+          data => isObject(data) ? this.customer = data : data
         );
   }
 

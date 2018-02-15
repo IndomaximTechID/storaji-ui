@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import { TranslateService } from '@ngx-translate/core';
+import { isObject } from 'lodash';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
-import 'rxjs/add/operator/switchMap';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'storaji-customers-overview',
@@ -30,7 +31,7 @@ export class OverviewComponent implements OnInit {
           return this._customerService.customers;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.customer = data : data
+          data => isObject(data) ? this.customer = data : data
         );
   }
 

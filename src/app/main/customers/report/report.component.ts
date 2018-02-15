@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
-
+import { isArray } from 'lodash';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -27,7 +27,7 @@ export class ReportComponent implements OnInit {
   loadCustomers() {
     this._customerService.get();
     this._customerService.customers.subscribe(
-      data => (data instanceof Array) ? this.customers = data : data
+      data => isArray(data) ? this.customers = data : data
     );
   }
 

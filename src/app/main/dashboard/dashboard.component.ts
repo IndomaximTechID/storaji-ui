@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import * as moment from 'moment';
 import 'moment/min/locales.min';
-import { find, range, isUndefined } from 'lodash';
+import { find, range } from 'lodash';
 import { StatsService } from '../../core/services/stats.service';
 import { Stat, TopProduct, Graph } from '../../core/classes/stat';
 import { UtilsService } from '../../shared/services/utils.service';
@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     public translate: TranslateService,
     private _utils: UtilsService
   ) {
+    this._utils.unsubscribeSub(this._translateSub);
     this._translateSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this._setChartSeriesName();
     });
@@ -64,17 +65,13 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this._utils.unsubscribeSub(this._sub);
     this._sub = this._loadStat().subscribe();
   }
 
   ngOnDestroy() {
-    if (!isUndefined(this._translateSub)) {
-      this._translateSub.unsubscribe();
-    }
-    
-    if (!isUndefined(this._sub)) {
-      this._sub.unsubscribe();
-    }
+    this._utils.unsubscribeSub(this._translateSub);
+    this._utils.unsubscribeSub(this._sub);
   }
 
   ngAfterViewInit() {
@@ -95,7 +92,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get format(): string {
-    return this._utils.getCurrentFormat();
+    return this._utils.format;
   }
 
   private _fitChartToParent() {

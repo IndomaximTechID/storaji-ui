@@ -54,10 +54,7 @@ export class AuthService {
   }
 
   detail(): Observable<User> {
-    const token = localStorage.getItem('oatoken');
-    const headers = this._utils.makeHeaders({
-      'Authorization': 'Bearer ' + token
-    });
+    const headers = this._utils.makeHeaders({ withToken: true });
 
     return this._http.get(`${this._authUrl}/detail`, this._utils.makeOptions(headers))
         .map((res: Response) => res.json());

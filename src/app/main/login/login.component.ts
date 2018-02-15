@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
-import { isUndefined } from 'lodash';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
 import { UtilsService } from '../../shared/services/utils.service';
@@ -18,8 +17,8 @@ class Credentials {
   styles: []
 })
 export class LoginComponent implements OnInit, OnDestroy {
-
   credentials = new Credentials();
+  
   private _sub: Subscription = undefined;
 
   constructor(
@@ -35,12 +34,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!isUndefined(this._sub)) {
-      this._sub.unsubscribe();
-    }
+    this._utils.unsubscribeSub(this._sub);
   }
 
   onSubmit() {
+    this._utils.unsubscribeSub(this._sub);
     this._sub = this._auth.login(this.credentials).subscribe();
   }
 

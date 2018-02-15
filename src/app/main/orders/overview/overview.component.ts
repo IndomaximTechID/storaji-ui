@@ -3,13 +3,13 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { TranslateService } from '@ngx-translate/core';
-
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import { isObject } from 'lodash';
 import { OrdersService } from '../../../core/services/orders.service';
 import { Order } from '../../../core/classes/order';
 import { UtilsService } from '../../../shared/services/utils.service';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
 @Component({
@@ -40,7 +40,7 @@ export class OverviewComponent implements OnInit {
           return this._ordersService.orders;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.order = data : data
+          data => isObject(data) ? this.order = data : data
         );
   }
 
@@ -51,7 +51,7 @@ export class OverviewComponent implements OnInit {
           return this._ordersService.orders;
         })
         .subscribe(
-          data => (data instanceof Object) ? this.order = data : data
+          data => isObject(data) ? this.order = data : data
         );
 
     this.location.back();
@@ -59,7 +59,7 @@ export class OverviewComponent implements OnInit {
   }
 
   format(): string {
-    return this.utils.getCurrentFormat();
+    return this.utils.format;
   }
 
   save() {
@@ -121,7 +121,7 @@ export class OverviewComponent implements OnInit {
                   style: 'item'
             },
             {
-              text: this.currency.set(this.order.order_detail.product.selling_price).format(localStorage.getItem('format')),
+              text: this.currency.set(this.order.order_detail.product.selling_price).format(this.utils.format),
               style: 'item'
             }
           ],
@@ -144,7 +144,7 @@ export class OverviewComponent implements OnInit {
               text: this
                     .currency
                     .set(this.order.order_detail.product.selling_price * this.order.order_detail.amount)
-                    .format(localStorage.getItem('format')),
+                    .format(this.utils.format),
               style: 'item'
             },
             {

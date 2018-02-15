@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import 'moment/min/locales.min';
 import { Headers, RequestOptions } from '@angular/http';
+import { Subscription } from 'rxjs/Subscription';
+import { isUndefined } from 'lodash';
 
 declare var $: any;
 declare var Notyf: any;
@@ -34,10 +36,19 @@ export class UtilsService {
     return new RequestOptions({headers});
   }
 
-  makeHeaders(customHeaders: any = {}): Headers {
-    const defaultOptions = { 'Content-Type': 'application/json' };
-    const opts = Object.assign({}, defaultOptions, customHeaders);
-    return new Headers(opts);
+  makeHeaders(options: any = {}): Headers {
+    const defaultOptions = {
+      withToken: false,
+      customHeaders: {},
+    };
+    const opts = Object.assign({}, defaultOptions, options);
+    const defaultHeaders = { 'Content-Type': 'application/json' };
+    const tokenHeader = opts.withToken
+      ? { 'Authorization': `Bearer ${this.token}` }
+      : {};
+    const headers = Object.assign({}, defaultHeaders, tokenHeader, opts.customHeaders);
+
+    return new Headers(headers);
   }
 
   loading(options: object): void {
@@ -100,11 +111,11 @@ export class UtilsService {
     localStorage.setItem('currency', currency);
   }
 
-  getCurrentCurrency(): string {
+  get currency(): string {
     return localStorage.getItem('currency');
   }
 
-  getCurrentFormat(): string {
+  get format(): string {
     return localStorage.getItem('format');
   }
 
@@ -121,5 +132,11 @@ export class UtilsService {
       const V = this._moment.weekdays().indexOf(o) + 1;
       return this.moment().isoWeekday(V).format('dddd');
     });
+  }
+
+  unsubscribeSub(sub: Subscription = undefined) {
+    if (!isUndefined(sub)) {
+      sub.unsubscribe();
+    }
   }
 }

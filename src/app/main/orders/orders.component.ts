@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { isArray } from 'lodash';
 import { OrdersService } from '../../core/services/orders.service';
 import { Order } from '../../core/classes/order';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'storaji-orders',
@@ -23,7 +24,7 @@ export class OrdersComponent implements OnInit {
   loadOrders() {
     this._ordersService.get();
     this._ordersService.orders.subscribe(
-      data => (data instanceof Array) ? this.orders = data : data
+      data => isArray(data) ? this.orders = data : data
     );
 
   }

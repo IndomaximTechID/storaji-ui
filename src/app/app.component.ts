@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private utils: UtilsService,
   ) {
-    const currency = this.utils.getCurrentCurrency();
+    const currency = this.utils.currency;
     const lang = this.utils.getCurrentLang();
     const getGlobal = this.http.get('assets/i18n/_i18n.json');
     const getDefault = this.http.get('assets/i18n/en.json');
