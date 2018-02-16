@@ -18,7 +18,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
   private _sub: Subscription = undefined;
 
   @Output('update')
-  filter: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
+  update: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
 
   customer: CustomerFilter;
 
@@ -50,7 +50,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
     this._sub = this._customersService.get(this.customer).subscribe(
       data => {
         if (isArray(data)) {
-          this.filter.emit(data);
+          this.update.emit(data);
         }
       }
     );

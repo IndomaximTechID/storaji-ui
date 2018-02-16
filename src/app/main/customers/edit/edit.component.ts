@@ -21,7 +21,7 @@ export class EditComponent implements OnInit, OnDestroy {
   customer: Customer = new Customer();
 
   @Output('update')
-  change: EventEmitter<Customer> = new EventEmitter<Customer>();
+  update: EventEmitter<Customer> = new EventEmitter<Customer>();
 
   constructor(
     private _routes: ActivatedRoute,
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit, OnDestroy {
       data => {
         if (isObject(data)) {
           this.customer = data;
-          this.change.emit(this.customer);
+          this.update.emit(this.customer);
         }
       }
       );

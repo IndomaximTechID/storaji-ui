@@ -18,7 +18,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
   private _sub: Subscription = undefined;
 
   @Output('update')
-  filter: EventEmitter<Order[]> = new EventEmitter<Order[]>();
+  update: EventEmitter<Order[]> = new EventEmitter<Order[]>();
 
   order: OrderFilter;
 
@@ -49,7 +49,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this._sub = this._ordersService.get(this.order).subscribe(
-      data => this.filter.emit(data)
+      data => this.update.emit(data)
     );
   }
 

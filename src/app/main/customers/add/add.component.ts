@@ -15,7 +15,7 @@ export class AddComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
 
   @Output('update')
-  add: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
+  update: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
 
   customer: Customer;
 
@@ -38,7 +38,7 @@ export class AddComponent implements OnInit, OnDestroy {
     this._sub = this._customersService.add(this.customer)
       .subscribe(data => {
         if (isArray(data)) {
-          this.add.emit(data);
+          this.update.emit(data);
           this.initCustomer();
         }
       });

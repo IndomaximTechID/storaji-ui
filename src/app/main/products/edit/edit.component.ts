@@ -25,7 +25,7 @@ export class EditComponent implements OnInit, OnDestroy {
   product: Product = new Product();
 
   @Output('update')
-  change: EventEmitter<Product> = new EventEmitter<Product>();
+  update: EventEmitter<Product> = new EventEmitter<Product>();
 
   productTypes: ProductType[];
 
@@ -54,11 +54,11 @@ export class EditComponent implements OnInit, OnDestroy {
     this._updateSub = this._productsService.update(this.product.id, this.product)
       .subscribe(data => {
         if (isObject(data)) {
-          this.product = data
+          this.product = data;
 
           this.product.cost = numeral(this.product.cost).format(this._utils.format);
           this.product.selling_price = numeral(this.product.selling_price).format(this._utils.format);
-          this.change.emit(this.product);
+          this.update.emit(this.product);
         }
       });
   }

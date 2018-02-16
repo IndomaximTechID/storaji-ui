@@ -134,7 +134,7 @@ export class UtilsService {
     });
   }
 
-  unsubscribeSub(sub: Subscription = undefined) {
+  unsubscribeSub(sub: Subscription) {
     if (!isUndefined(sub)) {
       sub.unsubscribe();
     }
