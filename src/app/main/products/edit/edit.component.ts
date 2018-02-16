@@ -18,6 +18,7 @@ declare var numeral: any;
 })
 export class EditComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
+  private _typeSub: Subscription = undefined;
 
   @Input('product')
   product: Product = new Product();
@@ -70,9 +71,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   initProduct() {
-    this._utils.unsubscribeSub(this._sub);
-    this._productTypesService.get();
-    this._productTypesService.productTypes.subscribe(
+    this._utils.unsubscribeSub(this._typeSub);
+    this._typeSub = this._productTypesService.get().subscribe(
       data => this.productTypes = data,
       err => { console.log(err); }
     );

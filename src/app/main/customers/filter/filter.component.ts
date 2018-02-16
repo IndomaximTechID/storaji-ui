@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 import { CustomersService } from '../../../core/services/customers.service';
-import { Customer } from '../../../core/classes/filter';
+import { CustomerFilter } from '../../../core/classes/filter';
 
 declare var numeral: any;
 declare var jQuery: any;
@@ -12,7 +12,7 @@ declare var jQuery: any;
   styles: []
 })
 export class FilterComponent implements OnInit, AfterViewInit {
-  customer: Customer;
+  customer: CustomerFilter;
 
   constructor(
     private _customersService: CustomersService,
@@ -20,7 +20,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.customer = new Customer();
+    this.customer = new CustomerFilter();
   }
 
   ngAfterViewInit() {

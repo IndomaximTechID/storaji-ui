@@ -4,7 +4,8 @@ import { map, isArray } from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
-import { Product } from '../../../core/classes/filter';
+import { Product } from '../../../core/classes/product';
+import { ProductFilter } from '../../../core/classes/filter';
 import { ProductType } from '../../../core/classes/product-type';
 import { UtilsService } from '../../../shared/services/utils.service';
 
@@ -17,11 +18,12 @@ declare var jQuery: any;
 })
 export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
   private _sub: Subscription = undefined;
+  private _typeSub: Subscription = undefined;
 
   @Output('update')
   filter: EventEmitter<Product[]> = new EventEmitter<Product[]>();
   
-  product: Product;
+  product: ProductFilter = new ProductFilter();
   productTypes: ProductType[];
 
   constructor(
@@ -59,9 +61,9 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initProduct() {
-    this.product = new Product();
-    this._productTypesService.get();
-    this._productTypesService.productTypes.subscribe(
+    this._utils.unsubscribeSub(this._typeSub);
+    this.product = new ProductFilter();
+    this._productTypesService.get().subscribe(
       data => isArray(data) ? this.productTypes = data : data,
       err => {console.log(err); }
     );

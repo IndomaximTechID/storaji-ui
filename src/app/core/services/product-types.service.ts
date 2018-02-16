@@ -1,43 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
-import { UtilsService } from '../../shared/services/utils.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
+import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
+import { ProductType } from '../classes/product-type';
 
 @Injectable()
 export class ProductTypesService {
-  _productTypesUrl = `${new Config().api}/products/types`;
+  private _productTypesUrl = `${new Config().api}/products/types`;
+  private _headers = this._utils.makeHeaders({ withToken: true });
 
-  public productTypes: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _utils: UtilsService,
+    private _http: Http,
+    private _progress: NgProgress
+  ) { }
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
+  get(): Observable<ProductType[]> {
+    this.beforeRequest();
 
-  get(): void {
-    const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
-
-    this.http.get(this._productTypesUrl, options)
+    return this._http.get(this._productTypesUrl, this._utils.makeOptions(this._headers))
                .map((res: Response) => res.json().data)
-               .subscribe(
+               .do(
                  data => this.afterRequest(data),
                  error => {console.log(error); }
                );
   }
 
   beforeRequest(): void {
-    this.progress.start();
+    this._progress.start();
   }
 
   afterRequest(data: any): void {
-    this.progress.done();
-    this.productTypes.next(data);
+    this._progress.done();
   }
 
 }

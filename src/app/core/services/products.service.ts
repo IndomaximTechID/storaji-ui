@@ -7,6 +7,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
+import { Product } from '../classes/product';
+import { ProductFilter } from '../classes/filter';
+import { Customer } from '../classes/customer';
 
 
 @Injectable()
@@ -21,7 +24,7 @@ export class ProductsService {
     private _progress: NgProgress
   ) { }
 
-  get(query?: any): Observable<any> {
+  get(query?: ProductFilter): Observable<Product[]> {
     this.beforeRequest();
     const options = this._utils.makeOptions(this._headers);
 
@@ -39,7 +42,7 @@ export class ProductsService {
       );
   }
 
-  find(id: string): Observable<any> {
+  find(id: string): Observable<Product> {
     this.beforeRequest();
 
     return this._http.get(`${this._productsUrl}/${id}`, this._utils.makeOptions(this._headers))
@@ -50,7 +53,7 @@ export class ProductsService {
       );
   }
 
-  getCustomers(id: string): Observable<any> {
+  getCustomers(id: string): Observable<Customer[]> {
     this.beforeRequest();
 
     return this._http.get(`${this._productsUrl}/${id}/customers`, this._utils.makeOptions(this._headers))
@@ -61,7 +64,7 @@ export class ProductsService {
       );
   }
 
-  add(product: any): Observable<any> {
+  add(product: Product): Observable<Product[]> {
     this.beforeRequest();
     const body = JSON.stringify(product);
 
@@ -73,7 +76,7 @@ export class ProductsService {
       );
   }
 
-  update(id: string, product: any): Observable<any> {
+  update(id: string, product: Product): Observable<Product> {
     this.beforeRequest();
     const body = JSON.stringify(product);
 
@@ -85,7 +88,7 @@ export class ProductsService {
       );
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: string): Observable<Product[]> {
     this.beforeRequest();
 
     return this._http.delete(`${this._productsUrl}/${id}/delete`, this._utils.makeOptions(this._headers))

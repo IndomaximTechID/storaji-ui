@@ -15,7 +15,8 @@ declare var numeral: any;
   styles: []
 })
 export class AddComponent implements OnInit, OnDestroy {
-  private _addSub: Subscription = undefined;
+  private _sub: Subscription = undefined;
+  private _typeSub: Subscription = undefined;
   
   @Output('update')
   add: EventEmitter<Product[]> = new EventEmitter<Product[]>();
@@ -35,14 +36,14 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._utils.unsubscribeSub(this._addSub);
+    this._utils.unsubscribeSub(this._sub);
   }
 
   onSubmit() {
-    this._utils.unsubscribeSub(this._addSub);
+    this._utils.unsubscribeSub(this._sub);
     this.product.cost = numeral(this.product.cost).value();
     this.product.selling_price = numeral(this.product.selling_price).value();
-    this._addSub = this._productsService.add(this.product)
+    this._sub = this._productsService.add(this.product)
       .subscribe(data => {
         if (isArray(data)) {
           this.add.emit(data);
@@ -55,8 +56,8 @@ export class AddComponent implements OnInit, OnDestroy {
   }
 
   initProduct() {
-    this._productTypesService.get();
-    this._productTypesService.productTypes.subscribe(
+    this._utils.unsubscribeSub(this._typeSub);
+    this._typeSub = this._productTypesService.get().subscribe(
       data => isArray(data) ? this.productTypes = data : data,
       err => {console.log(err); }
     );

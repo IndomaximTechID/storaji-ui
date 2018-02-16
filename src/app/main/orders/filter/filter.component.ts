@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 import { OrdersService } from '../../../core/services/orders.service';
-import { Order } from '../../../core/classes/filter';
+import { OrderFilter } from '../../../core/classes/filter';
 
 declare var numeral: any;
 declare var jQuery: any;
@@ -12,7 +12,7 @@ declare var jQuery: any;
   styles: []
 })
 export class FilterComponent implements OnInit, AfterViewInit {
-  order: Order;
+  order: OrderFilter;
 
   constructor(
     private _ordersService: OrdersService,
@@ -20,7 +20,7 @@ export class FilterComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.order = new Order();
+    this.order = new OrderFilter();
   }
 
   ngAfterViewInit() {
