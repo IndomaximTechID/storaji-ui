@@ -30,7 +30,7 @@ export class StatsService {
       );
   }
 
-  topProducts(): Observable<TopProduct[] | TopProduct> {
+  topProducts(): Observable<TopProduct[]> {
     return this._http.get(`${this._statsUrl}/top/products`, this._utils.makeOptions(this._headers))
       .map((res: Response) => res.json().data)
       .do(

@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   stat: Stat = new Stat();
   currency = numeral();
-  top_products: TopProduct[] | TopProduct;
+  top_products: TopProduct[];
   options: any = {
     renderTo: 'chart',
     title: { text: null },
