@@ -33,8 +33,8 @@ export class AuthService {
     )
       .map((res: Response) => res.json())
       .do(
-        data => this.afterLogin(data),
-        error => this.failedLogin(error)
+      data => this.afterLogin(data),
+      error => this.failedLogin(error)
       );
   }
 
@@ -48,8 +48,8 @@ export class AuthService {
     )
       .map((res: Response) => res.json())
       .do(
-        data => this.afterLogin(data),
-        error => this.failedLogin(error)
+      data => this.afterLogin(data),
+      error => this.failedLogin(error)
       );
   }
 
@@ -57,7 +57,7 @@ export class AuthService {
     const headers = this._utils.makeHeaders({ withToken: true });
 
     return this._http.get(`${this._authUrl}/detail`, this._utils.makeOptions(headers))
-        .map((res: Response) => res.json());
+      .map((res: Response) => res.json());
   }
 
   isAuthenticated(): boolean {

@@ -69,7 +69,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
           data => {
             if (isObject(data)) {
               this.product = data;
-              
+
               this.product.cost = numeral(this.product.cost).format(this._utils.format);
               this.product.selling_price = numeral(this.product.selling_price).format(this._utils.format);
             }
@@ -94,7 +94,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (isObject(data)) {
           this.product = data;
-          
+
           this.product.cost = numeral(this.product.cost).format(this._utils.format);
           this.product.selling_price = numeral(this.product.selling_price).format(this._utils.format);
         }

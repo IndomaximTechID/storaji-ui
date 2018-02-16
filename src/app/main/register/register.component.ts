@@ -24,7 +24,7 @@ class Credentials {
 export class RegisterComponent implements OnInit, OnDestroy {
   credentials = new Credentials();
   companyTypes: CompanyType[] | CompanyType;
-  
+
   private _registerSub: Subscription = undefined;
   private _companyTypeSub: Subscription = undefined;
 
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this._utils.unsubscribeSub(this._companyTypeSub);
     this._companyTypeSub = this._companyTypesService.get().subscribe(
       data => this.companyTypes = data,
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
 
     this._title.setTitle(this.app.name);

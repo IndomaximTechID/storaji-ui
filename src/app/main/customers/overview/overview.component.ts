@@ -35,12 +35,12 @@ export class OverviewComponent implements OnInit, OnDestroy {
   loadCustomer() {
     this._utils.unsubscribeSub(this._sub);
     this._sub = this._routes.paramMap
-        .switchMap((params: ParamMap) => {
-          return this._customerService.find(params.get('id'));
-        })
-        .subscribe(
-          data => isObject(data) ? this.customer = data : data
-        );
+      .switchMap((params: ParamMap) => {
+        return this._customerService.find(params.get('id'));
+      })
+      .subscribe(
+      data => isObject(data) ? this.customer = data : data
+      );
   }
 
   onUpdate(customer: Customer) {

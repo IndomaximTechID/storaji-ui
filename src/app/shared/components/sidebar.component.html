@@ -3,18 +3,53 @@
     <li class="uk-nav-header">
       {{ 'text.general' | translate }}
     </li>
-    <li><a [routerLink]="['/dashboard']"><i uk-icon="icon: home;"></i> <span>{{ 'module.title.dashboard' | translate }}</span></a></li>
+    <li>
+      <a [routerLink]="['/dashboard']">
+        <i uk-icon="icon: home;"></i>
+        <span>{{ 'module.title.dashboard' | translate }}</span>
+      </a>
+    </li>
     <li class="uk-nav-header">
       {{ 'text.module' | translate }}
     </li>
-    <li><a [routerLink]="['/dashboard/products']"><i uk-icon="icon: database;"></i> <span>{{ 'module.title.product' | translate }}</span></a></li>
-    <li><a [routerLink]="['/dashboard/customers']"><i uk-icon="icon: users;"></i> <span>{{ 'module.title.customer' | translate }}</span></a></li>
-    <li><a [routerLink]="['/dashboard/orders']"><i uk-icon="icon: cart;"></i> <span>{{ 'module.title.order' | translate }}</span></a></li>
+    <li>
+      <a [routerLink]="['/dashboard/products']">
+        <i uk-icon="icon: database;"></i>
+        <span>{{ 'module.title.product' | translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/dashboard/customers']">
+        <i uk-icon="icon: users;"></i>
+        <span>{{ 'module.title.customer' | translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/dashboard/orders']">
+        <i uk-icon="icon: cart;"></i>
+        <span>{{ 'module.title.order' | translate }}</span>
+      </a>
+    </li>
     <li class="uk-nav-header">
       {{ 'text.report' | translate }}
     </li>
-    <li><a [routerLink]="['/dashboard/products/report']"><i uk-icon="icon: database;"></i> <span>{{ 'module.title.product' | translate }}</span></a></li>
-    <li><a [routerLink]="['/dashboard/customers/report']"><i uk-icon="icon: users;"></i> <span>{{ 'module.title.customer' | translate }}</span></a></li>
-    <li><a [routerLink]="['/dashboard/orders/report']"><i uk-icon="icon: cart;"></i> <span>{{ 'module.title.order' | translate }}</span></a></li>
+    <li>
+      <a [routerLink]="['/dashboard/products/report']">
+        <i uk-icon="icon: database;"></i>
+        <span>{{ 'module.title.product' | translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/dashboard/customers/report']">
+        <i uk-icon="icon: users;"></i>
+        <span>{{ 'module.title.customer' | translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/dashboard/orders/report']">
+        <i uk-icon="icon: cart;"></i>
+        <span>{{ 'module.title.order' | translate }}</span>
+      </a>
+    </li>
   </ul>
 </div>

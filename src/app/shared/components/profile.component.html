@@ -1,43 +1,43 @@
 <div id="modal-edit-profile" uk-modal>
-    <div class="uk-modal-dialog">
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title uk-text-center">{{ 'text.edit.profile' | translate }}</h2>
-        </div>
-        <form (ngSubmit)="onSubmit();profileForm.reset()" #profileForm="ngForm">
-            <div class="uk-modal-body">
-                <div class="uk-grid-small uk-child-width-1-2@m" uk-grid>
-                    <div>
-                        <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
-                        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
-                        [required]="true" [(ngModel)]="user.name" #name="ngModel">
-                    </div>
-                    <div>
-                        <label for="email" class="uk-form-label">{{ 'form.label.email' | translate }}</label>
-                        <input type="email" name="email" class="uk-input" placeholder="{{ 'form.placeholder.email' | translate }}"                            [required]="true" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="user.email" #email="ngModel">
-                    </div>
-                    <div>
-                        <label for="old_password" class="uk-form-label">{{ 'form.label.old-password' | translate }}</label>
-                        <input type="text" name="old_password" class="uk-input" placeholder="{{ 'form.placeholder.old-password' | translate }}"
-                        [(ngModel)]="user.old_password" #old_password="ngModel">
-                    </div>
-                    <div>
-                        <label for="password" class="uk-form-label">{{ 'form.label.new-password' | translate }}</label>
-                        <input type="text" name="password" class="uk-input" placeholder="{{ 'form.placeholder.new-password' | translate }}"
-                        [(ngModel)]="user.password" #password="ngModel">
-                    </div>
-                </div>
-            </div>
-            <div class="uk-modal-footer">
-                <div class="uk-grid-small uk-child-width-1-1" uk-grid>
-                    <div class="uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'form.button.cancel' | translate }}</button>
-                        <button class="uk-button uk-button-primary" type="submit"
-                        [disabled]="!profileForm.form.valid">
-                            {{ 'form.button.save' | translate }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title uk-text-center">{{ 'text.edit.profile' | translate }}</h2>
     </div>
+    <form (ngSubmit)="onSubmit();profileForm.reset()" #profileForm="ngForm">
+      <div class="uk-modal-body">
+        <div class="uk-grid-small uk-child-width-1-2@m" uk-grid>
+          <div>
+            <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
+            <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}" [required]="true"
+              [(ngModel)]="user.name" #name="ngModel">
+          </div>
+          <div>
+            <label for="email" class="uk-form-label">{{ 'form.label.email' | translate }}</label>
+            <input type="email" name="email" class="uk-input" placeholder="{{ 'form.placeholder.email' | translate }}" [required]="true"
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="user.email" #email="ngModel">
+          </div>
+          <div>
+            <label for="old_password" class="uk-form-label">{{ 'form.label.old-password' | translate }}</label>
+            <input type="text" name="old_password" class="uk-input" placeholder="{{ 'form.placeholder.old-password' | translate }}" [(ngModel)]="user.old_password"
+              #old_password="ngModel">
+          </div>
+          <div>
+            <label for="password" class="uk-form-label">{{ 'form.label.new-password' | translate }}</label>
+            <input type="text" name="password" class="uk-input" placeholder="{{ 'form.placeholder.new-password' | translate }}" [(ngModel)]="user.password"
+              #password="ngModel">
+          </div>
+        </div>
+      </div>
+      <div class="uk-modal-footer">
+        <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+          <div class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'form.button.cancel' | translate }}</button>
+            <button class="uk-button uk-button-primary" type="submit" [disabled]="!profileForm.form.valid">
+              {{ 'form.button.save' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

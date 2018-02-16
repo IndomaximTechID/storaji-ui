@@ -1,161 +1,161 @@
 {
-    "intro": "Kelola stok gudang Perusahaan anda dengan kami",
-    "module": {
-        "title": {
-            "login": "Masuk",
-            "logout": "Keluar",
-            "register": "Daftar",
-            "product": "Produk",
-            "customer": "Pelanggan",
-            "transaction": "Transaksi",
-            "dashboard": "Beranda",
-            "order": "Pesanan"
-        }
-    },
-    "table": {
-        "number": "No.",
-        "name": "Nama",
-        "sold": "Terjual",
-        "status": "Status",
-        "stock": "Stok",
-        "sku": "SKU",
-        "type": "Tipe",
-        "no-data": "Tidak Ada Data",
-        "customer": {
-            "id": "ID Pelanggan",
-            "name": "Nama Pelanggan"
-        },
-        "company": {
-            "name": "Nama Perusahaan"
-        },
-        "order": {
-            "id": "ID Pesanan"
-        },
-        "product": {
-            "name": "Nama Produk"
-        },
-        "date": "Tanggal"
-    },
-    "form": {
-        "label": {
-            "email": "Email",
-            "password": "Kata Sandi",
-            "old-password": "Kata Sandi Lama",
-            "new-password": "Kata Sandi Baru",
-            "product": "Produk",
-            "customer": "Pelanggan",
-            "name": "Nama",
-            "fullname": "Nama Lengkap",
-            "company-name": "Nama Perusahaan",
-            "customer-name": "Nama Pelanggan",
-            "city": "Kota",
-            "country": "Negara",
-            "postal-code": "Kode Pos",
-            "address": "Alamat",
-            "type": "Tipe",
-            "sku": "SKU",
-            "stock": "Stok",
-            "cost": "Harga Pokok",
-            "selling-price": "Harga Jual",
-            "price": "Harga",
-            "total": "Total",
-            "description": "Keterangan",
-            "sold": "Terjual",
-            "amount": "Jumlah",
-            "date_from": "Dari Tanggal",
-            "date_to": "Sampai Tanggal"
-        },
-        "placeholder": {
-            "email": "Masukkan Email",
-            "order-id": "Masukkan ID Pesanan",
-            "password": "Masukkan Kata Sandi",
-            "old-password": "Masukkan Kata Sandi Lama",
-            "new-password": "Masukkan Kata Sandi Baru",
-            "product": "Masukkan Produk",
-            "customer": "Masukkan Pelanggan",
-            "fullname": "Masukkan Nama Lengkap",
-            "customer-name": "Masukkan Nama Pelanggan",
-            "company-name": "Masukkan Nama Perusahaan",
-            "company-type": "Masukkan Kategori Perusahaan",
-            "name": "Masukkan Nama",
-            "city": "Masukkan Kota",
-            "country": "Masukkan Negara",
-            "postal-code": "Masukkan Kode Pos",
-            "address": "Masukkan Alamat",
-            "type": "Masukkan Tipe",
-            "sku": "Masukkan SKU",
-            "stock": "Masukkan Stok",
-            "cost": "Masukkan Harga Pokok",
-            "selling-price": "Masukkan Harga Jual",
-            "description": "Masukkan Keterangan",
-            "amount": "Masukkan Jumlah",
-            "date": "Masukkan Tanggal"
-        },
-        "button": {
-            "save": "Simpan",
-            "cancel": "Batalkan",
-            "show-customers": "Munculkan pelanggan",
-            "save-as-pdf": "Simpan PDF",
-            "search": "Cari",
-            "clear": "Bersihkan"
-        }
-    },
-    "text": {
-        "new": {
-            "product": "Tambah Produk",
-            "customer": "Tambah Pelanggan",
-            "order": "Tambah Pesanan"
-        },
-        "edit": {
-            "product": "Ubah Produk",
-            "customer": "Ubah Pelanggan",
-            "order": "Ubah Pesanan",
-            "profile": "Ubah Profil",
-            "currency": "Ganti Mata Uang"
-        },
-        "search-option": "Pilihan Pencarian",
-        "i18n": "Pilihan Bahasa",
-        "general": "Umum",
-        "module": "Modul",
-        "report": "Laporan",
-        "forgot-password": "Lupa kata sandi?",
-        "has-account": "Sudah punya akun?",
-        "has-no-account": "Belum punya akun?",
-        "customers-who-bought-this-product": "Pelanggan yang membeli produk ini",
-        "stat": {
-            "financial": "Keuangan",
-            "top-selling": "Produk Paling Banyak Terjual",
-            "revenue": "Pendapatan",
-            "profit": "Keuntungan",
-            "cost": "Biaya",
-            "total": "Total"
-        },
-        "graph": {
-            "title": "Grafik Mingguan",
-            "current": "Pendapatan Minggu Ini",
-            "last": "Pendapatan Minggu Lalu"
-        },
-        "in-stock": "Stok ada",
-        "sold-out": "Stok habis"
-    },
-    "confirmation": {
-        "logout": {
-            "title": "Konfirmasi Keluar",
-            "message": "Apa anda yakin ingin melanjutkan keluar?",
-            "continue": "Ya, biarkan saya keluar",
-            "cancel": "Tidak, dan kembali"
-        },
-        "delete": {
-            "title": "Konfirmasi Hapus Data",
-            "message": "Apa anda yakin ingin melanjutkan menghapus data ini?",
-            "continue": "Hapus",
-            "cancel": "Batalkan"
-        }
-    },
-    "notification": {
-        "login": {
-            "success": "Mengalihkan ke Beranda ...",
-            "failed": "Email dan kata sandi tidak cocok."
-        }
+  "intro": "Kelola stok gudang Perusahaan anda dengan kami",
+  "module": {
+    "title": {
+      "login": "Masuk",
+      "logout": "Keluar",
+      "register": "Daftar",
+      "product": "Produk",
+      "customer": "Pelanggan",
+      "transaction": "Transaksi",
+      "dashboard": "Beranda",
+      "order": "Pesanan"
     }
+  },
+  "table": {
+    "number": "No.",
+    "name": "Nama",
+    "sold": "Terjual",
+    "status": "Status",
+    "stock": "Stok",
+    "sku": "SKU",
+    "type": "Tipe",
+    "no-data": "Tidak Ada Data",
+    "customer": {
+      "id": "ID Pelanggan",
+      "name": "Nama Pelanggan"
+    },
+    "company": {
+      "name": "Nama Perusahaan"
+    },
+    "order": {
+      "id": "ID Pesanan"
+    },
+    "product": {
+      "name": "Nama Produk"
+    },
+    "date": "Tanggal"
+  },
+  "form": {
+    "label": {
+      "email": "Email",
+      "password": "Kata Sandi",
+      "old-password": "Kata Sandi Lama",
+      "new-password": "Kata Sandi Baru",
+      "product": "Produk",
+      "customer": "Pelanggan",
+      "name": "Nama",
+      "fullname": "Nama Lengkap",
+      "company-name": "Nama Perusahaan",
+      "customer-name": "Nama Pelanggan",
+      "city": "Kota",
+      "country": "Negara",
+      "postal-code": "Kode Pos",
+      "address": "Alamat",
+      "type": "Tipe",
+      "sku": "SKU",
+      "stock": "Stok",
+      "cost": "Harga Pokok",
+      "selling-price": "Harga Jual",
+      "price": "Harga",
+      "total": "Total",
+      "description": "Keterangan",
+      "sold": "Terjual",
+      "amount": "Jumlah",
+      "date_from": "Dari Tanggal",
+      "date_to": "Sampai Tanggal"
+    },
+    "placeholder": {
+      "email": "Masukkan Email",
+      "order-id": "Masukkan ID Pesanan",
+      "password": "Masukkan Kata Sandi",
+      "old-password": "Masukkan Kata Sandi Lama",
+      "new-password": "Masukkan Kata Sandi Baru",
+      "product": "Masukkan Produk",
+      "customer": "Masukkan Pelanggan",
+      "fullname": "Masukkan Nama Lengkap",
+      "customer-name": "Masukkan Nama Pelanggan",
+      "company-name": "Masukkan Nama Perusahaan",
+      "company-type": "Masukkan Kategori Perusahaan",
+      "name": "Masukkan Nama",
+      "city": "Masukkan Kota",
+      "country": "Masukkan Negara",
+      "postal-code": "Masukkan Kode Pos",
+      "address": "Masukkan Alamat",
+      "type": "Masukkan Tipe",
+      "sku": "Masukkan SKU",
+      "stock": "Masukkan Stok",
+      "cost": "Masukkan Harga Pokok",
+      "selling-price": "Masukkan Harga Jual",
+      "description": "Masukkan Keterangan",
+      "amount": "Masukkan Jumlah",
+      "date": "Masukkan Tanggal"
+    },
+    "button": {
+      "save": "Simpan",
+      "cancel": "Batalkan",
+      "show-customers": "Munculkan pelanggan",
+      "save-as-pdf": "Simpan PDF",
+      "search": "Cari",
+      "clear": "Bersihkan"
+    }
+  },
+  "text": {
+    "new": {
+      "product": "Tambah Produk",
+      "customer": "Tambah Pelanggan",
+      "order": "Tambah Pesanan"
+    },
+    "edit": {
+      "product": "Ubah Produk",
+      "customer": "Ubah Pelanggan",
+      "order": "Ubah Pesanan",
+      "profile": "Ubah Profil",
+      "currency": "Ganti Mata Uang"
+    },
+    "search-option": "Pilihan Pencarian",
+    "i18n": "Pilihan Bahasa",
+    "general": "Umum",
+    "module": "Modul",
+    "report": "Laporan",
+    "forgot-password": "Lupa kata sandi?",
+    "has-account": "Sudah punya akun?",
+    "has-no-account": "Belum punya akun?",
+    "customers-who-bought-this-product": "Pelanggan yang membeli produk ini",
+    "stat": {
+      "financial": "Keuangan",
+      "top-selling": "Produk Paling Banyak Terjual",
+      "revenue": "Pendapatan",
+      "profit": "Keuntungan",
+      "cost": "Biaya",
+      "total": "Total"
+    },
+    "graph": {
+      "title": "Grafik Mingguan",
+      "current": "Pendapatan Minggu Ini",
+      "last": "Pendapatan Minggu Lalu"
+    },
+    "in-stock": "Stok ada",
+    "sold-out": "Stok habis"
+  },
+  "confirmation": {
+    "logout": {
+      "title": "Konfirmasi Keluar",
+      "message": "Apa anda yakin ingin melanjutkan keluar?",
+      "continue": "Ya, biarkan saya keluar",
+      "cancel": "Tidak, dan kembali"
+    },
+    "delete": {
+      "title": "Konfirmasi Hapus Data",
+      "message": "Apa anda yakin ingin melanjutkan menghapus data ini?",
+      "continue": "Hapus",
+      "cancel": "Batalkan"
+    }
+  },
+  "notification": {
+    "login": {
+      "success": "Mengalihkan ke Beranda ...",
+      "failed": "Email dan kata sandi tidak cocok."
+    }
+  }
 }

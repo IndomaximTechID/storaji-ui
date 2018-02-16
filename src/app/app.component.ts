@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    Offline.options = {checks: {xhr: {url: new Config().api}}};
+    Offline.options = { checks: { xhr: { url: new Config().api } } };
     Offline.check();
     const overlay = jQuery('.uk-overlay-default');
     Offline.on('confirmed-up', () => {

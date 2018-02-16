@@ -6,8 +6,7 @@
       <storaji-customers-filter (update)="onUpdate($event)"></storaji-customers-filter>
       <div class="uk-card uk-card-default uk-card-body" customers-table>
         <div class="uk-display-block uk-text-right">
-          <button class="uk-button uk-button-primary" type="button" (click)="save()"
-                  [disabled]="!customers">{{ 'form.button.save-as-pdf' | translate }}</button>
+          <button class="uk-button uk-button-primary" type="button" (click)="save()" [disabled]="!customers">{{ 'form.button.save-as-pdf' | translate }}</button>
         </div>
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>

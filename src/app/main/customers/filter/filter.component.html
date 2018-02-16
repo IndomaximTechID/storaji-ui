@@ -4,23 +4,23 @@
     <div class="uk-grid-small uk-child-width-1-4@m" uk-grid>
       <div class="uk-padding-small">
         <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
-        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
-          [(ngModel)]="customer.name" #name="ngModel">
+        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}" [(ngModel)]="customer.name"
+          #name="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="company" class="uk-form-label">{{ 'table.company.name' | translate }}</label>
-        <input type="text" name="company" class="uk-input" placeholder="{{ 'form.placeholder.company-name' | translate }}"
-          [(ngModel)]="customer.company" #company="ngModel">
+        <input type="text" name="company" class="uk-input" placeholder="{{ 'form.placeholder.company-name' | translate }}" [(ngModel)]="customer.company"
+          #company="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="city" class="uk-form-label">{{ 'form.label.city' | translate }}</label>
-        <input type="text" name="city" class="uk-input" placeholder="{{ 'form.placeholder.city' | translate }}"
-          [(ngModel)]="customer.city" #city="ngModel">
+        <input type="text" name="city" class="uk-input" placeholder="{{ 'form.placeholder.city' | translate }}" [(ngModel)]="customer.city"
+          #city="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="country" class="uk-form-label">{{ 'form.label.country' | translate }}</label>
-        <input type="text" name="country" class="uk-input" placeholder="{{ 'form.placeholder.country' | translate }}"
-          [(ngModel)]="customer.country" #country="ngModel">
+        <input type="text" name="country" class="uk-input" placeholder="{{ 'form.placeholder.country' | translate }}" [(ngModel)]="customer.country"
+          #country="ngModel">
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="date_from" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
@@ -31,10 +31,8 @@
         <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}" uk-datepicker>
       </div>
       <div class="uk-width-1-1 uk-padding-small">
-        <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!customerForm.form.valid">{{ 'form.button.search' | translate }}</button>
-        <button type="button" class="uk-button uk-button-default"
-          (click)="customerForm.reset()">
+        <button type="submit" class="uk-button uk-button-primary" [disabled]="!customerForm.form.valid">{{ 'form.button.search' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default" (click)="customerForm.reset()">
           {{ 'form.button.clear' | translate }}
         </button>
       </div>

@@ -22,7 +22,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Output('update')
   filter: EventEmitter<Product[]> = new EventEmitter<Product[]>();
-  
+
   product: ProductFilter = new ProductFilter();
   productTypes: ProductType[];
 
@@ -66,7 +66,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.product = new ProductFilter();
     this._productTypesService.get().subscribe(
       data => isArray(data) ? this.productTypes = data : data,
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
   }
 

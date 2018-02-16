@@ -1,37 +1,34 @@
-<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-product-add; animation: uk-animation-slide-top, uk-animation-fade"><span uk-icon="icon: plus;ratio:1.25;"></span></button>
+<button class="uk-button uk-button-primary uk-margin-small" type="button" uk-toggle="target: #form-product-add; animation: uk-animation-slide-top, uk-animation-fade">
+  <span uk-icon="icon: plus;ratio:1.25;"></span>
+</button>
 <div id="form-product-add" class="uk-card uk-card-default uk-card-body uk-margin-small uk-margin-remove-top" hidden>
   <h2 class="uk-card-title">{{ 'text.new.product' | translate }}</h2>
   <form (ngSubmit)="onSubmit();productForm.reset();" #productForm="ngForm">
     <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
       <div class="uk-padding-small">
         <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
-        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
-          [required]="true" [(ngModel)]="product.name" #name="ngModel">
+        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}" [required]="true"
+          [(ngModel)]="product.name" #name="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="sku" class="uk-form-label">{{ 'form.label.sku' | translate }}</label>
-        <input type="text" name="sku" class="uk-input" placeholder="{{ 'form.placeholder.sku' | translate }}"
-          [required]="true" [(ngModel)]="product.sku" #sku="ngModel">
+        <input type="text" name="sku" class="uk-input" placeholder="{{ 'form.placeholder.sku' | translate }}" [required]="true" [(ngModel)]="product.sku"
+          #sku="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="type" class="uk-form-label">{{ 'form.label.type' | translate }}</label>
-        <input ngui-auto-complete
-        class="uk-input"
-        [(ngModel)]="product.type"
-        [source]="productTypes"
-        list-formatter="name"
-        display-property-name="name"
-        placeholder="{{ 'form.placeholder.type' | translate }}" name="type" #type="ngModel"/>
+        <input ngui-auto-complete class="uk-input" [(ngModel)]="product.type" [source]="productTypes" list-formatter="name" display-property-name="name"
+          placeholder="{{ 'form.placeholder.type' | translate }}" name="type" #type="ngModel" />
       </div>
       <div class="uk-padding-small">
         <label for="stock" class="uk-form-label">{{ 'form.label.stock' | translate }}</label>
-        <input type="number" name="stock" class="uk-input" placeholder="{{ 'form.placeholder.stock' | translate }}"
-          [required]="true" [(ngModel)]="product.stock" #stock="ngModel">
+        <input type="number" name="stock" class="uk-input" placeholder="{{ 'form.placeholder.stock' | translate }}" [required]="true"
+          [(ngModel)]="product.stock" #stock="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="cost" class="uk-form-label">{{ 'form.label.cost' | translate }}</label>
-        <input type="text" name="cost" class="uk-input" placeholder="{{ 'form.placeholder.cost' | translate }}"
-          [required]="true" [(ngModel)]="product.cost" #cost="ngModel" (keyup)="onKeyup($event)">
+        <input type="text" name="cost" class="uk-input" placeholder="{{ 'form.placeholder.cost' | translate }}" [required]="true"
+          [(ngModel)]="product.cost" #cost="ngModel" (keyup)="onKeyup($event)">
       </div>
       <div class="uk-padding-small">
         <label for="selling_price" class="uk-form-label">{{ 'form.label.selling-price' | translate }}</label>
@@ -44,8 +41,7 @@
           [(ngModel)]="product.description" #description="ngModel"></textarea>
       </div>
       <div class="uk-width-1-1 uk-padding-small">
-        <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!productForm.form.valid">{{ 'form.button.save' | translate }}</button>
+        <button type="submit" class="uk-button uk-button-primary" [disabled]="!productForm.form.valid">{{ 'form.button.save' | translate }}</button>
         <button type="button" class="uk-button uk-button-default" uk-toggle="target: #form-product-add; animation: uk-animation-fade"
           (click)="initProduct()">
           {{ 'form.button.cancel' | translate }}

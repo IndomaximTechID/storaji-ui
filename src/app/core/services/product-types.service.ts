@@ -22,11 +22,11 @@ export class ProductTypesService {
     this.beforeRequest();
 
     return this._http.get(this._productTypesUrl, this._utils.makeOptions(this._headers))
-               .map((res: Response) => res.json().data)
-               .do(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
   beforeRequest(): void {

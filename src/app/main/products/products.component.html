@@ -8,7 +8,9 @@
         <table class="uk-table uk-table-justify uk-table-divider">
           <thead>
             <tr>
-              <th class="uk-width-auto"><span uk-icon="icon: image;"></span></th>
+              <th class="uk-width-auto">
+                <span uk-icon="icon: image;"></span>
+              </th>
               <th class="uk-width-medium">{{ 'table.name' | translate }}</th>
               <th>{{ 'table.sku' | translate }}</th>
               <th>{{ 'table.type' | translate }}</th>
@@ -32,10 +34,12 @@
               <td>{{product.stock}}</td>
               <div *ngIf="(product.stock > 0); then ok else not"></div>
               <ng-template #ok>
-                <td><span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>
+                <td>
+                  <span uk-icon="icon: check;"></span> {{ 'text.in-stock' | translate }}</td>
               </ng-template>
               <ng-template #not>
-                <td><span uk-icon="icon: close;"></span> {{ 'text.sold-out' | translate }}</td>
+                <td>
+                  <span uk-icon="icon: close;"></span> {{ 'text.sold-out' | translate }}</td>
               </ng-template>
             </tr>
           </tbody>

@@ -13,7 +13,8 @@ import { FilterComponent } from './filter/filter.component';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      { path: 'dashboard/customers', canActivateChild: [AuthGuard],
+      {
+        path: 'dashboard/customers', canActivateChild: [AuthGuard],
         children: [
           { path: '', component: CustomersComponent },
           { path: 'report', component: ReportComponent },

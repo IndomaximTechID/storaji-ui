@@ -25,8 +25,8 @@ export class CompanyTypesService {
     const token = localStorage.getItem('oatoken');
 
     return this._http.get(this._companyTypesUrl, this._utils.makeOptions())
-               .map((res: Response) => res.json().data)
-               .do(data => this.afterRequest(data));
+      .map((res: Response) => res.json().data)
+      .do(data => this.afterRequest(data));
   }
 
   beforeRequest(): void {

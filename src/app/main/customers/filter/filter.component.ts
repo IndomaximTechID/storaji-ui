@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Output('update')
   filter: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
-  
+
   customer: CustomerFilter;
 
   constructor(

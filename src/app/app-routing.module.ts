@@ -11,7 +11,7 @@ import { AuthGuard } from './core/services/auth.guard';
       { path: '404', component: ErrorComponent },
       { path: 'about', component: AboutComponent },
       { path: '**', component: ErrorComponent, pathMatch: 'full' }
-    ], {useHash: true})
+    ], { useHash: true })
   ],
   declarations: [
     ErrorComponent,

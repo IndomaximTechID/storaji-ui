@@ -17,7 +17,7 @@ declare var numeral: any;
 export class AddComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
   private _typeSub: Subscription = undefined;
-  
+
   @Output('update')
   add: EventEmitter<Product[]> = new EventEmitter<Product[]>();
 
@@ -60,7 +60,7 @@ export class AddComponent implements OnInit, OnDestroy {
     this._utils.unsubscribeSub(this._typeSub);
     this._typeSub = this._productTypesService.get().subscribe(
       data => isArray(data) ? this.productTypes = data : data,
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
     this.product = new Product();
   }

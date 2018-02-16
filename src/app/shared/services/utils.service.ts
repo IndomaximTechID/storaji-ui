@@ -18,7 +18,7 @@ export class UtilsService {
   constructor(
     private translate: TranslateService,
   ) { }
-  
+
   get token(): string {
     return localStorage.getItem('oatoken');
   }
@@ -33,7 +33,7 @@ export class UtilsService {
   }
 
   makeOptions(headers: Headers = this.makeHeaders()): RequestOptions {
-    return new RequestOptions({headers});
+    return new RequestOptions({ headers });
   }
 
   makeHeaders(options: any = {}): Headers {
@@ -60,7 +60,7 @@ export class UtilsService {
 
     const opts = Object.assign(defaultOpts, options);
 
-    if ( opts.nice ) {
+    if (opts.nice) {
       return $(opts.selector).LoadingOverlay(opts.action, {
         image: '',
         color: 'rgba(28, 35, 54, 0.45)',

@@ -5,41 +5,29 @@
     <div class="uk-grid-small uk-child-width-1-3@m" uk-grid *ngFor="let order of orders;let i = index">
       <div class="uk-padding-small">
         <label for="product" class="uk-form-label">{{ 'form.label.product' | translate }}</label>
-        <input ngui-auto-complete
-        class="uk-input"
-        [(ngModel)]="order.order_detail.product"
-        [source]="products"
-        list-formatter="name"
-        display-property-name="name"
-        placeholder="{{ 'form.placeholder.product' | translate }}" name="product-{{i}}" #product="ngModel"/>
+        <input ngui-auto-complete class="uk-input" [(ngModel)]="order.order_detail.product" [source]="products" list-formatter="name"
+          display-property-name="name" placeholder="{{ 'form.placeholder.product' | translate }}" name="product-{{i}}" #product="ngModel"
+        />
       </div>
       <div class="uk-padding-small">
-          <label for="customer" class="uk-form-label">{{ 'form.label.customer' | translate }}</label>
-          <input ngui-auto-complete
-          class="uk-input"
-          [(ngModel)]="order.customer"
-          [source]="customers"
-          list-formatter="full_name"
-          display-property-name="full_name"
-          placeholder="{{ 'form.placeholder.customer' | translate }}" name="customer-{{i}}" #customer="ngModel"/>
-        </div>
+        <label for="customer" class="uk-form-label">{{ 'form.label.customer' | translate }}</label>
+        <input ngui-auto-complete class="uk-input" [(ngModel)]="order.customer" [source]="customers" list-formatter="full_name" display-property-name="full_name"
+          placeholder="{{ 'form.placeholder.customer' | translate }}" name="customer-{{i}}" #customer="ngModel" />
+      </div>
       <div class="uk-padding-small">
         <label for="amount" class="uk-form-label">{{ 'form.label.amount' | translate }}</label>
-        <input type="number" name="amount-{{i}}" class="uk-input" placeholder="{{ 'form.placeholder.amount' | translate }}"
-          [required]="true" [(ngModel)]="order.order_detail.amount" #amount="ngModel"
-          (keyup)="available_stock($event, i);" (change)="available_stock($event, i);">
+        <input type="number" name="amount-{{i}}" class="uk-input" placeholder="{{ 'form.placeholder.amount' | translate }}" [required]="true"
+          [(ngModel)]="order.order_detail.amount" #amount="ngModel" (keyup)="available_stock($event, i);" (change)="available_stock($event, i);">
       </div>
     </div>
     <div class="uk-grid-small uk-child-width-expand" uk-grid>
       <div class="uk-padding-small">
-        <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!orderForm.form.valid">{{ 'form.button.save' | translate }}</button>
+        <button type="submit" class="uk-button uk-button-primary" [disabled]="!orderForm.form.valid">{{ 'form.button.save' | translate }}</button>
         <button type="button" class="uk-button uk-button-default" uk-toggle="target: #form-order-add; animation: uk-animation-fade"
           (click)="init()">
           {{ 'form.button.cancel' | translate }}
         </button>
-        <button type="button" class="uk-button uk-button-muted uk-align-right"
-          (click)="onAdd()">
+        <button type="button" class="uk-button uk-button-muted uk-align-right" (click)="onAdd()">
           <span uk-icon="icon: plus;ratio:1.25;"></span>
         </button>
       </div>

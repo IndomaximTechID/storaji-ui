@@ -13,7 +13,7 @@ import { UtilsService } from '../../../shared/services/utils.service';
 })
 export class AddComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
-  
+
   @Output('update')
   add: EventEmitter<Customer[]> = new EventEmitter<Customer[]>();
 

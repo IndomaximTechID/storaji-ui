@@ -19,8 +19,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     public translate: TranslateService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     if (jQuery(window).width() < 960) {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
@@ -11,37 +11,34 @@ import { User } from '../classes/user';
 
 @Injectable()
 export class ProfileService {
-  _profileUrl = `${new Config().api}/users/profile`;
+  private _profileUrl = `${new Config().api}/users/profile`;
+  private _headers = this._utils.makeHeaders({ withToken: true });
 
-  public user: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _utils: UtilsService,
+    private _http: Http,
+    private _router: Router,
+    private _progress: NgProgress
+  ) { }
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
-
-  update(profile: User): void {
+  update(profile: User): Observable<User> {
     this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
-
     const body = JSON.stringify(profile);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
 
-    this.http.put(`${this._profileUrl}`, body, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.put(`${this._profileUrl}`, body, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
   beforeRequest(): void {
-    this.progress.start();
+    this._progress.start();
   }
 
   afterRequest(data: User): void {
-    this.user.next(data);
-    this.progress.done();
+    this._progress.done();
   }
 
 }

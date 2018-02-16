@@ -42,17 +42,17 @@ export class EditComponent implements OnInit, OnDestroy {
   onSubmit() {
     this._utils.unsubscribeSub(this._updateSub);
     this._updateSub = this._routes.paramMap
-        .switchMap((params: ParamMap) => {
-          return this._customersService.update(this.customer.id, this.customer);
-        })
-        .subscribe(
-          data => {
-            if (isObject(data))  {
-              this.customer = data;
-              this.change.emit(this.customer);
-            }
-          }
-        );
+      .switchMap((params: ParamMap) => {
+        return this._customersService.update(this.customer.id, this.customer);
+      })
+      .subscribe(
+      data => {
+        if (isObject(data)) {
+          this.customer = data;
+          this.change.emit(this.customer);
+        }
+      }
+      );
   }
 
   onDelete() {

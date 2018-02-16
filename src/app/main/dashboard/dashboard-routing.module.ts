@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-import { ChartModule  } from 'angular2-highcharts';
+import { ChartModule } from 'angular2-highcharts';
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../../shared/modules/shared.module';
 import { AuthGuard } from '../../core/services/auth.guard';

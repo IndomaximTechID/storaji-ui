@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   top_products: TopProduct[] | TopProduct;
   options: any = {
     renderTo: 'chart',
-    title : { text : null },
+    title: { text: null },
     series: [
       {
         name: '',
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private _loadStat(): Observable<any> {
-   return Observable.combineLatest(
+    return Observable.combineLatest(
       this._statsService.get(),
       this._statsService.topProducts(),
       (stat, topProducts) => {

@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Output('update')
   filter: EventEmitter<Order[]> = new EventEmitter<Order[]>();
-  
+
   order: OrderFilter;
 
   constructor(

@@ -21,10 +21,10 @@ export class AddComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
   private _addSub: Subscription = undefined;
   private _customerSub: Subscription = undefined;
-  
+
   @Output('update')
   add: EventEmitter<Order[]> = new EventEmitter<Order[]>();
-  
+
   products: Product[] = [];
   customers: Customer[] = [];
   orders: Order[] = [];
@@ -73,12 +73,12 @@ export class AddComponent implements OnInit, OnDestroy {
           }
         });
       },
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
 
     this._customerSub = this._customersService.get().subscribe(
       data => this.customers = data,
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
   }
 

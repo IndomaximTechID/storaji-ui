@@ -21,7 +21,7 @@ import { TranslationModule } from './translation.module';
     AppRoutingModule,
     TranslationModule
   ],
-  providers: [ Title, Config ],
-  bootstrap: [ AppComponent ]
+  providers: [Title, Config],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

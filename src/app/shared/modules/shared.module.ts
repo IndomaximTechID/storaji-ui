@@ -22,7 +22,7 @@ import { EditProfileComponent } from '../components/profile.component';
     SidebarComponent,
     EditProfileComponent
   ],
-  providers: [ UtilsService ],
+  providers: [UtilsService],
   exports: [
     CommonModule,
     FormsModule,

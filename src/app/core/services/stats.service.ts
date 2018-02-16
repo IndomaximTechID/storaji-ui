@@ -23,20 +23,20 @@ export class StatsService {
 
   get(): Observable<Stat> {
     return this._http.get(this._statsUrl, this._utils.makeOptions(this._headers))
-               .map((res: Response) => res.json().data)
-               .do(
-                 data => this.afterRequest(),
-                 error => {console.log(error); }
-               );
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(),
+      error => { console.log(error); }
+      );
   }
 
   topProducts(): Observable<TopProduct[] | TopProduct> {
     return this._http.get(`${this._statsUrl}/top/products`, this._utils.makeOptions(this._headers))
-               .map((res: Response) => res.json().data)
-               .do(
-                 data => this.afterRequest(),
-                 error => {console.log(error); }
-               );
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(),
+      error => { console.log(error); }
+      );
   }
 
   beforeRequest(): void {

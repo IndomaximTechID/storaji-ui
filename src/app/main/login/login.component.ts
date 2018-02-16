@@ -18,7 +18,7 @@ class Credentials {
 })
 export class LoginComponent implements OnInit, OnDestroy {
   credentials = new Credentials();
-  
+
   private _sub: Subscription = undefined;
 
   constructor(
