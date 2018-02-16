@@ -1,12 +1,10 @@
 export class Customer {
-  constructor(
-    public id?: string,
-    public full_name: string = '',
-    public company_name: string = null,
-    public email: string = null,
-    public address: string = null,
-    public postal_code: string = null,
-    public city: string = null,
-    public country: string = null
-  ) { }
+  id?: string;
+  full_name: string = '';
+  company_name: string = null;
+  email: string = null;
+  address: string = null;
+  postal_code: string = null;
+  city: string = null;
+  country: string = null;
 }

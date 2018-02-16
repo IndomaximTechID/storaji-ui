@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   initUser() {
-    this.user = new User('', '', '', '', '');
+    this.user = new User();
   }
 
   loadData() {
