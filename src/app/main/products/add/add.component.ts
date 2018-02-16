@@ -47,6 +47,7 @@ export class AddComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (isArray(data)) {
           this.add.emit(data);
+          this.initProduct();
         }
       });
   }

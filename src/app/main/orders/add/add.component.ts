@@ -23,6 +23,7 @@ export class AddComponent implements OnInit, OnDestroy {
   orders: Order[];
 
   private _sub: Subscription = undefined;
+  private _customerSub: Subscription = undefined;
 
   constructor(
     private _productsService: ProductsService,
@@ -39,6 +40,7 @@ export class AddComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._utils.unsubscribeSub(this._sub);
+    this._utils.unsubscribeSub(this._customerSub);
   }
 
   async onSubmit() {
@@ -49,6 +51,7 @@ export class AddComponent implements OnInit, OnDestroy {
 
   init() {
     this._utils.unsubscribeSub(this._sub);
+    this._utils.unsubscribeSub(this._customerSub);
     this.orders = [new Order()];
     this.orders[0].order_detail = new OrderDetail();
     this.orders[0].order_detail.product = new Product();
@@ -66,8 +69,7 @@ export class AddComponent implements OnInit, OnDestroy {
       err => {console.log(err); }
     );
 
-    this._customersService.get();
-    this._customersService.customers.subscribe(
+    this._customerSub = this._customersService.get().subscribe(
       data => this.customers = data,
       err => {console.log(err); }
     );

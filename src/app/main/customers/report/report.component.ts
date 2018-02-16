@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
 import { isArray } from 'lodash';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { Subscription } from 'rxjs/Subscription';
+import { UtilsService } from '../../../shared/services/utils.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -12,11 +14,13 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   templateUrl: './report.component.html',
   styles: []
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
+  private _sub: Subscription = undefined;
   customers: Customer[];
 
   constructor(
     private _customerService: CustomersService,
+    private _utils: UtilsService,
     public translate: TranslateService
   ) { }
 
@@ -24,9 +28,17 @@ export class ReportComponent implements OnInit {
     this.loadCustomers();
   }
 
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
+  }
+
+  onUpdate(customers: Customer[]) {
+    this.customers = isArray(customers) ? customers : this.customers;
+  }
+
   loadCustomers() {
-    this._customerService.get();
-    this._customerService.customers.subscribe(
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._customerService.get().subscribe(
       data => isArray(data) ? this.customers = data : data
     );
   }
