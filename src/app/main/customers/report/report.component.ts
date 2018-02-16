@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomersService } from '../../../core/services/customers.service';
 import { Customer } from '../../../core/classes/customer';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
 import { isArray } from 'lodash';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
-import { Subscription } from 'rxjs/Subscription';
 import { UtilsService } from '../../../shared/services/utils.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 

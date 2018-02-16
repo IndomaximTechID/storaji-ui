@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { isArray } from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 import { CustomersService } from '../../core/services/customers.service';
 import { Customer } from '../../core/classes/customer';
-import { Subscription } from 'rxjs/Subscription';
 import { UtilsService } from '../../shared/services/utils.service';
 
 @Component({

@@ -39,6 +39,7 @@ export class FilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this._utils.unsubscribeSub(this._sub);
+    this._utils.unsubscribeSub(this._typeSub);
   }
 
   ngAfterViewInit() {

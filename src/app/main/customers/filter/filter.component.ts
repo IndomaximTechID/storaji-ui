@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map, isArray } from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 import { CustomersService } from '../../../core/services/customers.service';
 import { CustomerFilter } from '../../../core/classes/filter';
 import { Customer } from '../../../core/classes/customer';
-import { Subscription } from 'rxjs/Subscription';
 import { UtilsService } from '../../../shared/services/utils.service';
 
 declare var numeral: any;

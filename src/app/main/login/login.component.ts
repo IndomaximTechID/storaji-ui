@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
 
   constructor(
-    public app: Config,
     private _title: Title,
     private _auth: AuthService,
-    public translate: TranslateService,
-    private _utils: UtilsService
+    private _utils: UtilsService,
+    public app: Config,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {

@@ -24,6 +24,7 @@ interface HTMLInputEvent extends Event {
 })
 export class OverviewComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
+  private _updateSub: Subscription = undefined;
   private _customerSub: Subscription = undefined;
 
   product: Product = new Product();
@@ -45,9 +46,11 @@ export class OverviewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._utils.unsubscribeSub(this._sub);
     this._utils.unsubscribeSub(this._customerSub);
+    this._utils.unsubscribeSub(this._updateSub);
   }
 
   onUpload(e: HTMLInputEvent) {
+    this._utils.unsubscribeSub(this._updateSub);
     const file = e.target.files[0];
 
     const upload: any = new tus.Upload(file, {
@@ -58,8 +61,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
       },
       onSuccess: () => {
         this.product.image = upload.url;
-        this._utils.unsubscribeSub(this._sub);
-        this._sub = this._routes.paramMap
+        this._updateSub = this._routes.paramMap
           .switchMap((params: ParamMap) => {
             return this._productService.update(params.get('id'), this.product);
           })

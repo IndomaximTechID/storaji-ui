@@ -3,7 +3,7 @@
 <div class="content-padder content-background">
   <div class="uk-section-small">
     <div class="uk-container uk-container-large">
-      <storaji-orders-add></storaji-orders-add>
+      <storaji-orders-add (update)="init()"></storaji-orders-add>
       <div>
         <div class="uk-card uk-card-default uk-card-body" #chart>
           <h2 class="uk-card-title">{{ 'text.graph.title' | translate }}</h2>

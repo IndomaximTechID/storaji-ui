@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 import { isArray } from 'lodash';
@@ -11,7 +11,7 @@ import { UtilsService } from '../../../shared/services/utils.service';
   templateUrl: './add.component.html',
   styles: []
 })
-export class AddComponent implements OnInit {
+export class AddComponent implements OnInit, OnDestroy {
   private _sub: Subscription = undefined;
   
   @Output('update')
@@ -27,6 +27,10 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.initCustomer();
+  }
+
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
   }
 
   onSubmit() {

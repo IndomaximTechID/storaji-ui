@@ -65,8 +65,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._utils.unsubscribeSub(this._sub);
-    this._sub = this._loadStat().subscribe();
+    this.init();
   }
 
   ngOnDestroy() {
@@ -84,6 +83,11 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         this._fitChartToParent();
       }, 200);
     }
+  }
+
+  init() {
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._loadStat().subscribe();
   }
 
   saveInstance(chartInstance: any) {

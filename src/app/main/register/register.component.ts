@@ -29,12 +29,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private _companyTypeSub: Subscription = undefined;
 
   constructor(
-    public app: Config,
+    private _utils: UtilsService,
     private _title: Title,
     private _auth: AuthService,
     private _companyTypesService: CompanyTypesService,
-    public translate: TranslateService,
-    private _utils: UtilsService
+    public app: Config,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {

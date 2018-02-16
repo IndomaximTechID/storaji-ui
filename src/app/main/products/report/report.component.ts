@@ -25,8 +25,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   constructor(
     private _productService: ProductsService,
-    public translate: TranslateService,
-    private _utils: UtilsService
+    private _utils: UtilsService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {

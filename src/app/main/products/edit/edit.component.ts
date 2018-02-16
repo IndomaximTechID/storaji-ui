@@ -17,7 +17,8 @@ declare var numeral: any;
   styles: []
 })
 export class EditComponent implements OnInit, OnDestroy {
-  private _sub: Subscription = undefined;
+  private _updateSub: Subscription = undefined;
+  private _deleteSub: Subscription = undefined;
   private _typeSub: Subscription = undefined;
 
   @Input('product')
@@ -41,14 +42,16 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._utils.unsubscribeSub(this._sub);
+    this._utils.unsubscribeSub(this._updateSub);
+    this._utils.unsubscribeSub(this._deleteSub);
+    this._utils.unsubscribeSub(this._typeSub);
   }
 
   onSubmit() {
-    this._utils.unsubscribeSub(this._sub);
+    this._utils.unsubscribeSub(this._updateSub);
     this.product.cost = numeral(this.product.cost).value();
     this.product.selling_price = numeral(this.product.selling_price).value();
-    this._sub = this._productsService.update(this.product.id, this.product)
+    this._updateSub = this._productsService.update(this.product.id, this.product)
       .subscribe(data => {
         if (isObject(data))  {
           this.product = data
@@ -65,8 +68,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this._utils.unsubscribeSub(this._sub);
-    this._sub = this._productsService.delete(this.product.id)
+    this._utils.unsubscribeSub(this._deleteSub);
+    this._deleteSub = this._productsService.delete(this.product.id)
       .subscribe(data => this._location.back());
   }
 

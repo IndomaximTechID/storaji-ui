@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
+import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -17,49 +18,52 @@ declare var numeral: any;
   templateUrl: './overview.component.html',
   styles: []
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements OnInit, OnDestroy {
+  private _findSub: Subscription;
+  private _delSub: Subscription;
+
   order: Order;
   currency = numeral();
 
   constructor(
-    private routes: ActivatedRoute,
-    private location: Location,
+    private _routes: ActivatedRoute,
+    private _location: Location,
     private _ordersService: OrdersService,
     public translate: TranslateService,
-    private utils: UtilsService
+    private _utils: UtilsService
   ) { }
 
   ngOnInit() {
     this.loadOrder();
   }
 
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._findSub);
+    this._utils.unsubscribeSub(this._delSub);
+  }
+
   loadOrder() {
-    this.routes.paramMap
-        .switchMap((params: ParamMap) => {
-          this._ordersService.find(params.get('id'));
-          return this._ordersService.orders;
-        })
-        .subscribe(
-          data => isObject(data) ? this.order = data : data
-        );
+    this._utils.unsubscribeSub(this._findSub);
+    this._findSub = this._routes.paramMap
+      .switchMap((params: ParamMap) => {
+        return this._ordersService.find(params.get('id'));
+      })
+      .subscribe(
+      data => isObject(data) ? this.order = data : data
+      );
   }
 
   onDelete() {
-    this.routes.paramMap
-        .switchMap((params: ParamMap) => {
-          this._ordersService.delete(params.get('id'));
-          return this._ordersService.orders;
-        })
-        .subscribe(
-          data => isObject(data) ? this.order = data : data
-        );
-
-    this.location.back();
-    this.loadOrder();
+    this._utils.unsubscribeSub(this._delSub);
+    this._delSub = this._routes.paramMap
+      .switchMap((params: ParamMap) => {
+        return this._ordersService.delete(this.order.id);
+      })
+      .subscribe(data => this._location.back());
   }
 
   format(): string {
-    return this.utils.format;
+    return this._utils.format;
   }
 
   save() {
@@ -76,8 +80,8 @@ export class OverviewComponent implements OnInit {
           style: 'subheader'
         },
         {
-            canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }],
-            margin: [0, 10],
+          canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }],
+          margin: [0, 10],
         },
         {
           columns: [
@@ -94,11 +98,11 @@ export class OverviewComponent implements OnInit {
           columns: [
             {
               text: this.order.order_detail.product.name,
-                  style: 'item',
+              style: 'item',
             },
             {
               text: this.order.customer.full_name,
-                  style: 'item'
+              style: 'item'
             }
           ],
           style: ['columns', 'itemColumn']
@@ -118,10 +122,10 @@ export class OverviewComponent implements OnInit {
           columns: [
             {
               text: this.order.order_detail.amount,
-                  style: 'item'
+              style: 'item'
             },
             {
-              text: this.currency.set(this.order.order_detail.product.selling_price).format(this.utils.format),
+              text: this.currency.set(this.order.order_detail.product.selling_price).format(this._utils.format),
               style: 'item'
             }
           ],
@@ -142,14 +146,14 @@ export class OverviewComponent implements OnInit {
           columns: [
             {
               text: this
-                    .currency
-                    .set(this.order.order_detail.product.selling_price * this.order.order_detail.amount)
-                    .format(this.utils.format),
+                .currency
+                .set(this.order.order_detail.product.selling_price * this.order.order_detail.amount)
+                .format(this._utils.format),
               style: 'item'
             },
             {
               text: this.order.created_at,
-                  style: 'item'
+              style: 'item'
             }
           ],
           style: ['columns', 'itemColumn']
@@ -164,14 +168,14 @@ export class OverviewComponent implements OnInit {
           bold: true
         },
         item: {
-            fontSize: 15,
-            bold: true
+          fontSize: 15,
+          bold: true
         },
         itemColumn: {
-            margin: [0, 0, 0, 15]
+          margin: [0, 0, 0, 15]
         },
         columns: {
-            columnGap: 15,
+          columnGap: 15,
         }
       }
     };
