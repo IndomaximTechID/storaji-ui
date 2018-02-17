@@ -1,6 +1,6 @@
 {
   "name": "storaji",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "license": "MIT",
   "description": "The Light/Responsive Inventory Management System.",
   "main": "app/main.js",
