@@ -1,11 +1,12 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo(path: string = '') {
-    path = (path === '/')
-      ? ''
-      : path;
-    return browser.get(`/${path}`);
+  constructor() {
+    browser.ignoreSynchronization = true;
+  }
+
+  navigateTo(path: string = '#/login') {
+    return browser.get(`${path}`);
   }
 
   getLoginHeader() {
