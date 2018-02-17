@@ -14,7 +14,9 @@
                     <h1 class="uk-card-title uk-margin-remove uk-text-uppercase">#{{ (order && order.id) ? order.id.split('-')[0] : null }}</h1>
                   </div>
                   <div class="uk-text-right">
-                    <button class="uk-button uk-button-danger" type="button" [disabled]="!(order && order.order_detail)" uk-toggle="target: #modal-delete;"><span uk-icon="icon: trash;ratio:1.25;"></span></button>
+                    <button class="uk-button uk-button-danger" type="button" [disabled]="!(order && order.order_detail)" uk-toggle="target: #modal-delete;">
+                      <span uk-icon="icon: trash;ratio:1.25;"></span>
+                    </button>
                     <button class="uk-button uk-button-primary" type="button" [disabled]="!(order && order.order_detail)" (click)="save()">{{ 'form.button.save-as-pdf' | translate }}</button>
                   </div>
                   <div class="uk-width-1-1 uk-margin-remove">
@@ -36,11 +38,13 @@
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.price' | translate }}</h6>
-                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price).format(format()) : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price).format(format())
+                  : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'form.label.total' | translate }}</h6>
-                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format(format()) : null }}</span>
+                <span class="uk-text-bold">{{ (order && order.order_detail) ? currency.set(order.order_detail.product.selling_price * order.order_detail.amount).format(format())
+                  : null }}</span>
               </div>
               <div>
                 <h6 class="uk-margin-remove uk-text-uppercase">{{ 'table.date' | translate }}</h6>
@@ -52,20 +56,20 @@
       </div>
       <div id="modal-delete" uk-modal>
         <div class="uk-modal-dialog">
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.delete.title' | translate }}</h2>
-            </div>
-            <div class="uk-modal-body uk-text-center">
-                <p>{{ 'confirmation.delete.message' | translate }}</p>
-            </div>
-            <div class="uk-modal-footer">
-              <div class="uk-container">
-                  <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                      <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.delete.cancel' | translate }}</button>
-                      <button class="uk-button uk-button-primary uk-modal-close" type="button" [disabled]="!(order && order.order_detail)" (click)="onDelete()">{{ 'confirmation.delete.continue' | translate }}</button>
-                  </div>
+          <div class="uk-modal-header">
+            <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.delete.title' | translate }}</h2>
+          </div>
+          <div class="uk-modal-body uk-text-center">
+            <p>{{ 'confirmation.delete.message' | translate }}</p>
+          </div>
+          <div class="uk-modal-footer">
+            <div class="uk-container">
+              <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.delete.cancel' | translate }}</button>
+                <button class="uk-button uk-button-primary uk-modal-close" type="button" [disabled]="!(order && order.order_detail)" (click)="onDelete()">{{ 'confirmation.delete.continue' | translate }}</button>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
-import { UtilsService } from '../../shared/services/utils.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
+import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
+import { CompanyType } from '../classes/company_type';
 
 @Injectable()
 export class CompanyTypesService {
-  _companyTypesUrl = `${new Config().api}/companies/types`;
+  private _companyTypesUrl = `${new Config().api}/companies/types`;
 
-  public companyTypes: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _utils: UtilsService,
+    private _http: Http,
+    private _router: Router,
+    private _progress: NgProgress
+  ) { }
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
-
-  get(): void {
+  get(): Observable<CompanyType[] | CompanyType> {
     const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = new RequestOptions({ headers: headers });
 
-    this.http.get(this._companyTypesUrl, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.get(this._companyTypesUrl, this._utils.makeOptions())
+      .map((res: Response) => res.json().data)
+      .do(data => this.afterRequest(data));
   }
 
   beforeRequest(): void {
-    this.progress.start();
+    this._progress.start();
   }
 
   afterRequest(data: any): void {
-    this.progress.done();
-    this.companyTypes.next(data);
+    this._progress.done();
   }
 
 }

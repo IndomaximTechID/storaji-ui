@@ -4,18 +4,18 @@
     <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
       <div class="uk-padding-small">
         <label for="id" class="uk-form-label">{{ 'table.order.id' | translate }}</label>
-        <input type="text" name="id" class="uk-input" placeholder="{{ 'form.placeholder.order-id' | translate }}"
-          [(ngModel)]="order.id" #id="ngModel">
+        <input type="text" name="id" class="uk-input" placeholder="{{ 'form.placeholder.order-id' | translate }}" [(ngModel)]="order.id"
+          #id="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="product" class="uk-form-label">{{ 'table.product.name' | translate }}</label>
-        <input type="text" name="product" class="uk-input" placeholder="{{ 'form.placeholder.product' | translate }}"
-          [(ngModel)]="order.product" #product="ngModel">
+        <input type="text" name="product" class="uk-input" placeholder="{{ 'form.placeholder.product' | translate }}" [(ngModel)]="order.product"
+          #product="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="customer" class="uk-form-label">{{ 'table.customer.name' | translate }}</label>
-        <input type="text" name="customer" class="uk-input" placeholder="{{ 'form.placeholder.customer' | translate }}"
-          [(ngModel)]="order.customer" #customer="ngModel">
+        <input type="text" name="customer" class="uk-input" placeholder="{{ 'form.placeholder.customer' | translate }}" [(ngModel)]="order.customer"
+          #customer="ngModel">
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="sku" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
@@ -26,10 +26,8 @@
         <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}" uk-datepicker>
       </div>
       <div class="uk-width-1-1 uk-padding-small">
-        <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!orderForm.form.valid">{{ 'form.button.search' | translate }}</button>
-        <button type="button" class="uk-button uk-button-default"
-          (click)="orderForm.reset()">
+        <button type="submit" class="uk-button uk-button-primary" [disabled]="!orderForm.form.valid">{{ 'form.button.search' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default" (click)="orderForm.reset()">
           {{ 'form.button.clear' | translate }}
         </button>
       </div>

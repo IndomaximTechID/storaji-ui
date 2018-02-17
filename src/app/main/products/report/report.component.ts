@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../../core/services/products.service';
-import { Product } from '../../../core/classes/product';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
+import { Subscription } from 'rxjs/Subscription';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { isArray } from 'lodash';
+import { ProductsService } from '../../../core/services/products.service';
+import { Product } from '../../../core/classes/product';
 import { UtilsService } from '../../../shared/services/utils.service';
+
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 declare var numeral: any;
@@ -14,29 +17,39 @@ declare var numeral: any;
   templateUrl: './report.component.html',
   styles: []
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
   products: Product[];
   currency = numeral();
 
+  private _sub: Subscription = undefined;
+
   constructor(
     private _productService: ProductsService,
-    public translate: TranslateService,
-    private utils: UtilsService
+    private _utils: UtilsService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
     this.loadProducts();
   }
 
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
+  }
+
   format(): string {
-    return this.utils.getCurrentFormat();
+    return this._utils.format;
   }
 
   loadProducts() {
-    this._productService.get();
-    this._productService.products.subscribe(
-      data => (data instanceof Array) ? this.products = data : data
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._productService.get().subscribe(
+      data => isArray(data) ? this.products = data : data
     );
+  }
+
+  onUpdate(products: Product[]) {
+    this.products = isArray(products) ? products : this.products;
   }
 
   async save() {
@@ -117,8 +130,8 @@ export class ReportComponent implements OnInit {
         item.sku,
         item.type.name,
         item.stock,
-        this.currency.set(item.cost).format(localStorage.getItem('format')),
-        this.currency.set(item.selling_price).format(localStorage.getItem('format')),
+        this.currency.set(item.cost).format(this._utils.format),
+        this.currency.set(item.selling_price).format(this._utils.format),
         (item.stock > 0) ? this.translate.instant('text.in-stock') : this.translate.instant('text.sold-out')
       ]);
     });

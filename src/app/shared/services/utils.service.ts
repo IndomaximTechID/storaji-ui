@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import 'moment/min/locales.min';
+import { Headers, RequestOptions } from '@angular/http';
+import { Subscription } from 'rxjs/Subscription';
+import { isUndefined } from 'lodash';
 
 declare var $: any;
 declare var Notyf: any;
@@ -15,6 +18,39 @@ export class UtilsService {
   constructor(
     private translate: TranslateService,
   ) { }
+
+  get token(): string {
+    return localStorage.getItem('oatoken');
+  }
+
+  setToken(token: string): string {
+    localStorage.setItem('oatoken', token);
+    return this.token;
+  }
+
+  unsetToken(): void {
+    localStorage.removeItem('oatoken');
+  }
+
+  makeOptions(headers: Headers = this.makeHeaders()): RequestOptions {
+    return new RequestOptions({ headers });
+  }
+
+  makeHeaders(options: any = {}): Headers {
+    const defaultOptions = {
+      withToken: false,
+      customHeaders: {},
+    };
+    const opts = Object.assign({}, defaultOptions, options);
+    const defaultHeaders = { 'Content-Type': 'application/json' };
+    const tokenHeader = opts.withToken
+      ? { 'Authorization': `Bearer ${this.token}` }
+      : {};
+    const headers = Object.assign({}, defaultHeaders, tokenHeader, opts.customHeaders);
+
+    return new Headers(headers);
+  }
+
   loading(options: object): void {
     const defaultOpts = {
       selector: 'storaji-root',
@@ -24,7 +60,7 @@ export class UtilsService {
 
     const opts = Object.assign(defaultOpts, options);
 
-    if ( opts.nice ) {
+    if (opts.nice) {
       return $(opts.selector).LoadingOverlay(opts.action, {
         image: '',
         color: 'rgba(28, 35, 54, 0.45)',
@@ -75,11 +111,11 @@ export class UtilsService {
     localStorage.setItem('currency', currency);
   }
 
-  getCurrentCurrency(): string {
+  get currency(): string {
     return localStorage.getItem('currency');
   }
 
-  getCurrentFormat(): string {
+  get format(): string {
     return localStorage.getItem('format');
   }
 
@@ -96,5 +132,11 @@ export class UtilsService {
       const V = this._moment.weekdays().indexOf(o) + 1;
       return this.moment().isoWeekday(V).format('dddd');
     });
+  }
+
+  unsubscribeSub(sub: Subscription) {
+    if (!isUndefined(sub)) {
+      sub.unsubscribe();
+    }
   }
 }

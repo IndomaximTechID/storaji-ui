@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OrdersService } from '../../../core/services/orders.service';
 import { Order } from '../../../core/classes/order';
 import { TranslateService } from '@ngx-translate/core';
-
+import { isArray } from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import { UtilsService } from '../../../shared/services/utils.service';
@@ -14,30 +15,38 @@ declare var numeral: any;
   templateUrl: './report.component.html',
   styles: []
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
+  private _sub: Subscription = undefined;
   orders: Order[];
   currency = numeral();
 
   constructor(
     private _ordersService: OrdersService,
     public translate: TranslateService,
-    private utils: UtilsService
+    private _utils: UtilsService
   ) { }
 
   ngOnInit() {
     this.loadOrders();
   }
 
-  loadOrders() {
-    this._ordersService.get();
-    this._ordersService.orders.subscribe(
-      data => (data instanceof Array) ? this.orders = data : data
-    );
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
+  }
 
+  loadOrders() {
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._ordersService.get().subscribe(
+      data => isArray(data) ? this.orders = data : data
+    );
+  }
+
+  onUpdate(orders: Order[]) {
+    this.orders = isArray(orders) ? orders : this.orders;
   }
 
   format(): string {
-    return this.utils.getCurrentFormat();
+    return this._utils.format;
   }
 
   async save() {
@@ -113,8 +122,10 @@ export class ReportComponent implements OnInit {
         item.order_detail.product.name,
         item.customer.full_name,
         item.order_detail.amount,
-        this.currency.set(item.order_detail.product.selling_price).format(localStorage.getItem('format')),
-        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price).format(localStorage.getItem('format')),
+        this.currency.set(item.order_detail.product.selling_price)
+          .format(this._utils.format),
+        this.currency.set(item.order_detail.amount * item.order_detail.product.selling_price)
+          .format(this._utils.format),
         item.created_at,
       ]);
     });

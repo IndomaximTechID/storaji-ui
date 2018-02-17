@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
-import { UtilsService } from '../../shared/services/utils.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
+import { OrderFilter } from '../classes/filter';
+import { Order } from '../classes/order';
 
 
 @Injectable()
 export class OrdersService {
-  _ordersUrl = `${new Config().api}/orders`;
+  private _ordersUrl = `${new Config().api}/orders`;
+  private _headers = this._utils.makeHeaders({ withToken: true });
 
-  public orders: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _utils: UtilsService,
+    private _http: Http,
+    private _router: Router,
+    private _progress: NgProgress
+  ) { }
 
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
-
-  get(query?: any): void {
+  get(query?: OrderFilter): Observable<Order[]> {
     this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
+    const options = this._utils.makeOptions(this._headers);
 
     if (query) {
       const params = new URLSearchParams();
@@ -31,72 +32,54 @@ export class OrdersService {
       options.params = params;
     }
 
-    this.http.get(this._ordersUrl, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.get(this._ordersUrl, options)
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
-  find(id: string): void {
+  find(id: string): Observable<Order> {
     this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
 
-    this.http.get(`${this._ordersUrl}/${id}`, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.get(`${this._ordersUrl}/${id}`, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
-  add(customer: any): void {
+  add(order: Order[]): Observable<Order[]> {
     this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
+    const body = JSON.stringify(order);
 
-    const body = JSON.stringify(customer);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
-
-    this.http.post(`${this._ordersUrl}/add`, body, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.post(`${this._ordersUrl}/add`, body, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
-  delete(id: string): void {
+  delete(id: string): Observable<Order[]> {
     this.beforeRequest();
-    const token = localStorage.getItem('oatoken');
 
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
-
-    this.http.delete(`${this._ordersUrl}/${id}/delete`, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+    return this._http.delete(`${this._ordersUrl}/${id}/delete`, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(data),
+      error => { console.log(error); }
+      );
   }
 
   beforeRequest(): void {
-    this.progress.start();
+    this._progress.start();
   }
 
   afterRequest(data: any): void {
-    this.progress.done();
-    this.orders.next(data);
+    this._progress.done();
   }
 
 }

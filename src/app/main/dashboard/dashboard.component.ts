@@ -1,11 +1,14 @@
-import { Component, AfterViewInit, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/combineLatest';
 import * as moment from 'moment';
 import 'moment/min/locales.min';
 import { find, range } from 'lodash';
 import { StatsService } from '../../core/services/stats.service';
 import { Stat, TopProduct, Graph } from '../../core/classes/stat';
 import { UtilsService } from '../../shared/services/utils.service';
+import { Subscription } from 'rxjs/Subscription';
 
 declare var numeral: any;
 @Component({
@@ -13,12 +16,15 @@ declare var numeral: any;
   templateUrl: './dashboard.component.html',
   styles: []
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chart') graph: ElementRef;
+
   stat: Stat = new Stat();
+  currency = numeral();
+  top_products: TopProduct[];
   options: any = {
     renderTo: 'chart',
-    title : { text : null },
+    title: { text: null },
     series: [
       {
         name: '',
@@ -38,102 +44,109 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
     },
     xAxis: {
-      categories: this.utils.isoWeekDays
+      categories: this._utils.isoWeekDays
     }
   };
-  chart: any;
-  currency = numeral();
-  top_products: TopProduct[];
+
+  private _translateSub: Subscription = undefined;
+  private _sub: Subscription = undefined;
+  private _chart: any;
 
   constructor(
     private _statsService: StatsService,
     public translate: TranslateService,
-    private utils: UtilsService
+    private _utils: UtilsService
   ) {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.setChartSeriesName();
+    this._utils.unsubscribeSub(this._translateSub);
+    this._translateSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this._setChartSeriesName();
     });
-    this.fitChartToParent.bind(this);
+    this._fitChartToParent.bind(this);
   }
 
   ngOnInit() {
-    this.initStats();
+    this.init();
+  }
+
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._translateSub);
+    this._utils.unsubscribeSub(this._sub);
   }
 
   ngAfterViewInit() {
-    this.fitChartToParent();
+    this._fitChartToParent();
   }
 
   @HostListener('window:resize') onResize() {
-    if (this.checkInstance()) {
+    if (this._checkInstance()) {
       setTimeout(() => {
-        this.fitChartToParent();
+        this._fitChartToParent();
       }, 200);
     }
   }
 
-  fitChartToParent() {
-    this.chart.setSize(this.graph.nativeElement.clientWidth - 90, 400);
+  init() {
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._loadStat().subscribe();
   }
 
   saveInstance(chartInstance: any) {
-    this.chart = chartInstance;
-    this.setChartSeriesName();
+    this._chart = chartInstance;
+    this._setChartSeriesName();
   }
 
-  format(): string {
-    return this.utils.getCurrentFormat();
+  get format(): string {
+    return this._utils.format;
   }
 
-  initStats() {
-    this._statsService.get();
-    this._statsService.stats.subscribe(
-      data => {
-        this.stat = data;
-        if (this.checkInstance()) {
-          this.chart
+  private _fitChartToParent() {
+    this._chart.setSize(this.graph.nativeElement.clientWidth - 90, 400);
+  }
+
+  private _loadStat(): Observable<any> {
+    return Observable.combineLatest(
+      this._statsService.get(),
+      this._statsService.topProducts(),
+      (stat, topProducts) => {
+        this.stat = stat;
+        this.top_products = topProducts;
+        if (this._checkInstance()) {
+          this._chart
             .series[0]
-            .setData(this.mapGraphToChart(this.stat.graph.current));
-          this.chart
+            .setData(this._mapGraphToChart(this.stat.graph.current));
+          this._chart
             .series[1]
-            .setData(this.mapGraphToChart(this.stat.graph.last));
-          this.setChartSeriesName();
-          this.fitChartToParent();
+            .setData(this._mapGraphToChart(this.stat.graph.last));
+          this._setChartSeriesName();
+          this._fitChartToParent();
         }
-      },
-      err => {console.log(err); }
-    );
-
-    this._statsService.topProducts();
-    this._statsService.top_products.subscribe(
-      data => this.top_products = data,
-      err => {console.log(err); }
+      }
     );
   }
 
-  checkInstance(): boolean {
-    return typeof this.chart !== 'undefined' && typeof this.graph !== 'undefined';
+  private _checkInstance(): boolean {
+    return typeof this._chart !== 'undefined' && typeof this.graph !== 'undefined';
   }
 
-  setChartSeriesName() {
-    this.chart.update({
+  private _setChartSeriesName() {
+    this._chart.update({
       xAxis: {
-        categories: this.utils.isoWeekDays
+        categories: this._utils.isoWeekDays
       }
     });
-    this.chart.series[0].update({
+    this._chart.series[0].update({
       name: this.translate.instant('text.graph.current')
     }, false);
-    this.chart.series[1].update({
+    this._chart.series[1].update({
       name: this.translate.instant('text.graph.last')
     }, false);
-    this.chart.redraw();
+    this._chart.redraw();
   }
 
-  mapGraphToChart(data: any[]) {
-    return this.utils.isoWeekDays.map(index => {
+  private _mapGraphToChart(data: any[]) {
+    return this._utils.isoWeekDays.map(index => {
       const keys = range(0, 6);
-      const _id = this.utils.moment().isoWeekday(index).format('d');
+      const _id = this._utils.moment().isoWeekday(index).format('d');
       const pre = keys.map(o => {
         return {
           day: o,
@@ -142,7 +155,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
 
       const item = find(pre, (v) => {
-        const __id = this.utils.moment().isoWeekday(v.day).format('d');
+        const __id = this._utils.moment().isoWeekday(v.day).format('d');
         return _id === __id;
       });
 

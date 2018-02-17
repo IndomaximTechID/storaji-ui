@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
+import { isObject } from 'lodash';
 import { ProductsService } from '../../../core/services/products.service';
 import { ProductTypesService } from '../../../core/services/product-types.service';
 import { Product } from '../../../core/classes/product';
 import { ProductType } from '../../../core/classes/product-type';
-import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../../shared/services/utils.service';
 
 declare var numeral: any;
 @Component({
@@ -13,15 +16,24 @@ declare var numeral: any;
   templateUrl: './edit.component.html',
   styles: []
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
+  private _updateSub: Subscription = undefined;
+  private _deleteSub: Subscription = undefined;
+  private _typeSub: Subscription = undefined;
+
+  @Input('product')
   product: Product = new Product();
+
+  @Output('update')
+  update: EventEmitter<Product> = new EventEmitter<Product>();
+
   productTypes: ProductType[];
 
   constructor(
-    private routes: ActivatedRoute,
     private _productsService: ProductsService,
     private _productTypesService: ProductTypesService,
-    private location: Location,
+    private _utils: UtilsService,
+    private _location: Location,
     public translate: TranslateService
   ) { }
 
@@ -29,57 +41,44 @@ export class EditComponent implements OnInit {
     this.initProduct();
   }
 
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._updateSub);
+    this._utils.unsubscribeSub(this._deleteSub);
+    this._utils.unsubscribeSub(this._typeSub);
+  }
+
   onSubmit() {
+    this._utils.unsubscribeSub(this._updateSub);
     this.product.cost = numeral(this.product.cost).value();
     this.product.selling_price = numeral(this.product.selling_price).value();
-    this.routes.paramMap
-        .switchMap((params: ParamMap) => {
-          this._productsService.update(params.get('id'), this.product);
-          return this._productsService.products;
-        })
-        .subscribe(
-          data => (data instanceof Object) ? this.product = data : data
-        );
+    this._updateSub = this._productsService.update(this.product.id, this.product)
+      .subscribe(data => {
+        if (isObject(data)) {
+          this.product = data;
+
+          this.product.cost = numeral(this.product.cost).format(this._utils.format);
+          this.product.selling_price = numeral(this.product.selling_price).format(this._utils.format);
+          this.update.emit(this.product);
+        }
+      });
   }
 
   onKeyup(e: any) {
-    e.target.value = numeral(e.target.value).format(localStorage.getItem('format'));
+    e.target.value = numeral(e.target.value).format(this._utils.format);
   }
 
   onDelete() {
-    this.routes.paramMap
-        .switchMap((params: ParamMap) => {
-          this._productsService.delete(params.get('id'));
-          return this._productsService.products;
-        })
-        .subscribe(
-          data => (data instanceof Object) ? this.product = data : data
-        );
-    this.location.back();
-    this.initProduct();
+    this._utils.unsubscribeSub(this._deleteSub);
+    this._deleteSub = this._productsService.delete(this.product.id)
+      .subscribe(data => this._location.back());
   }
 
   initProduct() {
-    this._productTypesService.get();
-    this._productTypesService.productTypes.subscribe(
+    this._utils.unsubscribeSub(this._typeSub);
+    this._typeSub = this._productTypesService.get().subscribe(
       data => this.productTypes = data,
-      err => {console.log(err); }
+      err => { console.log(err); }
     );
-
-    this.routes.paramMap
-        .switchMap((params: ParamMap) => {
-          this._productsService.find(params.get('id'));
-          return this._productsService.products;
-        })
-        .subscribe(
-          data => {
-            if (data instanceof Object) {
-              this.product = data;
-            }
-            this.product.cost = numeral(this.product.cost).format(localStorage.getItem('format'));
-            this.product.selling_price = numeral(this.product.selling_price).format(localStorage.getItem('format'));
-          }
-        );
   }
 
 }

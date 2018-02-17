@@ -4,23 +4,18 @@
     <div class="uk-grid-small uk-child-width-1-3@m" uk-grid>
       <div class="uk-padding-small">
         <label for="name" class="uk-form-label">{{ 'form.label.name' | translate }}</label>
-        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}"
-          [(ngModel)]="product.name" #name="ngModel">
+        <input type="text" name="name" class="uk-input" placeholder="{{ 'form.placeholder.name' | translate }}" [(ngModel)]="product.name"
+          #name="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="sku" class="uk-form-label">{{ 'form.label.sku' | translate }}</label>
-        <input type="text" name="sku" class="uk-input" placeholder="{{ 'form.placeholder.sku' | translate }}"
-          [(ngModel)]="product.sku" #sku="ngModel">
+        <input type="text" name="sku" class="uk-input" placeholder="{{ 'form.placeholder.sku' | translate }}" [(ngModel)]="product.sku"
+          #sku="ngModel">
       </div>
       <div class="uk-padding-small">
         <label for="type" class="uk-form-label">{{ 'form.label.type' | translate }}</label>
-        <input ngui-auto-complete
-        class="uk-input"
-        [(ngModel)]="product.type"
-        [source]="productTypes"
-        list-formatter="name"
-        display-property-name="name"
-        placeholder="{{ 'form.placeholder.type' | translate }}" name="type" #type="ngModel"/>
+        <input ngui-auto-complete class="uk-input" [(ngModel)]="product.type" [source]="productTypes" list-formatter="name" display-property-name="name"
+          placeholder="{{ 'form.placeholder.type' | translate }}" name="type" #type="ngModel" />
       </div>
       <div class="uk-width-1-2 uk-padding-small">
         <label for="sku" class="uk-form-label">{{ 'form.label.date_from' | translate }}</label>
@@ -31,10 +26,8 @@
         <input type="text" name="date_to" class="uk-input" placeholder="{{ 'form.placeholder.date' | translate }}" uk-datepicker>
       </div>
       <div class="uk-width-1-1 uk-padding-small">
-        <button type="submit" class="uk-button uk-button-primary"
-          [disabled]="!productForm.form.valid">{{ 'form.button.search' | translate }}</button>
-        <button type="button" class="uk-button uk-button-default"
-          (click)="initProduct()">
+        <button type="submit" class="uk-button uk-button-primary" [disabled]="!productForm.form.valid">{{ 'form.button.search' | translate }}</button>
+        <button type="button" class="uk-button uk-button-default" (click)="initProduct()">
           {{ 'form.button.clear' | translate }}
         </button>
       </div>

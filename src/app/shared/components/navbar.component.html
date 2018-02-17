@@ -1,5 +1,4 @@
-<div uk-sticky class="uk-navbar-container tm-navbar-container"
-   *ngIf="navbar">
+<div uk-sticky class="uk-navbar-container tm-navbar-container" *ngIf="navbar">
   <div class="uk-container uk-container-expand">
     <nav uk-navbar>
       <div class="uk-navbar-left">
@@ -10,14 +9,16 @@
       </div>
       <div class="uk-navbar-center uk-logo">
         <img src="assets/storaji-white.png" width="60">
-        <a routerLink="/" class="uk-navbar-item uk-logo">
+        <a routerLink="/" class="uk-navbar-item uk-logo uk-text-capitalize">
           {{ app.name }}
         </a>
       </div>
       <div class="uk-navbar-right uk-light">
         <ul class="uk-navbar-nav">
           <li class="uk-active">
-            <a href="#"><span uk-icon="icon: settings; ratio: 1.2;" class="uk-margin-small-top"></span></a>
+            <a href="#">
+              <span uk-icon="icon: settings; ratio: 1.2;" class="uk-margin-small-top"></span>
+            </a>
             <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;" class="uk-width-medium">
               <ul class="uk-nav uk-navbar-dropdown-nav">
                 <li class="uk-nav-header">Hi, {{ (user) ? user.name : '' }}!</li>
@@ -39,11 +40,9 @@
                 </li>
                 <li class="uk-nav-header">{{ 'text.i18n' | translate }}</li>
                 <hr class="uk-margin-small" style="border-top-color: rgba(100,100,100,.2);">
-                <li *ngFor="let lang of translate.getLangs()"
-                    class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}" 
-                    [style.display]="(lang === '_i18n') ? 'none' : null">
+                <li *ngFor="let lang of translate.getLangs()" class="{{ (translate.currentLang === lang) ? 'uk-active' : null }}" [style.display]="(lang === '_i18n') ? 'none' : null">
                   <a (click)="onChangeLanguage(lang)">
-                        {{ lang | translate }}
+                    {{ lang | translate }}
                   </a>
                 </li>
               </ul>
@@ -55,45 +54,45 @@
   </div>
 </div>
 <div id="modal-logout" uk-modal>
-    <div class="uk-modal-dialog">
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.logout.title' | translate }}</h2>
-        </div>
-        <div class="uk-modal-body uk-text-center">
-            <p>{{ 'confirmation.logout.message' | translate }}</p>
-        </div>
-        <div class="uk-modal-footer">
-          <div class="uk-container">
-              <div class="uk-grid-small uk-child-width-1-2" uk-grid>
-                  <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.logout.cancel' | translate }}</button>
-                  <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="logout()">{{ 'confirmation.logout.continue' | translate }}</button>
-              </div>
-          </div>
-        </div>
+  <div class="uk-modal-dialog">
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title uk-text-center">{{ 'confirmation.logout.title' | translate }}</h2>
     </div>
+    <div class="uk-modal-body uk-text-center">
+      <p>{{ 'confirmation.logout.message' | translate }}</p>
+    </div>
+    <div class="uk-modal-footer">
+      <div class="uk-container">
+        <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+          <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'confirmation.logout.cancel' | translate }}</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="logout()">{{ 'confirmation.logout.continue' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="modal-currency" uk-modal>
   <div class="uk-modal-dialog uk-width-large">
-      <div class="uk-modal-header">
-          <h2 class="uk-modal-title uk-text-center">{{ 'text.edit.currency' | translate }}</h2>
-      </div>
-      <div class="uk-modal-body uk-text-center">
-        <select class="uk-select uk-text-uppercase" [(ngModel)]="selectedCurrency" name="currency" #currency="ngModel">
-          <option *ngFor="let item of currencies" [value]="item.id" [selected]="item.id === selectedCurrency">
-            {{ item.id }} ( {{ item.symbol }} )
-          </option>
-        </select>
-      </div>
-      <div class="uk-modal-footer">
-        <div class="uk-grid-small uk-child-width-1-1" uk-grid>
-            <div class="uk-text-center">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'form.button.cancel' | translate }}</button>
-                <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onChangeCurrency()">
-                    {{ 'form.button.save' | translate }}
-                </button>
-            </div>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title uk-text-center">{{ 'text.edit.currency' | translate }}</h2>
+    </div>
+    <div class="uk-modal-body uk-text-center">
+      <select class="uk-select uk-text-uppercase" [(ngModel)]="selectedCurrency" name="currency" #currency="ngModel">
+        <option *ngFor="let item of currencies" [value]="item.id" [selected]="item.id === selectedCurrency">
+          {{ item.id }} ( {{ item.symbol }} )
+        </option>
+      </select>
+    </div>
+    <div class="uk-modal-footer">
+      <div class="uk-grid-small uk-child-width-1-1" uk-grid>
+        <div class="uk-text-center">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">{{ 'form.button.cancel' | translate }}</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="onChangeCurrency()">
+            {{ 'form.button.save' | translate }}
+          </button>
         </div>
       </div>
+    </div>
   </div>
 </div>
 <storaji-profile-edit [user]="user" (change)="onChange($event)"></storaji-profile-edit>

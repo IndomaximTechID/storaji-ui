@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs/Subscription';
 import { Config } from '../../shared/classes/app';
 import { AuthService } from '../../core/services/auth.service';
-import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '../../shared/services/utils.service';
 
 class Credentials {
@@ -15,28 +16,34 @@ class Credentials {
   templateUrl: './login.component.html',
   styles: []
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
   credentials = new Credentials();
 
+  private _sub: Subscription = undefined;
+
   constructor(
+    private _title: Title,
+    private _auth: AuthService,
+    private _utils: UtilsService,
     public app: Config,
-    private title: Title,
-    private auth: AuthService,
-    public translate: TranslateService,
-    private utils: UtilsService
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
-    this.title.setTitle(this.app.name);
+    this._title.setTitle(this.app.name);
+  }
+
+  ngOnDestroy() {
+    this._utils.unsubscribeSub(this._sub);
   }
 
   onSubmit() {
-    this.auth.login(this.credentials);
+    this._utils.unsubscribeSub(this._sub);
+    this._sub = this._auth.login(this.credentials).subscribe();
   }
 
   onChangeLanguage(language: string) {
-    this.utils.setLang(language);
+    this._utils.setLang(language);
   }
 
 }

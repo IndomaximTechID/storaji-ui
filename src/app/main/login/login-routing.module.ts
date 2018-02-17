@@ -11,7 +11,7 @@ import { GuestGuard } from '../../core/services/guest.guard';
       { path: 'login', component: LoginComponent, canActivate: [GuestGuard] }
     ])
   ],
-  declarations: [ LoginComponent ],
+  declarations: [LoginComponent],
   providers: [GuestGuard],
   exports: [
     RouterModule,

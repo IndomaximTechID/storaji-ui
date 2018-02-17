@@ -1,65 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
-import { UtilsService } from '../../shared/services/utils.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { NgProgress } from 'ngx-progressbar';
+import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
+import { Stat, TopProduct } from '../classes/stat';
 
 @Injectable()
 export class StatsService {
-  _statsUrl = `${new Config().api}/stats`;
+  private _statsUrl = `${new Config().api}/stats`;
+  private _headers = this._utils.makeHeaders({ withToken: true });
 
-  public stats: BehaviorSubject<any> = new BehaviorSubject(null);
-  public top_products: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _utils: UtilsService,
+    private _http: Http,
+    private _router: Router,
+    private _progress: NgProgress
+  ) { }
 
-
-  constructor(private utils: UtilsService, private http: Http, private router: Router, private progress: NgProgress) { }
-
-  get(): void {
-    const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
-
-    this.http.get(this._statsUrl, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequest(data),
-                 error => {console.log(error); }
-               );
+  get(): Observable<Stat> {
+    return this._http.get(this._statsUrl, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(),
+      error => { console.log(error); }
+      );
   }
 
-  topProducts(): void {
-    const token = localStorage.getItem('oatoken');
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ' + token);
-    const options = new RequestOptions({ headers: headers });
-
-    this.http.get(`${this._statsUrl}/top/products`, options)
-               .map((res: Response) => res.json().data)
-               .subscribe(
-                 data => this.afterRequestTopProduct(data),
-                 error => {console.log(error); }
-               );
+  topProducts(): Observable<TopProduct[]> {
+    return this._http.get(`${this._statsUrl}/top/products`, this._utils.makeOptions(this._headers))
+      .map((res: Response) => res.json().data)
+      .do(
+      data => this.afterRequest(),
+      error => { console.log(error); }
+      );
   }
 
   beforeRequest(): void {
-    this.progress.start();
+    this._progress.start();
   }
 
-  afterRequest(data: any): void {
-    this.progress.done();
-    this.stats.next(data);
-  }
-
-  afterRequestTopProduct(data: any): void {
-    this.progress.done();
-    this.top_products.next(data);
+  afterRequest(): void {
+    this._progress.done();
   }
 
 }
