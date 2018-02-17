@@ -18,12 +18,12 @@
           </div>
           <div>
             <label for="old_password" class="uk-form-label">{{ 'form.label.old-password' | translate }}</label>
-            <input type="text" name="old_password" class="uk-input" placeholder="{{ 'form.placeholder.old-password' | translate }}" [(ngModel)]="user.old_password"
+            <input type="password" name="old_password" class="uk-input" placeholder="{{ 'form.placeholder.old-password' | translate }}" [(ngModel)]="user.old_password"
               #old_password="ngModel">
           </div>
           <div>
             <label for="password" class="uk-form-label">{{ 'form.label.new-password' | translate }}</label>
-            <input type="text" name="password" class="uk-input" placeholder="{{ 'form.placeholder.new-password' | translate }}" [(ngModel)]="user.password"
+            <input type="password" name="password" class="uk-input" placeholder="{{ 'form.placeholder.new-password' | translate }}" [(ngModel)]="user.password"
               #password="ngModel">
           </div>
         </div>
