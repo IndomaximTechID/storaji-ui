@@ -1,7 +1,8 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressModule, NgProgressComponent } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { Config } from './shared/classes/app';
 
 import { AppComponent } from './app.component';
@@ -17,11 +18,12 @@ import { TranslationModule } from './translation.module';
     BrowserModule,
     HttpClientModule,
     NgProgressModule,
+    NgProgressHttpModule,
     MainModule,
     AppRoutingModule,
     TranslationModule
   ],
-  providers: [Title, Config],
+  providers: [Title, Config, NgProgressComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

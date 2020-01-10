@@ -17,7 +17,7 @@ declare var numeral: any;
   styles: []
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('chart') graph: ElementRef;
+  @ViewChild('chart', {static: false}) graph: ElementRef;
 
   stat: Stat = new Stat();
   currency = numeral();

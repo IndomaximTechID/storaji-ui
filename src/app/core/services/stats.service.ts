@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { Stat, TopProduct } from '../classes/stat';
@@ -18,7 +18,7 @@ export class StatsService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(): Observable<Stat> {
@@ -44,7 +44,7 @@ export class StatsService {
   }
 
   afterRequest(): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angul
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { CustomerFilter } from '../classes/filter';
@@ -19,7 +19,7 @@ export class CustomersService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(query?: CustomerFilter): Observable<Customer[]> {
@@ -91,7 +91,7 @@ export class CustomersService {
   }
 
   afterRequest(data: any): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

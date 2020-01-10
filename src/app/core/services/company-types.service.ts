@@ -5,7 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NgProgress } from 'ngx-progressbar';
+import 'rxjs/add/operator/do';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { CompanyType } from '../classes/company_type';
@@ -18,7 +19,7 @@ export class CompanyTypesService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(): Observable<CompanyType[] | CompanyType> {
@@ -34,7 +35,7 @@ export class CompanyTypesService {
   }
 
   afterRequest(data: any): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { Product } from '../classes/product';
@@ -21,7 +21,7 @@ export class ProductsService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(query?: ProductFilter): Observable<Product[]> {
@@ -104,7 +104,7 @@ export class ProductsService {
   }
 
   afterRequest(): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

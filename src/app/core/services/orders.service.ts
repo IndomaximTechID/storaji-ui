@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { UtilsService } from '../../shared/services/utils.service';
@@ -19,7 +19,7 @@ export class OrdersService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(query?: OrderFilter): Observable<Order[]> {
@@ -79,7 +79,7 @@ export class OrdersService {
   }
 
   afterRequest(data: any): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

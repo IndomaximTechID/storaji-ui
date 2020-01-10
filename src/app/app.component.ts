@@ -49,14 +49,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    Offline.options = { checks: { xhr: { url: new Config().api } } };
-    Offline.check();
+    // Offline.options = { checks: { xhr: { url: new Config().api } } };
+    // Offline.check();
     const overlay = jQuery('.uk-overlay-default');
-    Offline.on('confirmed-up', () => {
+    // Offline.on('confirmed-up', () => {
       overlay.fadeOut('slow');
-    });
-    Offline.on('confirmed-down', () => {
-      overlay.fadeIn('slow');
-    });
+    // });
+    // Offline.on('confirmed-down', () => {
+    //   overlay.fadeIn('slow');
+    // });
   }
 }

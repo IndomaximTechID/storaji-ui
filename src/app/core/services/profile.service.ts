@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { User } from '../classes/user';
@@ -18,7 +18,7 @@ export class ProfileService {
     private _utils: UtilsService,
     private _http: Http,
     private _router: Router,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   update(profile: User): Observable<User> {
@@ -38,7 +38,7 @@ export class ProfileService {
   }
 
   afterRequest(data: User): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }

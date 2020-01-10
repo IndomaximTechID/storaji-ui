@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NgProgress } from 'ngx-progressbar';
+import { NgProgressComponent } from '@ngx-progressbar/core';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Config } from '../../shared/classes/app';
 import { ProductType } from '../classes/product-type';
@@ -15,7 +15,7 @@ export class ProductTypesService {
   constructor(
     private _utils: UtilsService,
     private _http: Http,
-    private _progress: NgProgress
+    private _progress: NgProgressComponent
   ) { }
 
   get(): Observable<ProductType[]> {
@@ -34,7 +34,7 @@ export class ProductTypesService {
   }
 
   afterRequest(data: any): void {
-    this._progress.done();
+    this._progress.complete();
   }
 
 }
